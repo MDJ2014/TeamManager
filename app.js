@@ -4,9 +4,27 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var helmet = require('helmet');
+var mongoose = require('mongoose');
+
+var Player = require('./models/playerModel');
+var Game = require('./models/gameModel');
+var Payment = require('./models/paymentModel');
+var User = require('./models/userModel');
+var Schedule = require('./models/scheduleModel');
+var TeamMessage = require('./models/teamMessages');
+var Team = require('./models/teamModel');
+
+
+
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var teams = require('./routes/teams');
+var players = require('./routes/players');
+var fees = require('./routes/fees');
+var pay = require('./routes/pay');
 
 var app = express();
 
@@ -20,10 +38,65 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(helmet.hidePoweredBy({ setTo: 'PHP 4.2.0' }));
+app.use(helmet.frameguard({action: 'deny'}));
+app.use(helmet.xssFilter());
+app.use(helmet.noSniff());
+app.use(helmet.ieNoOpen());
+app.use(helmet.contentSecurityPolicy({directives:{defaultSrc:["'self'"], scriptSrc: ["'self'", "trusted-cdn.com"]}}));
+
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
+var dbName = "teammanager";
+
+// mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI || "mongodb://localhost:27017/" + dbName, function(err) {
+//   if (err) {
+//     console.error("Error connecting to database");
+//   } else {
+//     console.error("Connection to " + dbName + " database successful");
+//   }
+// });
+
+// mongoose.Promise = global.Promise;
+
+// const db = mongoose.connection;
+
+
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI || "mongodb://localhost:27017/" + dbName);
+const db = mongoose.connection;
+
+db.on("error", function(err){
+  console.error("Error connecting to database");
+});
+
+db.once('open', function(){
+  console.error("Connection to " + dbName + " database successful");
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/teams', teams);
+app.use('/players', players);
+app.use('/fees',fees);
+app.use('/pay',pay);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
