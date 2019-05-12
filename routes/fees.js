@@ -32,5 +32,19 @@ res.status(201);
 res.json(fee);
 });
 });
+
+
+router.delete('/fee/:id', function(req,res,next){
+Fee.findOneAndDelete(req.params.id, function(err,doc){
+if(err) return next(err);
+res.status(200);
+res.json(doc);
+});
+});
+
+
+
+
+
 module.exports = router;
 

@@ -25,6 +25,8 @@ var teams = require('./routes/teams');
 var players = require('./routes/players');
 var fees = require('./routes/fees');
 var pay = require('./routes/pay');
+var messages = require('./routes/messages');
+var games = require('./routes/games');
 
 var app = express();
 
@@ -84,19 +86,14 @@ db.once('open', function(){
 
 
 
-
-
-
-
-
-
-
 app.use('/', index);
 app.use('/users', users);
 app.use('/teams', teams);
 app.use('/players', players);
 app.use('/fees',fees);
 app.use('/pay',pay);
+app.use('/messages',messages);
+app.use('/games', games);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

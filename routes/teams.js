@@ -1,15 +1,34 @@
 var express = require('express');
 var router = express.Router();
+var multer  = require('multer');
+var fs = require('fs');
 
 var Team = require('../models/teamModel').Team;
 var Player = require('../models/playerModel').Player;
-var TeamMessage = require('../models/teamMessages').TeamMessage;
+var Game = require('../models/gameModel').Game;
 
-/* GET team listing. */
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../public/uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname + '-' + Date.now() +  ".png")
+    }
+  })
+
+//var uplaod = multer({storage: storage});
+
+var upload = multer({ dest: '../public/uploads/' });
+
+
+
+
+
+/* GET all teams. */
 router.get('/', function(req, res, next) {
     Team.find({})
-    .populate("messages")
-     .exec(
+       .exec(
         function(err, teams)  {
             if(err) return next(err);
             res.json(teams);
@@ -28,119 +47,116 @@ router.post('/', function(req,res,next){
     });
 });
 
+/*GET team ranking*/
+router.get('/rankings', function(req,res,next){
+Team.find({})
+.sort({wins: "desc"})
+.exec(function(err,docs){
+    if(err) return next(err);
+    res.status(200);
+    res.json(docs);
+})
+
+});
+
+
+
+
+
+
 /*GET specific team */
 router.get('/team/:id',function(req,res,next){
 Team.findById(req.params.id)
-.populate('messages').populate('players','name')
 .exec(function(err,doc){
     if(err) return next(err);
-    res.status(201);
+
+var a = req.params.id;
+      
+Game.find().or([{homeTeam: a},{awayTeam: a}])
+ .exec(
+ function(err, games)  {
+     if(err) return next(err);
+   
+  id = req.params.id
+   var wins = 0;
+   var losses = 0;
+
+
+   for(let game of games){
+       if(game.homeTeam == id){
+            if(game.homeTeamScore > game.awayTeamScore){
+                wins +=1;
+            }else{losses +=1}
+       }else if(game.awayTeam == id){
+            if(game.awayTeamScore > game.homeTeamScore){
+                wins+=1;
+            }else{losses +=1;}
+       }
+
+   }
+
+
+doc.update({wins: wins, losses: losses}, function(err, savedDoc){
+    if(err) return next(err);
+     res.status(201);
     res.json(doc);
-})
+
+});
+  
+
+});
+
+   
+});
 });
 
 
 
 /*update team */
 router.put('/team/:id',function(req,res,next){
-    var team = req.params.id;
-    var newData = req.body;
+
+var newData = req.body;
 
 
-    Team.findOneAndUpdate(team, newData, {"new":true})
-    .exec(
-        function(err, doc){
-            if(err) return next(err);
-            res.status(201);
-            res.json(doc);
-        }
-    )
-});
-
-/*Get a teams messages*/
-router.get('/team/:id/message', function(req,res,next){
     Team.findById(req.params.id)
-    .populate('messages')
-    .exec(function(err,team){
+    .exec(function(err,doc){
         if(err) return next(err);
-        var messages = team.messages;
-        res.status(201);
-        res.json(messages);
-    })
+        if(req.body.logo){
+           req.body.logo =  '../public/images/assets/' + req.body.logo;
+            
+           
+        }
+        doc.update(newData, function(err,savedDoc){
+            if(err) return next(err);
+            res.status(201);
+            res.json(doc);
+        });
+    });
+
 });
 
-/*Update Team message*/
-router.put('/team/:id/message', function(req,res,next){
-var team = req.params.id;
-    var message = {"title": req.body.title, "body": req.body.body, "author": req.body.author, "date": req.body.date, "team": team}
+
+
+/*Uplaod team Logo */
+router.post('/team/:id/upload/logo', upload.single('logo'), function(req,res,next){
+    var file = req.file;
+// file.upload(req,res, function(err){
+//      if(err instanceof multer.MulterError){
+// return next(err);
+//      }else{return next(err)}
+
+     
+ //});
+// var filename=file.originalname;
+// var filetype = file.mimetype;
+// var filesize= file.size;
+res.status(201);
+res.json({"name": "filename", "type": "filetype", "size":" filesize", "uploaded": true})
+});
+
+
+
  
-
-var newMessage = new TeamMessage(req.body);
-newMessage.save(function(err,msg){
-    if(err) return next(err);
-    Team.findById(req.params.id, function(err,team){
-        if(err) return next(err);
-        team.messages.push(msg._id);
-        team.save(function(err,doc){
-            if(err) return next(err);
-            res.status(201);
-            res.json(doc);
-        });
-
-    });
-});
-
-});
-
-
-/**Get Add Player Form */
-router.get('/team/:id/build-roster',function(req,res,next){
-Team.findById(req.params.id, function(err,team){
-    if(err) return next(err);
-
-    var query = Player.find({});
-    query.and([{ 'team': null }, { playerAge: team.ageGroup }])
-    .exec(
-        function(err,doc){
-            if(err) return next(err);
-            res.status(201);
-            res.json(doc);
-        });
-
-    
-});
-
-
-});
-
-
-
-/**Add player to team */
-router.put('/team/:id/add-to-roster/:playerId',function(req,res,next){
-    
-    Team.findById(req.params.id,function(err,team){
-        if(err) return next(err);
-         team.players.push(req.params.playerId) ;
-        team.save(function(err,doc){
-            if(err) return next(err);
-  Player.findById(req.params.playerId, function(err,player){
-            if(err) return next(err);
-             player.team = req.params.id
-            player.save(function(err,doc){
-                   if(err) return next(err);
-        res.status(201);
-        res.json(team);
-            }) ;         
-        });
-        });
-    });
-    
-});
-
-
-
-
-
 
 
 module.exports = router;

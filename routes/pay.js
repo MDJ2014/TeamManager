@@ -24,7 +24,7 @@ newPayment.save(function(err,doc){
 
     User.findById(req.body.payerId, function(err,userDoc){
         if(err) return next(err);
-        userDoc.payment = doc._id
+        userDoc.payment.push(doc._id)
         userDoc.save(function(err, savedDoc){
             if(err) return next(err);
             res.status(201);
@@ -36,6 +36,45 @@ newPayment.save(function(err,doc){
 
 });
 });
+
+router.delete('/cancel/:id', function(req,res,next){
+
+/*
+    
+    Payment.findOneAndDelete(req.params.id, function(err,doc){
+        if(err) return next(err);
+
+        var query = User.find({});
+        query.$where("this.payment == doc._id")
+         .exec(function(err,userDoc){
+            if(err) return next(err);
+           userDoc.update({$pull:{"payment":doc._id}})
+              res.status(200);
+           res.json(doc);
+         })
+
+*/
+
+    Payment.findOneAndDelete(req.params.id)
+    .exec(function(err,pmtDoc){
+        if(err) return next(err);
+
+        User.find({payment: {$e: pmtDoc._id}}, function(err, userDoc){
+            if(err) return next(err);
+
+            userDoc.update({$pull:{"payment": pmtDoc._id}})
+
+            res.status(200);
+            res.json(userDoc)
+        })
+
+    });
+
+
+    
+ 
+    });
+   // });
 
 
 module.exports = router;

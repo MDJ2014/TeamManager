@@ -5,7 +5,7 @@ var Player = require('../models/playerModel').Player;
 
 
 
-/* GET users listing. */
+/* GET all players listing. */
 router.get('/', function(req, res, next) {
     Player.find({})
     .exec(
@@ -25,27 +25,45 @@ router.get('/', function(req, res, next) {
   var newPlayer = new Player(req.body);
   newPlayer.save(function(err,player){
       if(err) return next(err);
-      
-      User.findById(req.body.userId, function(err,user){
-        if(err) return next(err);
-        user.players.push(player._id);
-        user.save(function(err,doc){
-            if(err) return next(err);
-              res.status(201);
-              res.json(doc);
-        });  
-        });
-      
+      res.status(201);
+      res.json(player);
+  
   });
   
   });
 
 
+   /**Get Team Players (roster) */
+   router.get('/:teamId', function(req, res, next) {
+    Player.find({team: req.params.teamId})
+    //.populate("team")
+    .exec(
+      function(err, players)  {
+        if(err) return next(err);
+        res.json(players);
+       
+    });
+    });
 
+/**Get Parents Players */
+router.get('/parent/:userId', function(req, res, next) {
+  Player.find({parent: req.params.userId})
+  .exec(
+    function(err, players)  {
+      if(err) return next(err);
+      res.json(players);
+     
+  });
+  });
 
-   
-
-
+/**UPDATE PLayer */
+router.put('/player/:id', function(req,res,next){
+  Player.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .exec(function(err,doc){
+    if(err) return next(err);
+    res.json(doc);
+  });
+});
 
 
 

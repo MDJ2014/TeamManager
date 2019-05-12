@@ -9,17 +9,14 @@ var PlayerSchema = require('mongoose').model('Player').schema
 var UserSchema = new mongoose.Schema({
     userType: {type: String, default: 'Member'},
     name:{firstName: {type: String, trim: true, required: true}, lastName: {type: String, trim: true, required: true}},
-    // firstName: {type: String, trim: true, required: [true, 'First name required']},  
-    // lastName: {type: String, trim: true, required:[true, 'Last name required']},  
     userName: {type: String, unique: true, required: [true, 'User name required']},
     userAddress:{street: String, city: String, state: {type: String, uppercase: true, required: true}, zip: Number},
-    // userAddress:{type: String, trim: true,  required: [true, 'Address required']},
     userPhone:{type: String, trim: true, required: [true, 'Phone number required']},
     userEmail:{type: String, trim: true, unique: true, required: [true, 'Email required']},
     passWord: {type: String, required: true},
-    payment: [{type: Schema.Types.ObjectId, ref: 'Payment'}],
+   // payment: [{type: Schema.Types.ObjectId, ref: 'Payment'}],
     dateJoined:{type: Date, default: Date.now},
-    players:[{type: Schema.Types.ObjectId, ref: 'Player'}]
+   // players:[{type: Schema.Types.ObjectId, ref: 'Player'}]
 });
 
 

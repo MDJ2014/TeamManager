@@ -21,10 +21,11 @@ router.get('/', function(req, res, next) {
   /*Get registration page */
   router.get('/register', function(req, res, next) {
     
-     res.render('/register');  
+     res.render('register');  
     
     });
 
+ /*Sign up new user*/   
 router.post('/register', function(req,res,next){
 
 var user = new User(req.body);
@@ -40,13 +41,30 @@ user.save(function(err,doc){
 /**Get Individual User */
 router.get('/user/:id', function(req,res,next){
 User.findById(req.params.id)
-.populate('payment').populate('players')
+//.populate('payment').populate('players')
 .exec(function(err,user){
   if(err) return next(err);
   res.status(201);
   res.json(user);
 });
 });
+
+
+/**Delete User */
+router.delete('/user/:id', function(req,res,next){
+  User.findByIdAndDelete(req.params.id, function(err,deletedDoc){
+      if(err) return next(err);
+      Player.deleteMany({parent: req.params.id}, function(err,playerDocs){
+        if(err) return next(err);
+        res.status(200);
+      res.json(deletedDoc);
+      })
+
+      
+  })
+})
+
+
 
 
 
