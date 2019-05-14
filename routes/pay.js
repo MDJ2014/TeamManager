@@ -4,11 +4,24 @@ var router = express.Router();
 var Fee = require('../models/feeModel').Fee;
 var User = require('../models/userModel').User;
 var Payment = require('../models/paymentModel').Payment;
+var mid = require('../middleware');
 
 
 /*Get payment page loaded with fees*/
-router.get('/', function(req, res, next) {
+router.get('/', mid.requiresLogin, function(req, res, next) {
     Payment.find({}, function(err,fees){
+            if(err) return next(err);
+            res.status(201);
+            //render post payments form
+            res.json(fees);
+    });
+  });
+
+
+/*user's payment*/
+
+router.get('/payment', mid.requiresAdmin, function(req, res, next) {
+    Payment.find({payerId: req.body.userId}, function(err,fees){
             if(err) return next(err);
             res.status(201);
             res.json(fees);
@@ -16,65 +29,59 @@ router.get('/', function(req, res, next) {
   });
 
 
-router.post('/', function(req,res,next){
+
+
+
+
+router.post('/', mid.requiresLogin,  function(req,res,next){
 var newPayment = new Payment(req.body);
 
 newPayment.save(function(err,doc){
     if(err) return next(err);
 
-    User.findById(req.body.payerId, function(err,userDoc){
-        if(err) return next(err);
-        userDoc.payment.push(doc._id)
-        userDoc.save(function(err, savedDoc){
-            if(err) return next(err);
             res.status(201);
-            res.json(savedDoc);
-
-        });
-            
-    });
+            res.json(doc);
 
 });
 });
 
-router.delete('/cancel/:id', function(req,res,next){
 
-/*
-    
-    Payment.findOneAndDelete(req.params.id, function(err,doc){
+router.put('/payment/update', mid.requiresAdmin, function(req,res,next){
+    Payment.findOneAndUpdate({payerId: req.body.paymentId}, req.body, {new: true})
+    .exec(function(err, doc){
         if(err) return next(err);
+        res.status(200);
+        res.json(doc);
 
-        var query = User.find({});
-        query.$where("this.payment == doc._id")
-         .exec(function(err,userDoc){
-            if(err) return next(err);
-           userDoc.update({$pull:{"payment":doc._id}})
-              res.status(200);
-           res.json(doc);
-         })
+    });
+});
 
-*/
 
-    Payment.findOneAndDelete(req.params.id)
+
+
+
+
+router.delete('/payment/delete', mid.requiresAdmin, function(req,res,next){
+
+
+    Payment.findById(req.body.paymentId)
     .exec(function(err,pmtDoc){
         if(err) return next(err);
 
-        User.find({payment: {$e: pmtDoc._id}}, function(err, userDoc){
-            if(err) return next(err);
-
-            userDoc.update({$pull:{"payment": pmtDoc._id}})
-
-            res.status(200);
-            res.json(userDoc)
+    
+      pmtDoc.delete(function(err,doc){
+          if(err) return next(err);
+          res.status(200);
+           res.json(pmtDoc);
+      })
+            
         })
 
     });
 
 
     
- 
-    });
-   // });
+
 
 
 module.exports = router;

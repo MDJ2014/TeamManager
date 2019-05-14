@@ -2,9 +2,7 @@
 
 
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var ScheduleSchema = require('mongoose').model('Schedule').schema;
-var GameSchema = require('mongoose').model('Game').schema;
+
 
 var TeamSchema = new mongoose.Schema({
     teamName: {type: String, required: true},  

@@ -6,6 +6,7 @@ var fs = require('fs');
 var Team = require('../models/teamModel').Team;
 var Player = require('../models/playerModel').Player;
 var Game = require('../models/gameModel').Game;
+var mid = require('../middleware');
 
 
 var storage = multer.diskStorage({
@@ -26,18 +27,19 @@ var upload = multer({ dest: '../public/uploads/' });
 
 
 /* GET all teams. */
-router.get('/', function(req, res, next) {
+router.get('/', mid.requiresLogin, function(req, res, next) {
     Team.find({})
        .exec(
         function(err, teams)  {
             if(err) return next(err);
             res.json(teams);
+            //render add team form
             //res.render('teams',teams)
         });
  });
 
  /*Post a new team */
-router.post('/', function(req,res,next){
+router.post('/', mid.requiresMod, function(req,res,next){
     var team = new Team(req.body);
 
     team.save(function(err, team){
@@ -48,7 +50,7 @@ router.post('/', function(req,res,next){
 });
 
 /*GET team ranking*/
-router.get('/rankings', function(req,res,next){
+router.get('/rankings', mid.requiresLogin, function(req,res,next){
 Team.find({})
 .sort({wins: "desc"})
 .exec(function(err,docs){
@@ -65,19 +67,19 @@ Team.find({})
 
 
 /*GET specific team */
-router.get('/team/:id',function(req,res,next){
-Team.findById(req.params.id)
+router.get('/team', mid.requiresLogin, function(req,res,next){
+Team.findById(req.body.teamId)
 .exec(function(err,doc){
     if(err) return next(err);
 
-var a = req.params.id;
+var a = req.body.teamId;
       
 Game.find().or([{homeTeam: a},{awayTeam: a}])
  .exec(
  function(err, games)  {
      if(err) return next(err);
    
-  id = req.params.id
+  id = req.body.teamId
    var wins = 0;
    var losses = 0;
 
@@ -100,7 +102,7 @@ doc.update({wins: wins, losses: losses}, function(err, savedDoc){
     if(err) return next(err);
      res.status(201);
     res.json(doc);
-
+//render add player form add logo form, update team form 
 });
   
 
@@ -113,12 +115,12 @@ doc.update({wins: wins, losses: losses}, function(err, savedDoc){
 
 
 /*update team */
-router.put('/team/:id',function(req,res,next){
+router.put('/team/update', mid.requiresMod, function(req,res,next){
 
 var newData = req.body;
 
 
-    Team.findById(req.params.id)
+    Team.findById(req.body.teamId)
     .exec(function(err,doc){
         if(err) return next(err);
         if(req.body.logo){
@@ -138,7 +140,7 @@ var newData = req.body;
 
 
 /*Uplaod team Logo */
-router.post('/team/:id/upload/logo', upload.single('logo'), function(req,res,next){
+router.post('/team/upload/logo',mid.requiresMod,  upload.single('logo'), function(req,res,next){
     var file = req.file;
 // file.upload(req,res, function(err){
 //      if(err instanceof multer.MulterError){

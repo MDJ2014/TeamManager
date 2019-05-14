@@ -1,5 +1,44 @@
 extends layout
 
 block content
-  h1= title
-  p User Registration
+  .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h1.display-4.m-b-2 Sign Up
+
+        // register form
+        form(method='POST' action='/users/register')
+          div.form-group
+            label(for='firstname') First Name:
+            input#name.form-control(type='text', placeholder='first name' name='firstname')
+          div.form-group
+            label(for='lastname') Last Name:
+            input#name.form-control(type='text', placeholder='last name' name='lastname')  
+          div.form-group
+            label(for='email') Email:
+            input#email.form-control(type='email', placeholder='name@email.com' name='email')
+          div.form-group
+            label(for='street') Street:
+            input#favoriteBook.form-control(type='text', placeholder='Street address' name='street')
+          div.form-group
+            label(for='city') City:
+            input#favoriteBook.form-control(type='text', placeholder='City' name='city')
+          div.form-group
+            label(for='state') State:
+            input#favoriteBook.form-control(type='text', placeholder='State' name='state')
+          div.form-group
+            label(for='zip') Zip Code:
+            input#favoriteBook.form-control(type='text', placeholder='Zip code' name='zip')
+          div.form-group
+            label(for='phone') Phone:
+            input#favoriteBook.form-control(type='text', placeholder='Phone' name='phone')
+          div.form-group
+            label(for='username') User Name:
+            input#favoriteBook.form-control(type='text', placeholder='User name' name='username')          
+          div.form-group
+            label(for='pw') Password:
+            input#pw.form-control(type='password' name='password')
+          div.form-group
+            label(for='pw2') Confirm Password:
+            input#pw2.form-control(type='password' name='confirmPassword')
+          button.btn.btn-primary(type='submit') Sign up

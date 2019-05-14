@@ -6,14 +6,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
 var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
-var Player = require('./models/playerModel');
-var Game = require('./models/gameModel');
-var Payment = require('./models/paymentModel');
-var User = require('./models/userModel');
-var Schedule = require('./models/scheduleModel');
-var TeamMessage = require('./models/teamMessages');
-var Team = require('./models/teamModel');
+
+
+
+
+// var Player = require('./models/playerModel');
+// var Game = require('./models/gameModel');
+// var Payment = require('./models/paymentModel');
+// var User = require('./models/userModel');
+// var Schedule = require('./models/scheduleModel');
+// var TeamMessage = require('./models/teamMessages');
+// var Team = require('./models/teamModel');
 
 
 
@@ -35,7 +41,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,6 +54,11 @@ app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 app.use(helmet.contentSecurityPolicy({directives:{defaultSrc:["'self'"], scriptSrc: ["'self'", "trusted-cdn.com"]}}));
 
+
+
+
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -55,17 +66,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var dbName = "teammanager";
 
-// mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI || "mongodb://localhost:27017/" + dbName, function(err) {
-//   if (err) {
-//     console.error("Error connecting to database");
-//   } else {
-//     console.error("Connection to " + dbName + " database successful");
-//   }
-// });
-
-// mongoose.Promise = global.Promise;
-
-// const db = mongoose.connection;
 
 
 mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI || "mongodb://localhost:27017/" + dbName);
@@ -82,7 +82,19 @@ db.once('open', function(){
 
 
 
+app.use(session({
+  secret: 'We are number one',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+  mongooseConnection: db
+  })
+}));
 
+app.use(function(req,res,next){
+res.locals.currentUser = req.session.userId;
+next();
+});
 
 
 
