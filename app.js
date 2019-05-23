@@ -52,7 +52,7 @@ app.use(helmet.frameguard({action: 'deny'}));
 app.use(helmet.xssFilter());
 app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
-app.use(helmet.contentSecurityPolicy({directives:{defaultSrc:["'self'"], scriptSrc: ["'self'", "trusted-cdn.com"]}}));
+app.use(helmet.contentSecurityPolicy({directives:{defaultSrc:["'self'"], scriptSrc: ["'self'", "trusted-cdn.com","/users/profile"]}}));
 
 
 
@@ -122,7 +122,10 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+  //res.json({"error": res.locals.message })
   res.render('error');
+
+
 });
 
 module.exports = app;

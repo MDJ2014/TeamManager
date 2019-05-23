@@ -1,0 +1,140 @@
+h1{
+    text-align: center;
+}
+p{
+    font-size: 1em;
+}
+
+#outside{
+display: grid;
+grid-template-columns: 1fr 2fr 1fr;
+grid-template-rows: 1fr 2fr 2fr 1fr;
+}
+#top{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+#left{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+background-image: url('../../assets/trophy.png');
+background-repeat: no-repeat;
+
+
+}
+#middle{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+#right{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    background-image: url('../../assets/tropyh2.png');
+    background-repeat: no-repeat;
+
+}
+#bottom{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+
+
+
+
+
+#formContainer{
+    width: 60%;
+    height: auto;
+    margin: auto;
+    -webkit-box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58); 
+    box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58);
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-areas: "top" "bottom";
+    border-radius: 8px;
+    background-color: white;
+}
+#formHeader{
+grid-area: "top";
+height: 2em;
+background-color: darkslategray;
+color: white;
+border-radius:  8px 8px 0 0;
+text-align: center;
+font-weight: bold;
+font-size: 16px;
+padding-top: 10px;
+}
+
+#formBody{
+    grid-area: "bottom";
+  
+}
+
+
+
+
+#registerForm{
+   
+    border-radius: 6px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;    
+    padding-left: 6em;
+}
+.registerInput{
+    padding: .5em;
+    margin-right: 1em;
+    background-color: antiquewhite;
+}
+label{
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#stateInput{
+    width: 3em;
+}
+
+#loginInfo{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+button{
+    width: 9em;
+    height: 4em;
+    display: block;
+   margin-left: 11%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:darkslategray;
+    background-color: white;
+    border: solid 2px darkslategray;
+    font-weight: bold;
+}
+button:hover{
+    background-color: darkslategray;
+    color: white;
+    font-weight: bold;
+}
+
+#regButton{
+    
+}
+.space{
+    
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: .7em;
+}

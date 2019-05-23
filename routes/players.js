@@ -21,16 +21,36 @@ router.get('/', mid.requiresMod,  function(req, res, next) {
 
 
     /*Register a Player */
-//router.post('/user/:id/register-player', function(req,res,next){
-  router.post('/register-player', mid.requiresLogin, function(req,res,next){
-  var newPlayer = new Player(req.body);
+//router.post('/user/:id/register-player', function(req,res,next){   mid.requiresLogin,
+  router.post('/register-player', function(req,res,next){
+  //var newPlayer = new Player(req.body);
+var newPlayer={
+  name:{firstName: req.body.firstName, lastName: req.body.lastName},
+  nicName: req.body.nicName,
+  playerAge: req.body.age,
+  positionPref: req.body.positionPref,
+  parent: req.session.userId
+}
+
+Player.create(newPlayer, function (err, player) {
+  if (err) return next(err);
+ res.status(201);
+ // return res.redirect('/users/profile');
+ return res.json(player);
+});
+
+
+
+
+/*
   newPlayer.save(function(err,player){
       if(err) return next(err);
-      res.status(201);
-      res.json(player);
+ res.status(201);
+        res.json(player);
+         
   
   });
-  
+  */
   });
 
 

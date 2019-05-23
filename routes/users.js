@@ -6,10 +6,15 @@ var Player = require('../models/playerModel').Player;
 var mid = require('../middleware');
 
 
-
+// function writeError(message) {
+//   res.status(400);
+//   res.json({ message: message, status: 400 });
+//   res.end();
+// }
 
 /* GET users listing. */
-router.get('/', mid.requiresAdmin, function (req, res, next) {
+//mid.requiresAdmin
+router.get('/', function (req, res, next) {
   User.find({})
     .exec(
       function (err, users) {
@@ -22,17 +27,18 @@ router.get('/', mid.requiresAdmin, function (req, res, next) {
 
 
 
-/*Get registration page */
-router.get('/register', mid.loggedOut, function (req, res, next) {
-  //render post form
-  res.render('register');
+/*Get registration page mid.loggedOut */
+router.get('/register',  function (req, res, next) {
+
+  res.json({title: "register"});
 
 });
 
 /*User Login */
-/*Get form*/
-router.get('/login', mid.loggedOut, function (req, res, next) {
-  return res.render('login');
+/*Get form  mid.loggedOut*/
+router.get('/login', function (req, res, next) {
+  res.json({title: "login"});
+ // return res.render('login');
 });
 
 
@@ -42,7 +48,7 @@ router.get('/logout', function (req, res, next) {
       if (err) {
         return next(err);
       } else {
-        return res.redirect('/');
+        return res.redirect('/home');
       }
     });
   }
@@ -50,19 +56,81 @@ router.get('/logout', function (req, res, next) {
 
 
 
-/*Profile*/
-router.get('/profile', mid.requiresLogin, function (req, res, next) {
-  // if(! req.session.userId){
-  //   var err = new Error("You are not authorized to view this page!");
-  //   err.status = 403;
-  //   return next(err);
-  // }
+/*Profile* mid.requiresLogin,*/
+router.get('/profile', function (req, res, next) {
+  res.status(200);
+
+   if(! req.session.userId){
+    var err = new Error("You are not authorized to view this page!");
+    err.status = 403;
+   // return writeError("You are not authorized to view this page!");
+   //return res.render('newError',{newMessage: "You are not authorized to view this page!"})
+   return next(err);
+  }
+
+var profileData={
+firstname:"",
+lastname:"",
+username:"",
+street:"",
+city:"",
+state:"",
+zip:"",
+phone:"",
+email:"",
+players:"",
+pay:""
+};
+
+
+
+
+//req.session.userId
   User.findById(req.session.userId)
     .exec(function (err, user) {
       if (err) {
         return next(err);
       } else {
-        return res.render('profile', { title: "Profile", name: user.name.firstName });
+         // profileData.user=user;
+         profileData.firstname = user.name.firstName;
+         profileData.lastname = user.name.lastName;
+         profileData.username = user.userName;
+         profileData.street = user.userAddress.street;
+         profileData.city = user.userAddress.city;
+         profileData.state = user.userAddress.state;
+         profileData.zip = user.userAddress.zip;
+         profileData.phone=user.userPhone;
+         profileData.email=user.userEmail;
+
+          Player.find({parent: req.session.userId})
+          .exec(function(err,players){
+            if(err){
+              return next(err);
+            }else{
+              profileData.players =players;
+           
+              Payment.find({payerId: req.session.userId})
+              .exec(function(err,payment){
+                if(err){return next(err)
+                }else{
+                  profileData.pay=payment;
+
+                  res.status(200);
+                  return res.json(profileData);
+
+                }
+              }
+          
+              );
+            }
+          }
+
+
+          )
+
+
+
+      //  return res.render('profile', { title: "Profile", name: user.name.firstName });
       }
     });
 
@@ -91,16 +159,19 @@ router.post('/login', function (req, res, next) {
     User.authenticate(req.body.email, req.body.password, function (err, user) {
       if (err || !user) {
         var err = new Error("Wrong email or password");
-        err.status = 401;
+        res.status(401);
+       // res.json({"error": "Wrong email or password"});
         return next(err);
       } else {
         req.session.userId = user._id;
-        return res.redirect('profile');
+        req.session.userName = user.userName;
+        return res.redirect('/users/profile');
       }
     });
   } else {
     var err = new Error("Email and Password are required.");
-    err.status = 401;
+    res.status(401);
+    // res.json({"error": "Email and Password are required"});
     return next(err);
   }
 
@@ -116,28 +187,28 @@ router.post('/login', function (req, res, next) {
 router.post('/register', function (req, res, next) {
 
 
-  if (req.body.email && req.body.firstname && req.body.lastname && req.body.street && req.body.city && req.body.state && req.body.zip && req.body.username && req.body.phone && req.body.password && req.body.confirmPassword) {
+  if (req.body.userEmail && req.body.firstName && req.body.lastName && req.body.userName && req.body.passWord && req.body.confirmPassword) {
 
     //confirm passwords match
-    if (req.body.password != req.body.confirmPassword) {
+    if (req.body.passWord != req.body.confirmPassword) {
       var err = new Error("Passwords do not match!");
       res.status(400);
       return next(err);
     }
 
     let userData = {
-      name: { firstName: req.body.firstname, lastName: req.body.lastname },
-      userName: req.body.username,
-      userAddress: { street: req.body.street, city: req.body.city, state: req.body.state, zip: req.body.zip },
-      userPhone: req.body.phone,
-      userEmail: req.body.email,
-      passWord: req.body.password
+      name: { firstName: req.body.firstName, lastName: req.body.lastName },
+      userName: req.body.userName,
+      userEmail: req.body.userEmail,
+      passWord: req.body.passWord
     };
 
     User.create(userData, function (err, user) {
       if (err) return next(err);
       req.session.userId = user._id;
-      return res.redirect('profile');
+      req.session.userName = user.userName;
+     // return res.redirect('/users/profile');
+     return res.json(user);
     });
 
 
@@ -159,11 +230,11 @@ router.put('/user/update', mid.requiresLogin, function (req, res, next) {
     .exec(function (err, user) {
       if (err) return next(err);
 
-      user.update(newData)
+      user.update(newData, {new:true})
         .exec(function (err, doc) {
           if (err) return next(err);
           res.status(200);
-          res.json({ "user": req.session.userId, "updated to": req.body });
+          res.json(doc);
         });
 
     });
