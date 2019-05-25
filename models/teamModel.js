@@ -10,6 +10,7 @@ var TeamSchema = new mongoose.Schema({
     logo: {contentType: String, data: Buffer},
     photo: {contentType: String, data:Buffer},    
     practiceSchedule: {type: String},
+    coaches:[{name: String, title: String}],
     //schedule: [GameSchema],
     wins: {type: Number, default: 0},
     losses: {type: Number, default: 0},

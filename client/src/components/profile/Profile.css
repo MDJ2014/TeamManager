@@ -187,9 +187,14 @@ height: 3em;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
+display: flex;
 
   
 }
+
+
+
+
 #playerAddBtn{
   width: 6em;
   height: 3em;  
@@ -269,10 +274,7 @@ height: 3em;
  
 }
 
-#playerEditButton{
- width: 8em;
- margin-left:6em;
-}
+
   #paySection{
 
   }

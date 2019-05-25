@@ -3,6 +3,11 @@ import './Profile.css';
 import { Redirect } from 'react-router'
 import AddPlayer from '../addplayer/AddPlayer';
 import EditUser from '../edituser/Edituser';
+import EditPlayer from '../editPlayer/EditPlayer';
+import MyPlayers from '../myplayers/MyPlayers';
+
+
+
 
 class Profile extends Component {
   constructor(props){
@@ -11,19 +16,17 @@ class Profile extends Component {
     this.state = {
       profileData: '',
      playerAdd: false,
-      paid:false
-      // street:"",
-      // city:"",
-      // state:"",
-      // zip:"",
-      // phone:""
-     // redirect: false
-      
+     playerEdit: false,
+     paid:false
+         
     };
     this.onClick = this.onClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleUserDataSubmit = this.handleUserDataSubmit.bind(this);
     this.handleAddPlayerSubmit = this.handleAddPlayerSubmit.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+
+   
   }
 
 
@@ -93,6 +96,13 @@ componentDidUpdate() {
   }
 }
 */
+toggleEdit = ()=>
+{
+  this.state.playerEdit ? this.setState({playerEdit:false}) : 
+  this.setState({playerEdit:true});
+  
+}
+
 
 handleChange(event) {
   const target = event.target;
@@ -108,15 +118,6 @@ this.setState({[name]: value});
 handleUserDataSubmit = async(event, formData)=>{
   event.preventDefault();
 
-  // const body = JSON.stringify({
-  //   userPhone: this.state.phone,
-  //   userAddress:{
-  //     street: this.state.street,
-  //     city: this.state.city,
-  //     state: this.state.state,
-  //     zip: this.state.zip
-  //   }
-//});
 const body = JSON.stringify({
     userPhone:formData.phone,
     userAddress:{
@@ -191,7 +192,7 @@ handleAddPlayerSubmit = async(event,formData)=>{
   // }
 
    
-
+ 
 const {renderedResponse} = this.state;
 const pageData = this.state.profileData;
 
@@ -204,7 +205,7 @@ const pageData = this.state.profileData;
 <div id="userWelcome"> Welcome </div>
 <div id="userName">{pageData.username}</div>
 <div id="row2"></div>
-<div id="row3"></div>
+<div id="row3">my teams</div>
 <div id="cityLeagueHeader"></div>
 
 {/* <div id="myTeamLogo"><div id="teamLogo"></div></div>
@@ -273,56 +274,32 @@ const pageData = this.state.profileData;
 <button id="playerAddBtn"type="button" onClick={this.onClick}>
       {this.state.playerAdd? 'Close' : 'Add Player'}
       </button>
+
+     
+
 </div>
  </div>   
-
 {this.state.playerAdd?
-<div><AddPlayer addPlayer={this.handleAddPlayerSubmit}/></div>
+  <div><AddPlayer addPlayer={this.handleAddPlayerSubmit}/></div>
+  :
+  null
+  }
+
+
+{this.state.playerEdit
+?
+
+ <EditPlayer playersToEdit={this.state.profileData.players}/> 
+
+
+
 :
-null
+
+
+
+<MyPlayers editmode={this.toggleEdit} myplayers={this.state.profileData.players}/>
+
 }
- 
-
-
-<div id="playersContainer">
-
-{this.state.profileData.players.map(function(player,index){
-
-return(
-<div id="playerContainer" key={index}>
-
-<div id="profilePlayerFirstName"><div className="profileFormLabels">First name:</div><div className="playerFormResult">{player.name.firstName}</div></div>
-<div id="profilePlayerLastName"><div className="profileFormLabels">Last name:</div><div className="playerFormResult">{player.name.lastName}</div></div>
-<div id="profilePlayerNicName"><div className="profileFormLabels">Nicname:</div><div className="playerFormResult">{player.nicName}</div></div>
-<div id="profilePlayerAge"><div className="profileFormLabels">Age:</div><div className="playerFormResult">{player.playerAge}</div></div>
-<div id="profilePlayerPosition"><div className="profileFormLabels">Pos. pref:</div><div className="playerFormResult">{player.positionPref}</div></div>
-<div id="profilePlayerTeam"><div className="profileFormLabels">Team:</div><div className="playerFormResult">{player.team}</div></div>
-<div id="myTeamLogo"><div id="teamLogo"></div></div>
-<div className="space"></div>
-<div>
-<button id="playerEditButton" type="button">
-        Edit
-      </button>
-      </div>
-      <div className="space"></div>
-</div>
-
-)
-
-})}
-
-
-
-
-
-</div>
-
-{/*
-     
-  */}
-
-
-
 
 </section>
 

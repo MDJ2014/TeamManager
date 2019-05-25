@@ -9,9 +9,11 @@ import Register from './components/Register/Register';
 import LogIn from './components/login/Login';
 import Contact from './components/contact/Contact';
 import Profile from './components/profile/Profile';
-import RegisterPlayer from './components/registerPlayer/RegisterPlayer';
+
 import { Link } from 'react-router-dom';
-import Error from './components/error/error'
+import Team from './components/team/Team';
+import Error from './components/error/error';
+import Admin from './components/admin/Admin';
 
 
 
@@ -94,9 +96,12 @@ const pageData = this.state.data;
  <Route  path="/register" component={Header}/>
  <Route  path="/contact" component={Header}/>
  <Route  path="/about" component={Header}/>
-
-
-    <menubar id="topMenu"><Menu /></menubar>
+ <Route exact path="/" component={Menu}/>
+ <Route  path="/login" component={Menu}/>
+ <Route  path="/register" component={Menu}/>
+ <Route  path="/contact" component={Menu}/>
+ <Route  path="/about" component={Menu}/>
+ <Route  path="/users/profile" component={Menu}/>
     
  
     
@@ -229,11 +234,9 @@ null
 <Route path="/register" component={Register}/>
 <Route path="/login" component={LogIn}/>
 <Route path="/contact" component={Contact}/>
-
 <Route path="/users/profile" component={Profile}/>
-
-<Route path="/users/register-player" component={RegisterPlayer}/>
-
+<Route path="/team" component={Team}/>
+<Route path="/admin" component={Admin}/>
 </div>
 
 

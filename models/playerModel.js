@@ -7,7 +7,8 @@ var Schema = mongoose.Schema;
 var PlayerSchema = new mongoose.Schema({
     name: { firstName: {type: String, required: [true, 'First name required']},  
                 lastName: {type: String, required:[true, 'Last name required']} },
-    nicName: String,            
+    nicName: String,   
+    playerNumber: String,         
     playerAge:{type: Number, required:[true, 'Player age required']},
     positionPref: {type: String, default: 'None'},
     team: {type: Schema.Types.ObjectId, ref: 'Team'},    

@@ -45,7 +45,7 @@ this.props.onClick(page);
    <ul>
 
 <li><Link to="">Teams</Link></li>
-<li><Link to="">My Team</Link></li>
+<li><Link to="/team">My Team</Link></li>
 <li><Link to="users/profile">My Profile</Link></li>
 <li><Link to="/register">Register</Link></li>
 <li><Link to="/login">Log In</Link></li>
