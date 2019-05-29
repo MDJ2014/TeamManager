@@ -1,0 +1,63 @@
+#adminTeamContainer{
+    text-align: center;
+
+}
+
+#adminTeamHeader{
+    margin-bottom: 5%;  
+}
+
+.teamSectionBody{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid darkslategray;
+    background-color: white;
+    display: flex;
+
+}
+
+.adminTeamContainer{
+    height: 10em;
+    width: 8em;
+    margin-left: 1%;
+
+}
+
+.adminTeamEditButton{
+    width: 4em;
+    height: 2em;
+    font-size: .7em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
+}
+
+.adminTeamLogo{
+    padding-top: 1%;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 1em;
+    height: 5.5em;
+      width:auto;
+      border: solid 2px darkslategray;
+    border-radius: 240px;
+    -webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+    -moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+    box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+    background-image: url('../../assets/vikings.png');
+    background-size: 6em;
+    background-repeat: no-repeat;
+   
+  
+  }
+
+  #addTeamBtnContainer{
+      width: 10%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 1%;
+  }
+
+ 
+  

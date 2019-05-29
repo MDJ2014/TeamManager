@@ -16,8 +16,14 @@ class Profile extends Component {
     this.state = {
       profileData: '',
      playerAdd: false,
-     playerEdit: false,
+     playerToEdit: null,
+    // playerEdit: false,
      paid:false
+      // playerFirstName:'',
+      //   playerLastName:'',
+      //   playerNicName:'',
+      //   playerAge:'',
+      //   playerPositionPreference:''
          
     };
     this.onClick = this.onClick.bind(this);
@@ -25,7 +31,7 @@ class Profile extends Component {
     this.handleUserDataSubmit = this.handleUserDataSubmit.bind(this);
     this.handleAddPlayerSubmit = this.handleAddPlayerSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
-
+    this.handleEditPlayer = this.handleEditPlayer.bind(this);
    
   }
 
@@ -57,6 +63,11 @@ class Profile extends Component {
 // })
 
 
+  }
+  getInitialState() {
+    return {
+      playerToEdit: null
+    };
   }
 
 componentDidMount(){
@@ -96,13 +107,44 @@ componentDidUpdate() {
   }
 }
 */
-toggleEdit = ()=>
-{
-  this.state.playerEdit ? this.setState({playerEdit:false}) : 
-  this.setState({playerEdit:true});
+toggleEdit(itemId){
+
+  // this.state.playerEdit ? this.setState({playerEdit:false}) : 
+  // this.setState({playerEdit:true});
   
+  this.setState( { playerToEdit: itemId } );
+
 }
 
+handleEditPlayer(player){
+
+this.setState({playerToEdit: null});
+
+}
+
+cancelEdit(){
+  this.setState({playerToEdit: null});
+}
+
+renderItemOrEditItem(player){
+  if(this.state.playerToEdit === player._id){
+  
+return(
+<EditPlayer playerToEdit={player} cancelThisEdit={this.cancelEdit} editPlayer={this.handelEditPlayer}/> 
+);
+
+    
+  }else{
+
+return(
+<MyPlayers editmode={this.toggleEdit} playerToShow={player}/>
+)
+
+
+  }
+  
+  }
+  
 
 handleChange(event) {
   const target = event.target;
@@ -286,20 +328,12 @@ const pageData = this.state.profileData;
   }
 
 
-{this.state.playerEdit
-?
+<div id="playersContainer">
+{this.state.profileData.players.map((item)=>{
+  return this.renderItemOrEditItem(item);
+},this)}
+</div>
 
- <EditPlayer playersToEdit={this.state.profileData.players}/> 
-
-
-
-:
-
-
-
-<MyPlayers editmode={this.toggleEdit} myplayers={this.state.profileData.players}/>
-
-}
 
 </section>
 

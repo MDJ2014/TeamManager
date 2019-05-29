@@ -79,8 +79,8 @@ router.get('/parent', mid.requiresLogin, function(req, res, next) {
   });
   });
 
-/**UPDATE PLayer */
-router.put('/player', mid.requiresLogin, function(req,res,next){
+/**UPDATE PLayer mid.requiresLogin,*/
+router.put('/player',  function(req,res,next){
   Player.findByIdAndUpdate(req.body.playerId, req.body, {new: true})
   .exec(function(err,doc){
     if(err) return next(err);

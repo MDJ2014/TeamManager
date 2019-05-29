@@ -102,7 +102,7 @@ const pageData = this.state.data;
  <Route  path="/contact" component={Menu}/>
  <Route  path="/about" component={Menu}/>
  <Route  path="/users/profile" component={Menu}/>
-    
+ <Route  path="/team" component={Menu}/>  
  
     
 <div id="main">

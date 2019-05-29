@@ -11,6 +11,7 @@ var PlayerSchema = new mongoose.Schema({
     playerNumber: String,         
     playerAge:{type: Number, required:[true, 'Player age required']},
     positionPref: {type: String, default: 'None'},
+    assignedPosition: String,
     team: {type: Schema.Types.ObjectId, ref: 'Team'},    
     parent:{type: Schema.Types.ObjectId, ref: 'User', required: true},
     dateJoined:{type: Date, default: Date.now}

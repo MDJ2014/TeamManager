@@ -236,13 +236,14 @@ display: flex;
   #playersContainer{
     height: auto;
     width: 100%;
-  
+  display: flex;
   }
 
 #playerContainer{
   width: 35%;
   padding-left: 4%;
   margin-top: 5%;
+  margin-left: 3%;
   height: 30em;
   -webkit-box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58); 
   box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58);

@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import './Admin.css';
-
-
+import AdminEditHome from '../adminEditHome/AdminEditHome';
+import Teams from '../teams/Teams';
+import { Link } from 'react-router-dom';
 
 class Admin extends Component {
     constructor(props){
       super(props);
     
       this.state = {
+        editView : "",
         memberView: false,
         teamView: false,
         playerView: false,
@@ -18,12 +20,17 @@ class Admin extends Component {
         editPlayer:false
                
       };
-     
+      this.handleMenu = this.handleMenu.bind(this);
     }
 
 
+    handleMenu(event){
+      const target = event.target;
+      const value = target.value;
+      const name = target.name;
 
-
+   this.setState({editView: name});
+  }
 
 
 
@@ -55,10 +62,10 @@ class Admin extends Component {
 
 
 <div id="adminMenu">
- <button className="adminBtn"type="button">
+ <button className="adminBtn"type="button" name="home" onClick={this.handleMenu}>
           Home Page <span>></span>
          </button>
- <button className="adminBtn"type="button">
+ <button className="adminBtn"type="button" name="teams" onClick={this.handleMenu}>
           Teams<span>></span>
   </button>
 <button className="adminBtn"type="button">
@@ -70,11 +77,21 @@ class Admin extends Component {
          <button className="adminBtn"type="button">
           Accounts <span>></span>
          </button>    
+         <Link to="/">
+         <button className="adminBtn"type="button" name="close" onClick={this.handleMenu}>
+          Close Admin</button>    
+          </Link>
 </div>
 <div id="adminBody">
 
-
-
+{this.state.editView === 'home'?
+<AdminEditHome/>
+:
+this.state.editView === 'teams'?
+<Teams/>
+:
+null
+}
 
 
 

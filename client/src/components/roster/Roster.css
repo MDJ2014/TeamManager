@@ -1,0 +1,67 @@
+
+
+#rosterHeader{
+    display: flex;
+    font-weight: bold;
+}
+#rosterRow{
+    display:flex;
+}
+.listLong{
+    width: 6em;
+}
+.listShort{
+    width: 4em;
+}
+#playerEditBtn{
+width: 5%;
+}
+#playerDeleteBtn{
+     width: 5%;
+}
+#playerDeleteButton{
+    margin: 0%;
+    padding: 0%;
+    color: red;
+}
+#playerDeleteButton:hover{
+    color: white;
+    background-color: red;
+}
+#playerEditButton{
+margin: 0%;
+padding: 0%;
+
+
+}
+
+
+#playerDelCancelBtn{
+    
+    width: 4em;
+}
+
+
+#commitDeletePlayerBtn{
+    width: 4em;
+    border: 2px solid red;
+    color: red;
+}
+#commitDeletePlayerBtn:hover{
+    color: white;
+    background-color: red;
+}
+
+/* 
+<div id="rosterContainer">
+
+<div id="rosterHeader">
+<div id="headerFirstName">First Name</div>
+<div id="headerLastName">Last Name</div>
+<div id="headerNic">Nicname</div>
+<div id="rosterPlayerAge"></div>
+<div id="headerPositionPref">Pos Pref</div>
+<div id="headerAssignedPos">Position</div>
+<div id="headerNumber">Number</div>
+<div id="rosterSpace"></div>
+</div> */

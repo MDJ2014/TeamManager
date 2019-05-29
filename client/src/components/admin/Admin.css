@@ -12,7 +12,7 @@ background-color: darkslategray;
 
     display: grid;
     grid-template-columns: 1fr 6fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 1fr 24fr;
    
 }
 
@@ -72,7 +72,7 @@ margin-top: 3%;
 
 #adminMenu{
 grid-row-start: 1;
-grid-row-end: 4;
+grid-row-end: 3;
 grid-column-start: 1;
 grid-column-end: 2;
 background-color: darkslategray;
@@ -80,12 +80,13 @@ padding: 0%;
 
 }
 
-#adminbody{
-    grid-row-start: 1;
-grid-row-end: 4;
+#adminBody{
+grid-row-start: 2;
+grid-row-end: 3;
 grid-column-start: 2;
 grid-column-end: 3;
-background-color: brown;
+padding-top: 5%;
+
 }
 
 .adminBtn{
@@ -107,8 +108,9 @@ background-color: brown;
 padding: 2%;
 margin-left: 5%;
 border: .2px solid darkslategray;
--webkit-box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58); 
-box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58);
+-webkit-box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.78);
+-moz-box-shadow:    0px 1px 3px 0px rgba(50, 50, 50, 0.78);
+box-shadow:         0px 1px 3px 0px rgba(50, 50, 50, 0.78);
 height: 6em;
 width: 9em;
 background-color: white;
