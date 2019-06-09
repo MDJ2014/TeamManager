@@ -1,0 +1,19 @@
+#footer{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+   li{
+    float: left;
+    padding-left: 2em;
+    padding-top: 1em;
+ }
+}
+
+#copy{
+    font-size: 1em;
+    color: burlywood;
+    float: right;
+   margin-top: .5%;
+}

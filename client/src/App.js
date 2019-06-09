@@ -1,254 +1,87 @@
-import React, {Component} from 'react';
-import './App.css';
+import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Menu from './components/menu/Menu';
-import Footer from './components/footer/Footer';
-import Header from './components/header/Header';
-import About from './components/about/About';
-import Register from './components/Register/Register';
-import LogIn from './components/login/Login';
-import Contact from './components/contact/Contact';
-import Profile from './components/profile/Profile';
+import Menu from './components/Menu';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Home from './components/Home';
+import Contact from './components/Contact';
+import About from './components/About';
+import LogIn from './components/Login';
+import Register from './components/Register';
+import Profile from './components/Profile';
+import Team from './components/Team';
+import Teams from './components/Teams'
+import Admin from './components/Admin';
+import PrivacyStatement from './components/privacyStatement';
+import LicenseAgreement from './components/LicenseAgreement';
+import TermsOfUse from './components/TermsOfUse';
 
-import { Link } from 'react-router-dom';
-import Team from './components/team/Team';
-import Error from './components/error/error';
-import Admin from './components/admin/Admin';
-
-
-
-class App extends Component {
-  constructor(props){
-    super(props);
-  
-    this.state = {
-      data: ''
-     
-    };
-    this.onClick = this.onClick.bind(this);
-  }
+function App() {
+  return (
+    <Router>
 
 
- 
-
-/*
-getResponse = async() =>{
-  const response = await fetch('/home');
-
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body; 
-}
-*/
-
-getResponse = async()=>{
-  const response = await fetch('/home',{method:'GET', headers:{'Content-Type': 'application/json'}
-
-});
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body; 
-}
-
-componentDidMount(){
-  this.getResponse()
-  .then(res => {
-    const receivedData = res;
-    this.setState({data: receivedData});
-  });
-}
-
-
-/*
-componentDidUpdate() {
-  if(this.props.onClick.message === 'ok'){
-      console.log('ok');
-      if (!this.state.isLogged) {
-          this.setState({
-              isLogged: true
-          });
-      }
-      this.props.history.push('/');
-      //path is ok!!!
-      console.log('path from history: ', this.props.history);
-  }
-}
-*/
-
-
-
-
-
-onClick(page){
-  //this.state.home ? this.setState({home: false}) : this.setState({home: true});
-  this.setState({view:page});
-}
-
-  render(){
-const pageData = this.state.data;
-
-
- return (
-<Router>
-  <div id="homeBody ">
-  <Route exact path="/" component={Header}/>
- <Route  path="/login" component={Header}/>
- <Route  path="/register" component={Header}/>
- <Route  path="/contact" component={Header}/>
- <Route  path="/about" component={Header}/>
- <Route exact path="/" component={Menu}/>
- <Route  path="/login" component={Menu}/>
- <Route  path="/register" component={Menu}/>
- <Route  path="/contact" component={Menu}/>
- <Route  path="/about" component={Menu}/>
- <Route  path="/users/profile" component={Menu}/>
- <Route  path="/team" component={Menu}/>  
- 
     
-<div id="main">
-<Route exact path="/" render={props => (
-  <React.Fragment>
-    <div className="divider"></div>
+    <div className="App">
+    <Route exact path="/" component={Header}/>
+    <Route exact path="/" component={Menu}/>
+    <Route path="/contact" component={Header}/>
+    <Route path="/contact" component={Menu}/>
+    <Route path="/about" component={Header}/>
+    <Route path="/about" component={Menu}/>
+    <Route path="/login" component={Header}/>
+    <Route path="/login" component={Menu}/>
+    <Route path="/login" component={Footer}/>
+    <Route path="/register" component={Header}/>
+    <Route path="/register" component={Menu}/>
+    <Route path="/register" component={Footer}/>
+    <Route path="/users/profile" component={Menu}/>
+    <Route path="/users/profile" component={Footer}/>
+    <Route path="/team" component={Menu}/>
+    <Route path="/teams" component={Menu}/>
+    <Route path="/privacy-statement" component={Menu}/>
+    <Route path="/privacy-statement" component={Header}/>
+    <Route path="/privacy-statement" component={Footer}/>
+    <Route path="/license-agreement" component={Header}/>
+    <Route path="/license-agreement" component={Menu}/>
+    <Route path="/license-agreement" component={Footer}/>
+    <Route path="/terms" component={Header}/>
+    <Route path="/terms" component={Menu}/>
+    <Route path="/terms" component={Footer}/>
 
-{pageData.welcome?
-  <div id="welcome-top">{pageData.welcome} </div>
-:
-null
-}
+<div id="maincontainer">
+
+    
+    <Route exact path="/" component={Home}/>
+    <Route path="/contact" component={Contact}/>
+    <Route path="/contact" component={Footer}/>
+    <Route path="/about" component={About}/>
+    <Route path="/about" component={Footer}/>
+    <Route path="/login" component={LogIn}/>
+    <Route path="/register" component={Register}/>
+    <Route exact path="/" component={Footer}/>
+    <Route path="/users/profile" component={Profile}/>
+    <Route path="/team" component={Team}/>
+    <Route path="/teams" component={Teams}/>
+    <Route path="/admin" component={Admin}/>
+    <Route path="/privacy-statement" component={PrivacyStatement}/>
+<Route path="/license-agreement" component={LicenseAgreement}/>
+<Route path="/terms" component={TermsOfUse}/>
 
 
-  <div id="maincontainer">
-{pageData.header?
-<div id="mainHeader">{pageData.header}</div>
-:
-null
-}
 
-{pageData.mainAnnouncement?
-<div id="mainAnnouncements">
-<div className="announcement">
-<div className="announcement-top">
-<h2 className="announcement-title">{pageData.mainAnnouncement.title}</h2>
+
+
+
+
+
 </div>
 
-<p className="announcement-body">{pageData.mainAnnouncement.body}</p>
-{pageData.mainAnnouncement.link?
-<p className="announcement-footer"><Link to ={pageData.mainAnnouncement.link}>Link</Link></p>
-:
-null}
-
-</div>
-</div>
-:
-null
-}
+    </div>
 
 
-{pageData.mainCallOut?
-<div id="mainCallout" className="callout">
-<div className="callout-top" id="calloutTop"><div className="whistle" id="mainWhistle"></div>
-<h2 className="callout-title">{pageData.mainCallOut.title}</h2>
-</div>
-
-<p className="callout-body">{pageData.mainCallOut.body}</p>
-{pageData.mainCallOut.link?
-<p className="callout-footer"><Link to ={pageData.mainCallOut.link}>Link</Link></p>
-:
-null}
-
-</div>
-:
-null
-}
-
-{pageData.announcements?
-<div id="otherAnnouncements">
-{pageData.announcements.map(function(announcement, index){
-return <div className="announcement" key={index}>
-<div className="announcement-top">
- <h2 className="announcement-title">{announcement.title}</h2>
-</div>
-<p className="announcement-body">{announcement.body}</p>
-{pageData.announcements.link?
- <p announcement-footer><Link to={announcement.link}>Link</Link></p>
-:
-null}
-
-</div>  
-})}
-</div>
-:
-null
-}
-</div>
-
-{pageData.callsToAction?
-<div id="callout-container">
-{pageData.callsToAction.map(function(cta, index){
-return <div id="callsToAction" className="callout left">
-<div className="callout-top">
-<div className="whistle"></div>
-<h2 className="callout-title">{cta.title}</h2>
-</div>
-
-<p className="callout-body">{cta.body}</p>
-{pageData.callsToAction.link?
-<p className="callout-footer"><Link to={cta.link}>Link</Link></p>
-:
-null
-}
-
-</div>
-})}
-
-</div>
-:
-null
-
-}
-
-{pageData.notice?
-<div id="notice">
-{pageData.notice}
-</div>
-:
-null
-
-}
-
-
-
-
-
-
-
-
-<div className="divider"></div>
-
-
-  </React.Fragment>
-)}/>
-
-
-<Route path="/about" component={About}/>
-<Route path="/register" component={Register}/>
-<Route path="/login" component={LogIn}/>
-<Route path="/contact" component={Contact}/>
-<Route path="/users/profile" component={Profile}/>
-<Route path="/team" component={Team}/>
-<Route path="/admin" component={Admin}/>
-</div>
-
-
-<footer><Footer /></footer>
-  
-  </div>
-  </Router>
+    </Router>
   );
-
-  }
-
-  
 }
 
 export default App;

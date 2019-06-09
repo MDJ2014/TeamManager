@@ -50,8 +50,12 @@ Player.create(newPlayer, function (err, player) {
          
   
   });
-  */
-  });
+*/
+  
+});
+
+  
+  
 
 
    /**Get Team Players (roster) */
@@ -81,13 +85,26 @@ router.get('/parent', mid.requiresLogin, function(req, res, next) {
 
 /**UPDATE PLayer mid.requiresLogin,*/
 router.put('/player',  function(req,res,next){
-  Player.findByIdAndUpdate(req.body.playerId, req.body, {new: true})
+  Player.findByIdAndUpdate({_id: req.body.playerId}, req.body, {new: true})
   .exec(function(err,doc){
     if(err) return next(err);
     res.json(doc);
   });
 });
 
+/*
+router.put('/player', function(req,res,next){
 
+// Player.findOne({_id:req.body.playerId})
+// .exec(function(err,player){
+//   if(err) return next(err);
 
+// })
+Player.findOneAndUpdate({_id: req.body.playerId}, req.body, {upsert:true, new:true, returnNewDocument : true})
+.exec(function(err,doc){
+  if(err) return next(err);
+  res.json(doc);
+})
+});
+*/
 module.exports = router;

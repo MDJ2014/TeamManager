@@ -31,7 +31,19 @@ return res.json(page);
  // res.render('index', { title: 'City Youth Team Manager' });
 });
 
+router.put('/home/about/edit',function(req,res,next){
+  HomePage.findById(req.body.id)
+  .exec(function(err,page){
+    if (err) return next(err);
+    page.update({$set:{"about": req.body.about}})
+    .exec(function (err, doc) {
+      if (err) return next(err);
+      res.status(200);
+      res.json(doc);
 
+    });
+  });
+});
 router.get('/about',function(req,res,next){
 //res.render('about');
 return res.json({title: "About"});
@@ -68,7 +80,7 @@ router.put('/home/header/edit',function(req,res,next){
     .exec(function (err, doc) {
       if (err) return next(err);
       res.status(200);
-      res.json({ "notice": req.body.header, "updated to": req.body });
+      res.json({ "message": "Header saved"});
 
     });
   });
@@ -77,14 +89,17 @@ router.put('/home/header/edit',function(req,res,next){
 
 
 router.put('/home/welcome/edit',function(req,res,next){
+  
   HomePage.findById(req.body.id)
   .exec(function(err,page){
     if (err) return next(err);
     page.update({$set:{"welcome": req.body.welcome}})
     .exec(function (err, doc) {
-      if (err) return next(err);
+      if (err){ 
+           return next(err);
+      }
       res.status(200);
-      res.json({ "welcome": req.body.welcome, "updated to": req.body });
+      res.json({ "message": "Welcome saved"});
 
     });
   });
@@ -132,6 +147,69 @@ router.put('/home/notice/edit',function(req,res,next){
   });
 });
 
+
+router.put('/home/license/edit',function(req,res,next){
+  HomePage.findById(req.body.id)
+  .exec(function(err,page){
+    if (err) return next(err);
+    page.update({$set:{"license": req.body.license}})
+    .exec(function (err, doc) {
+      if (err) return next(err);
+      res.status(200);
+      res.json(doc);
+
+    });
+  });
+});
+
+router.put('/home/terms/edit',function(req,res,next){
+  HomePage.findById(req.body.id)
+  .exec(function(err,page){
+    if (err) return next(err);
+    page.update({$set:{"terms": req.body.terms}})
+    .exec(function (err, doc) {
+      if (err) return next(err);
+      res.status(200);
+      res.json(doc);
+
+    });
+  });
+});
+
+router.put('/home/privacy/edit',function(req,res,next){
+  HomePage.findById(req.body.id)
+  .exec(function(err,page){
+    if (err) return next(err);
+    page.update({$set:{"privacy": req.body.privacy}})
+    .exec(function (err, doc) {
+      if (err) return next(err);
+      res.status(200);
+      res.json(doc);
+
+    });
+  });
+});
+
+
+
+router.put('/home/contact/edit',function(req,res,next){
+  HomePage.findById(req.body.id)
+  .exec(function(err,page){
+    if (err) return next(err);
+    page.update({$set:{"contact": req.body.contact}})
+    .exec(function (err, doc) {
+      if (err) return next(err);
+      res.status(200);
+      res.json(doc);
+
+    });
+  });
+});
+
+
+
+
+
 router.put('/home/announcements/add',function(req,res,next){
 HomePage.findById(req.body.id)
 .exec(function(err,doc){
@@ -172,14 +250,8 @@ doc.save(function(err,savedDoc){
  
   });
 });
-// router.put('/home/announcements/edit',function(req,res,next){
-//   HomePage.updateOne({req.body.id, "announcements": {_id:req.body.anId} }, req.body.announcements,{new:true})
-//   .exec(function(err,doc){
-//     if(err) return next(err);
-//     res.status(200);
-//     res.json(doc);
-//   })
-// });
+
+
 
 router.put('/home/announcements/edit',function(req,res,next){
   HomePage.findByIdAndUpdate(req.body.id, {$pull:{announcements:{_id: req.body.anId}}},{new: true})

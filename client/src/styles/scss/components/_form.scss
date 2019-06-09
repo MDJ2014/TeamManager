@@ -1,0 +1,81 @@
+@import '../variables';
+
+
+.form-input{
+    background-color: $input-color;
+    width: 60%;
+    height: 2em;
+    font-weight: bold;
+    }
+
+
+.space{
+    
+    margin-top: 1em;
+    margin-bottom: 1em;
+   
+}
+
+.form-btn{
+    width: 9em;
+       height: 4em;
+       display: block;
+      margin-left: auto;
+      margin-right: auto;
+       color:$main-color;
+       background-color: white;
+       border: solid 2px $main-color;
+       font-weight: bold;
+   }
+   
+   .form-btn:hover{
+       background-color: $main-color;
+       color: white;
+       font-weight: bold;
+   }
+
+   .form-btn:disabled{
+       background-color: gainsboro;
+       color: gray;
+       border: 1px solid black;
+       font-weight: normal;
+     
+   }
+   .form-btn:disabled:hover{
+    background-color: gainsboro;
+    color: gray;
+    border: 1px solid black;
+    font-weight: normal;
+   }
+
+   input:invalid {
+    border: 2px solid red;
+  }
+  
+  input:valid {
+    border: 2px solid black;
+  }
+
+  .disabled{
+    background-color: gainsboro;
+    color: gray;
+    border: 1px solid black;
+    font-weight: normal;
+    width: 9em;
+    height: 4em;
+    display: block;
+   margin-left: auto;
+   margin-right: auto;
+  
+  
+  }
+
+  .disabled:hover{
+    background-color: gainsboro;
+    color: gray;
+    border: 1px solid black;
+    font-weight: normal;
+  }
+#message{
+  
+}

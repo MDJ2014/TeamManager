@@ -1,0 +1,210 @@
+
+ #coachName{
+    margin-right: 25%;
+}
+#coachContainer{
+   
+}
+#coachTitle{
+    margin-right: 2%;
+    font-weight: bold;
+}
+
+
+ 
+#msgBody{
+ 
+    background-color: white;
+    border: 3px solid darkslategray;
+    width: 50%;
+    border-radius: 10px;
+    text-align:center;
+    height: auto;
+    margin: auto;
+}
+#msgTitle{
+    font-weight: bold;
+}
+#teamContainer{
+    background-color: white;
+     height: auto;
+     width: 100%;
+     display: grid;
+     grid-template-columns: 1fr;
+     grid-template-rows: 2fr 1fr 4fr;
+ }
+#teamPageBody{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    background-color: greeen;
+ 
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+
+ #teamPageCoaches{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+   
+    height: auto;
+   
+    display: flex;
+}
+
+
+
+ 
+ #teamHeader{
+     grid-column-start: 1;
+     grid-column-end: 4;
+     grid-row-start: 1;
+     grid-row-end: 2;
+   
+     display: grid;
+     grid-template-columns: 1fr 1fr 4fr;
+     grid-template-rows: 1fr;
+     border-bottom: 3px solid darkslategray;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ #teamPageHeaderLogo{
+    background-image: url('../../assets/vikings.png');
+    border: 3px solid darkslategray;
+    background-position: center center;
+    border-radius: 150px;
+    height: 9em;
+      width:9em;
+     background-repeat: no-repeat;
+
+}
+
+ #teamPageLogo{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+   
+    height: 150px;
+    width: 150px;
+    
+}
+
+
+#teamPageMessages{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+}
+ #teamPageName{
+     grid-column-start: 1;
+     grid-column-end: 2;
+     grid-row-start: 1;
+     grid-row-end: 2;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: right;
+    padding-right: 2%;
+  
+     
+ }
+ 
+  
+ #teamRoster{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    background-color: aliceblue;
+    border-left: 1px solid darkslategray;
+padding: 1%;
+
+
+}
+#rosterTable{
+width: 90%;
+margin: auto;
+}
+#rosterTitle{
+ text-align: center;
+ font-weight: bold;
+ background-color: darkslategray;
+   color: white;
+    
+}
+
+ 
+ #teamSchedule{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  padding: 1%;
+  background-color: aliceblue;
+
+}
+
+
+#scheduleTitle{
+   text-align: center;
+   font-weight: bold;
+   background-color: darkslategray;
+   color: white;
+   
+}
+
+
+
+ 
+
+
+ 
+ 
+
+ .scheduleHeader{
+     display: flex;
+     width: 99%;
+     margin: auto;
+     font-weight: bold;
+     padding-left: 7%;
+    
+ }
+ .scheduleHeader div{
+     margin-right: 2.5em;
+ }
+ .scheduleRow{
+     display: flex;
+     width: 99%;
+     margin: auto;
+     font-size: 1.1em;
+     padding-left: 5%;
+ }
+ 
+ 
+ 
+ 
+ #scheduleTable{
+    width: 100%;
+}
+#scheduleTableBody tr{
+
+text-align: center;
+}
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 

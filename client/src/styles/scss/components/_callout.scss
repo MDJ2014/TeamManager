@@ -1,0 +1,110 @@
+.callout{
+    border: 1px solid darkslategray;
+    border-radius: 5px;
+    height: auto;
+     margin-top: 20px;
+  margin-bottom: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    display: grid;
+    background-color: white;
+  
+    -webkit-box-shadow: 0px 3px 4px 0px rgba(50, 50, 15, 0.73);
+    -moz-box-shadow:    0px 3px 4px 0px rgba(50, 50, 15, 0.73);
+    box-shadow:         0px 3px 4px 0px rgba(50, 50, 15, 0.73);
+  
+    grid-template-columns: 1fr;
+   grid-template-rows: 1fr 2fr 1fr;
+  
+   background-image: linear-gradient(gainsboro, white, white, gainsboro );
+  }
+
+
+
+  
+ .callout-top{
+    grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 1;
+      height: 2em;
+      color: white;
+      padding-top: 1%;
+      padding-bottom: 10%;
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2f4f4f+1,4a5f60+55,5e696b+100 */
+  background: #2f4f4f; /* Old browsers */
+  background: -moz-linear-gradient(top,  #2f4f4f 1%, #4a5f60 55%, #5e696b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #2f4f4f 1%,#4a5f60 55%,#5e696b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #2f4f4f 1%,#4a5f60 55%,#5e696b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f4f4f', endColorstr='#5e696b',GradientType=0 ); /* IE6-9 */
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr;
+   }
+  
+   .whistle{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+width: 100%;
+
+     height: 4em;
+      width: auto;
+
+  
+   }
+   .callout-title{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    font-size: 1.5em;
+   text-align: left;
+   padding-left: 3%;
+   }
+   .callout-body{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    font-size: 2em;
+ height: auto; 
+ width: 100%;
+ padding-top: 3%;
+ word-wrap: break-word;
+  
+   }
+   .callout-footer{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 3;
+    text-align: center;
+  
+  
+   }
+
+   .callout-large{
+    width: 50%;
+    .callout-footer{
+      font-size: 1.6em;
+    }
+   
+     }
+   
+     .callout-small{
+       width: 30%;
+       .callout-title{
+         grid-column-start: 2;
+       grid-column-end: 3;
+       font-size: 1em;
+      text-align:left;
+      padding: 3%;
+       }
+       .callout-body{
+         font-size: 1.2em;
+       }
+       .callout-footer{
+        font-size: 1.2em;
+      }
+     }
+   

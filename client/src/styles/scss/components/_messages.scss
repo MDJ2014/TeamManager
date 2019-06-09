@@ -1,0 +1,41 @@
+@import '../variables';
+
+#messageEditContainer{
+ 
+
+    text-align: center;
+}
+#messageContainer{
+    background-color: white;
+    width: 50%;
+    margin: auto;
+}
+#newMessageBtn{
+    width: 8em;
+    height: 3em;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top: 1em;
+}
+#editMessageBody{
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    background-color: white;
+    border: 1px solid $main-color;
+
+    h4{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+}
+#editMsgTextArea{
+    width: 95%;
+    height: 4em;
+}
+#messageSaveBtn{
+    width: 6em;
+    height: 2em;
+    margin: auto;
+}

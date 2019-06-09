@@ -1,0 +1,80 @@
+.App {
+  text-align: center; }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+#pageTitle {
+  text-align: center;
+  margin-top: 1em;
+  height: 6em;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto; }
+  #pageTitle h1 {
+    color: darkred;
+    font-size: 3em;
+    -webkit-text-stroke: 1px white; }
+
+#maincontainer {
+  width: 80%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  background-color: gainsboro;
+  -webkit-box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58);
+  box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58); }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white; }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+
+html {
+  position: relative;
+  min-height: 100%; }
+
+.menuList {
+  height: 60px;
+  background: #2f4f4f;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #2f4f4f 0%, #5e696b 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2f4f4f), color-stop(100%, #5e696b));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #2f4f4f 0%, #5e696b 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #2f4f4f 0%, #5e696b 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #2f4f4f 0%, #5e696b 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #2f4f4f 0%, #5e696b 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 );
+  /* IE6-9 */
+  padding: 0px;
+  margin: 0px; }
+  .menuList ul {
+    list-style-type: none;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto; }
+    .menuList ul li {
+      float: right;
+      padding-right: 2em;
+      padding-top: 1em; }
+      .menuList ul li * {
+        font-size: 1.5em;
+        text-decoration: none;
+        color: white; }
+
+.menuList li *:hover {
+  color: burlywood; }

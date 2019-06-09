@@ -1,0 +1,32 @@
+
+
+header{
+  
+    background-image: url('../../assets/team4.png');
+    background-size: 100% 100%;
+    display: grid;
+    grid-template-areas: "logo pageTitle pageTitle"
+  }
+  
+
+
+  
+  #seal{
+    max-width: 30%;
+    height: auto;
+   padding-top: 5%;
+   margin-bottom: 10px;
+  }
+  
+  
+  #logo{
+    grid-area: logo;
+    background-size: 100% 100%;
+  }
+  
+  #headerBlurb{
+      grid-area: pageTitle;
+  }
+  
+ 
+  

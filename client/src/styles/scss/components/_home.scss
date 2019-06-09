@@ -1,0 +1,52 @@
+@import '../variables';
+
+
+
+#homePage{
+    height: auto;
+    margin-top: 0%;
+  padding-top: 0%;
+    padding-bottom: 5%;
+}
+#welcome-top{
+    width: $homePage-width;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    
+    margin-bottom: 50px;
+    }
+
+    #callouts-container{
+      display: flex;
+      width: 100%;
+    }
+
+    #mainHeader{
+      width: 100%;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    }
+
+
+    #notice{
+      width: 80%;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    
+    }
+
+    .link{
+      color: $main-color;
+      text-decoration: none;
+
+     
+
+    }
+    .link:hover{
+      color: $hover-color;
+    }

@@ -12,6 +12,11 @@ var HomePageSchema = new mongoose.Schema({
     mainCallOut: {title:{type: String}, body:{type: String}, link:{type:String}},
     callsToAction:[{title:{type: String}, body:{type: String}, link:{type:String}}],
     notice: String,
+    terms: String,
+    license: String,
+    privacy: String,
+    about: String,
+    contact:{phone: String, street: String, city: String, state: String,zip:String,email:String},
     datePosted:{type: Date, required:true},
     dateUpdated:{type: Date, default: Date.now}
 });

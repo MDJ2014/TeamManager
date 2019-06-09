@@ -1,0 +1,103 @@
+#profileContainer{
+    height: auto;
+    background-color: white;
+    width: 100%;
+}
+#newPlayerFormContainer{
+    width: 50%;
+    height: auto;
+    margin: auto;
+}
+
+#profilePlayerForm{
+
+    height: auto;
+      padding-bottom: 5%;
+      background-color: aquamarine;
+  }
+
+#profileBody{
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    margin-top: 0%;
+   
+
+}
+.profileFieldContainer{
+    display: flex; 
+}
+.profileSection{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+   
+}
+#playerSectionTitle{
+    display: flex;
+}
+
+.personalDetails{
+    font-weight: bold;
+    margin-left: 30%;
+  
+    
+}
+.profileSectionLabel{
+border-bottom: 2px solid darkslategray;
+width: 80%;
+font-size: 1.5em;
+font-weight: bold;
+margin-bottom: 1em;
+margin-top: 1em;
+margin-left: auto;
+margin-right: auto;
+
+
+}
+
+.profileFormResult{
+    margin-left: 1%;
+    font-size: 1em;
+
+    width: 20em;
+}
+.profileFormLabels{
+
+margin-right: 0%;
+width: 6em;
+}
+
+#btnContainer{
+   margin-top: 7px;
+}
+.sectionButton{
+    width: 6em;
+  height: 2em;  
+  margin-left: 10px;
+  border: 2px solid darkslategray;
+  background-color: white;
+  color: darkslategray;
+  font-weight: bold;
+
+}
+.sectionButton:hover{
+    color:white;
+    background-color: darkslategray;
+    
+}
+#playersContainer{
+    display: inline-block;
+  
+   
+   
+}
+
+
+#myPlayers{
+
+    width: 100%;
+    display: flex;
+margin-bottom: 5%;
+}
