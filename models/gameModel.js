@@ -8,8 +8,8 @@ var GameSchema = new mongoose.Schema({
     homeTeam: {type: Schema.Types.ObjectId, ref: 'Team'},
     awayTeam:{type: Schema.Types.ObjectId, ref: 'Team'},  
     location: {type: String}, 
-    homeTeamScore: {type: Number},
-    awayTeamScore: {type: Number},    
+    homeTeamScore: {type: Number, default: 0},
+    awayTeamScore: {type: Number, default: 0},    
     date:{type: Date}
 });
 

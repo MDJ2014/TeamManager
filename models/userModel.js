@@ -3,10 +3,12 @@
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var Schema = mongoose.Schema;
 
 
 var UserSchema = new mongoose.Schema({
     userType: {type: String, default: 'Member'},
+    position:{title: {type: String,default:"None"}, team:{type: Schema.Types.ObjectId, ref: 'Team', default: null},preference:{type: String, default:"None"}},
     name:{firstName: {type: String, trim: true, required: true}, lastName: {type: String, trim: true, required: true}},
     userName: {type: String, unique: true, required: [true, 'User name required']},
     userAddress:{street: String, city: String, state: {type: String, uppercase: true}, zip: Number},

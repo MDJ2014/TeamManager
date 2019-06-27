@@ -25,6 +25,7 @@ class AdminEditHome extends Component{
             addCallout: false,
             editCallout: "",
             deleteCallout:false,
+            calloutToDelete:"",
             
             calloutTitleEdit:"",
             calloutBodyEdit:"",
@@ -37,6 +38,7 @@ class AdminEditHome extends Component{
             welcomeSuccess:"",
             mainAnnouncementSuccess:"",
             mainCalloutSuccess:"",
+            noticeSuccess:"",
             
             announceTitle:"",
             announceBody:"",
@@ -46,8 +48,8 @@ class AdminEditHome extends Component{
             announceEdit: "",
             deleteAnnouncement: false,  
 
-            minorAnnouncementSuccess:""
-            
+            minorAnnouncementSuccess:"",
+            minorAnnouncementDelete: ""
 
             
         }
@@ -71,6 +73,10 @@ class AdminEditHome extends Component{
         this.addMinorAnnouncement = this.addMinorAnnouncement.bind(this);
         this.announcementDelete = this.announcementDelete.bind(this);
         this.handleAnnouncementDelete = this.handleAnnouncementDelete.bind(this);
+        this.handleAnnouncementDelete = this.handleAnnouncementDelete.bind(this);
+        this.setDeleteSuccess = this.setDeleteSuccess.bind(this);
+        this.componentRerender = this.componentRerender.bind(this);
+        this.handleCalloutsSubmit = this.handleCalloutsSubmit.bind(this);
     }
 
 
@@ -84,6 +90,12 @@ class AdminEditHome extends Component{
       }
       
       componentDidMount(){
+          this.componentRerender();
+   
+      }
+      
+    
+    componentRerender(){
         this.getResponse()
         .then(res => {
           const receivedData = res;
@@ -93,10 +105,7 @@ class AdminEditHome extends Component{
             mainCalloutBody:receivedData.mainCallOut.body, mainCalloutLink:receivedData.mainCallOut.link, announcements:receivedData.announcements, callOuts:receivedData.callsToAction,notice:receivedData.notice
         });
         });
-      }
-      
-    
-    
+    }
 
 
 
@@ -150,6 +159,16 @@ setSuccessMessage(item){
         });
     }, 3000)
 }
+
+
+setDeleteSuccess(item){
+    setTimeout(() => {
+        this.setState({
+            [item]: ''
+        });
+    }, 3000)
+}
+
 
 setErrorMessage(){
     setTimeout(() => {
@@ -209,7 +228,7 @@ setErrorMessage(){
 
         const body = JSON.stringify({
            id: this.state.data._id,
-         mainAnnouncement:{
+             mainAnnouncement:{
              title: this.state.mainAnnouncementTitle,
              body: this.state.mainAnnouncementBody,
              link: this.state.mainAnnouncementLink
@@ -301,6 +320,7 @@ route='/home/announcements/edit';
 
         const body = JSON.stringify({
             id: this.state.data._id,
+            anId: this.state.announceEdit,
           announcements:{
               title: this.state.announceTitle,
               body: this.state.announceBody,
@@ -314,6 +334,7 @@ route='/home/announcements/edit';
          .then(this.handleErrors)
          .then((res)=>this.setState({minorAnnouncementSuccess:res}))
          .then(this.setSuccessMessage('minorAnnouncementSuccess'))  
+         .then(this.componentRerender)
           .catch(function(res){
             
          })
@@ -321,6 +342,108 @@ route='/home/announcements/edit';
     }
 
 
+
+
+
+
+handleAnnouncementDelete= async(item)=>{
+    //event.preventDefault();
+
+    const body = JSON.stringify({
+        id: this.state.data._id,
+        anId: item
+    
+     });
+
+     const headers = {'content-type': 'application/json', accept: 'application/json'};
+
+     await fetch('/home/announcements/delete',{method: 'DELETE', headers, body})
+     .then(this.handleErrors)
+     .then((res)=>this.setState({minorAnnouncementDelete:res, deleteAnnouncement:""}))
+     .then(this.setDeleteSuccess('minorAnnouncementDelete'))  
+     .then(this.componentRerender)
+      .catch(function(res){
+        
+     })
+
+
+}
+
+handleCalloutDelete= async(item)=>{
+    //event.preventDefault();
+
+    const body = JSON.stringify({
+        id: this.state.data._id,
+        ctaId: item
+    
+     });
+
+     const headers = {'content-type': 'application/json', accept: 'application/json'};
+
+     await fetch('/home/calls-to-action/delete',{method: 'DELETE', headers, body})
+     .then(this.handleErrors)
+     .then((res)=>this.setState({calloutToDelete: res, calloutDelete:""}))
+     .then(this.setDeleteSuccess('calloutToDelete'))  
+     .then(this.componentRerender)
+      .catch(function(res){
+        
+     })
+
+
+}
+
+handleCalloutsSubmit= async(event)=>{
+    event.preventDefault();
+
+    const body = JSON.stringify({
+       id: this.state.data._id,
+       ctaId: this.state.editCallout,
+       callsToAction:{
+         title: this.state.calloutTitleEdit,
+         body: this.state.calloutBodyEdit,
+         link: this.state.calloutLinkEdit
+     }
+    });
+
+    const headers = {'content-type': 'application/json', accept: 'application/json'};
+
+    let route="";
+
+    if(this.state.addCallout){
+        route = '/home/calls-to-action/add'
+                }else{
+        route='/home/calls-to-action/edit';
+                }
+
+    await fetch(route,{method: 'PUT', headers, body})
+    .then(this.handleErrors)
+    .then((res)=>this.setState({mainCalloutSuccess:res}))
+    .then(this.setSuccessMessage('mainCalloutSuccess'))  
+    .then(this.componentRerender)
+     .catch(function(res){
+       
+    })
+}
+
+
+handleNoticeSubmit= async(event)=>{
+    event.preventDefault();
+
+    const body = JSON.stringify({
+       id: this.state.data._id,
+       notice: this.state.notice
+    });
+
+    const headers = {'content-type': 'application/json', accept: 'application/json'};
+
+    await fetch('/home/notice/edit',{method: 'PUT', headers, body})
+    .then(this.handleErrors)
+    .then((res)=>this.setState({noticeSuccess:res}))
+    .then(this.setSuccessMessage('noticeSuccess'))  
+     .catch(function(res){
+       
+    })
+}
 
 
 
@@ -512,7 +635,7 @@ onClick={this.announcementDelete}>
     :null}
     
   
-    
+   
 
 
 
@@ -527,7 +650,10 @@ onClick={this.announcementDelete}>
 
 </div>
 
-  
+  {this.state. minorAnnouncementDelete? 
+    <h6>Announcement Deleted</h6>
+    
+    :null}
 
         <button className="sectionButton" type="submit" onClick={this.addMinorAnnouncement}>
            Add
@@ -602,6 +728,8 @@ onClick={this.announcementDelete}>
 <div>
 <h5>Calls To Action</h5>
 
+
+
  <div id="calloutsContainer">
 {this.state.callOuts.map(function(callout){
     return(
@@ -630,7 +758,7 @@ onClick={this.announcementDelete}>
                  <button className="adminEditButton cancelBtn" id="calloutCancelDelete"type="button" onClick={()=>this.clickCalloutDelete()}>
                Cancel
              </button>
- <button className="adminEditButton deleteBtn" id="callOutConfirmDelete"type="button" onClick={()=>this.clickCalloutDelete(callout._id)}>
+ <button className="adminEditButton deleteBtn" id="callOutConfirmDelete"type="button" onClick={()=>this.handleCalloutDelete(callout._id)}>
                Delete  
              </button>
 
@@ -653,6 +781,9 @@ onClick={this.announcementDelete}>
     },this)}
 </div>
 
+
+
+
 </div>
 
 
@@ -661,6 +792,8 @@ onClick={this.announcementDelete}>
         <button className="sectionButton" type="button" onClick={this.addMinorCallout}>
            Add
          </button>
+
+
 
     </div>
 
@@ -675,7 +808,7 @@ onClick={this.announcementDelete}>
     }
     
     <div>
-    <form id="adminEditCalloutForm">
+    <form id="adminEditCalloutForm" onSubmit={this.handleCalloutsSubmit}>
     <div>
 <h6>Title</h6>
 <input className="adminInput" type="text" name="calloutTitleEdit"value={this.state.calloutTitleEdit} onChange={this.handleChange} placeholder="Title"/>
@@ -718,7 +851,7 @@ onClick={this.announcementDelete}>
     <div className="adminEditHomeSection">
     <div className="homeSectionTitle"><h3>Notice</h3></div>
     <div className="homeSectionBody">
-    <form id="adminEditNoticeForm">
+    <form id="adminEditNoticeForm" onSubmit={this.handleNoticeSubmit}>
         <textarea id="noticeInput"type="textarea" name="notice"value={this.state.notice} onChange={this.handleChange} placeholder="Enter notice"rows="15" cols="150">
         </textarea>
         <div className="adminHomeBtnContainer">
@@ -728,25 +861,13 @@ onClick={this.announcementDelete}>
         </div>
     </form>
     </div>
+    {this.state.noticeSuccess?
+    <h6>Notice saved!</h6>
+:
+null
+}
     <div className="adminSpacer"></div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -755,9 +876,6 @@ onClick={this.announcementDelete}>
 );
 
     }
-
-
-
 
 
 }

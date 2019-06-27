@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Popup from 'reactjs-popup';
 
 
 
@@ -8,8 +9,23 @@ class EditUser extends Component {
   
     this.state = {
     data: '',
+    firstName:"",
+    lastName:"",
+    userName:"",
+    userType:"",
+    street:"",
+    city:"",
+    state:"",
+    zip:"",
+    phone:"",
+    email:"",
     editMember: false,
-    deleteMember: false
+    memberToEdit:"",
+    memberDelete:"",
+    deleteMember: false,
+    saveSuccess:false,
+    showPopup:false,
+     errorMessage:""
     };
 
    // this.onClick = this.onClick.bind(this);
@@ -17,22 +33,52 @@ class EditUser extends Component {
    this.handleSubmit = this.handleSubmit.bind(this);
    this.clickDeleteMember=this.clickDeleteMember.bind(this);
    this.clickEditMember=this.clickEditMember.bind(this);
+   this.cancelEditMember=this.cancelEditMember.bind(this);
+  this.componentRerender=this.componentRerender.bind(this);
+  this.setSuccessMessage=this.setSuccessMessage.bind(this);
+  this.setDeleteSuccess=this.setDeleteSuccess.bind(this);
   }
 
   getResponse = async() =>{
-    const response = await fetch('/users/register');
+    const response = await fetch('/users');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body; 
   }
   
   componentDidMount(){
-    // this.getResponse()
-    // .then(res => {
-    //   const data = res;
-    //   this.setState({renderedResponse: data.title});
-    // })
+    this.getResponse()
+    .then(res => {
+      const renderedResponse = res;
+      this.setState({data: renderedResponse},()=>console.log(this.state.data));
+    })
   }
+
+  componentRerender(){
+    this.getResponse()
+    .then(res => {
+      const renderedResponse = res;
+      this.setState({data: renderedResponse},()=>console.log(this.state.data));
+   
+    });
+}
+
+
+  setSuccessMessage(item){
+    setTimeout(() => {
+     this.setState({
+         [item]: ''
+     });
+ }, 3000)
+}
+
+setDeleteSuccess(item){
+  setTimeout(() => {
+      this.setState({
+          [item]: ''
+      });
+  }, 3000)
+}
 
 
   handleChange(event) {
@@ -43,39 +89,122 @@ class EditUser extends Component {
     this.setState({[name]: value});
   }
 
-  handleSubmit= async(event)=>{
-    event.preventDefault();
 
-    const body= {
-     userPhone: this.state.phone,
+
+
+
+handleSubmit(event){
+  event.preventDefault();
+  const body= {
+    id:this.state.editMember,
+    userNewData:{
+     userType: this.state.userType,
+    name:{firstName: this.state.firstName, 
+                lastName:this.state.lastName},
+    userName: this.state.userName,
     userAddress:{
-      street: this.state.street,
-      city: this.state.city,
-      state: this.state.state,
-      zip: this.state.zip
-    }
-    
-    };
-//this.props.updateUser(event, body);
-    // const headers = {'content-type': 'application/json', accept: 'application/json'};
-
-    // await fetch('/users/register',{method: 'POST', headers, body})
-    // .then((res)=>this.setState({redirect:true}))
-    // .catch(function(response){
-      //this.setState({error:true, errmsg: error});
-      //console.log(response.data)
-   // })
-
+        street: this.state.street,
+         city: this.state.city,
+        state: this.state.state,
+        zip: Number(this.state.zip)
+  },
+  userPhone: this.state.phone,
+   userEmail: this.state.email,
   }
+  
+  };
 
- 
-clickEditMember(){
-this.state.editMember? this.setState({editMember: false}) : this.setState({editMember: true});
+
+
+
+  const options = { 
+    method: 'put',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+       body: JSON.stringify(body)
+  
+  }    
+  
+  
+  fetch('/users/update', options)
+  .then(response => {
+       console.log(response)        
+   if (response.ok) {
+           return response.json();
+         } else {
+            throw new Error('Something went wrong ...');
+         }
+       })
+         .then(data => this.setState({ saveSuccess:true, editMember:false }))
+           .then(this.setSuccessMessage('saveSuccess'))  
+          .then(this.componentRerender)
+         .catch(error => this.setState({ error }));
+
 }
+
+
+cancelEditMember(){
+this.setState({editMember: false,
+  firstName:"",
+  lastName:"",
+  userName:"",
+  userType:"",
+  street:"",
+  city:"",
+  state:"",
+  zip:"",
+  phone:"",
+  email:"",
+
+
+}) 
+}
+clickEditMember(member){
+
+
+
+this.setState({editMember: member._id,
+  firstName:member.name.firstName,
+  lastName:member.name.lastName,
+  userName:member.userName,
+  userType:member.userType,
+  street:member.userAddress.street,
+  city:member.userAddress.city,
+  state:member.userAddress.state,
+  zip:member.userAddress.zip,
+  phone:member.userPhone,
+  email:member.userEmail,
+});
+}
+
+
 clickDeleteMember(){
-    this.state.deleteMember? this.setState({deleteMember: false}) : this.setState({deleteMember: true});
+  this.state.deleteMember? this.setState({deleteMember: false}) : this.setState({deleteMember: true});
+ 
 }
 
+handleMemberDelete= async(item)=>{
+  //event.preventDefault();
+
+  const body = JSON.stringify({
+    userId: item._id,
+        
+   });
+
+   const headers = {'content-type': 'application/json', accept: 'application/json'};
+
+   await fetch('/users/user/delete',{method: 'DELETE', headers, body})
+   //.then(this.handleErrors)
+   .then((res)=>this.setState({memberDelete:res}))
+   .then(this.setDeleteSuccess('memberDelete'))  
+   .then(this.componentRerender)
+    .catch(function(res){
+      
+   })
+
+}
 
   render(){
   
@@ -86,90 +215,113 @@ clickDeleteMember(){
       <table id="userTable" className="systemTable">
    <thead>
    <tr>
-   <th>First Name</th>
    <th>Last Name</th>
-   <th>User Type</th>
-   <th>Address</th>
-   <th>Phone</th>
+   <th>First Name</th>
+   <th>Type</th>
+   <th>Street</th>
+   <th>City</th>
+   <th>State</th>
+   <th>Zip</th>
+     <th>Phone</th>
    <th>Email</th>
-   <th>Players</th>
-   <th></th>
+    <th></th>
    <th></th>
    </tr>
    </thead>
 
-   <tbody>
 
 
+{this.state.data? 
+  <tbody>
 
-  <tr>
-<td>Wanda</td>
-<td>White</td>
-<td>Member</td>
-<td>8760 Broken hook rd., Douglasville, GA</td>
-<td>687-698-8787</td>
-<td>wanda@yahoo.com</td>
-<td>Junior, Beltmoor</td>
+{this.state.data.map(function(user){
+return <tr  key={user._id}>
+<td>{user.name.lastName}</td>
+<td>{user.name.firstName}</td>
+<td>{user.userType}</td>
+<td>{user.userAddress.street}</td>
+<td>{user.userAddress.city}</td>
+<td>{user.userAddress.state}</td>
+<td>{user.userAddress.zip}</td>
+<td>{user.userPhone}</td>
+<td>{user.userEmail}</td>
 <td>
-<button className="adminEditGameButton" id="userEditBtn"type="button" onClick={this.clickEditMember}>
-             Edit
-     </button> 
-  </td>
+<button className="adminEditButton" id="userEditBtn"type="button" onClick={()=>this.clickEditMember(user)}>
+            Edit
+    </button> 
+ </td>
 <td>
-   <button className="adminEditGameButton" id="userDeleteBtn"type="button" onClick={this.clickDeleteMember}>
-             Del
-           </button> 
+  
+<Popup trigger={<button  className="adminEditButton deleteBtn">Del</button>} 
+modal id="tmModal" item={user._id}>
+    {close => (
+      <div className="modal">
+        <a className="close" onClick={close}>
+        &times;
+        </a>
+        <div className="header">Delete Member</div>
+        <div className="content">
+          {' '}
+          Are you sure you want to delete {user.name.lastName}, {user.name.firstName}?
+    
+        </div>
+        <div className="actions">
+         
+          <button
+            className="sectionButton"
+            onClick={() => {
+              console.log('modal closed ')
+              close()
+            }}
+          >
+           Cancel
+          </button>
+
+
+
+          <button
+            className="sectionButton popupDelBtn"
+            
+            onClick={() => {
+              this.handleMemberDelete(user);
+              close();
+            }}
+          >
+            Delete
+          </button>
+
+
+
+        </div>
+      </div>
+    )}
+  </Popup>
 
 </td>
-  </tr>
 
- <tr>
-<td>Wanda</td>
-<td>White</td>
-<td>Member</td>
-<td>8760 Broken hook rd., Douglasville, GA</td>
-<td>687-698-8787</td>
-<td>wanda@yahoo.com</td>
-<td>Junior, Beltmoor</td>
-<td>
-<button className="adminEditGameButton" id="userEditBtn"type="button" onClick={this.clickEdit}>
-             Edit
-     </button> 
-  </td>
-<td>
-   <button className="adminEditGameButton" id="userDeleteBtn"type="button" onClick={this.clickDelete}>
-             Del
-           </button> 
+ </tr>
 
-</td>
-  </tr>
+},this)}
 
 
-   </tbody>
+
+
+  </tbody>
+  :
+null
+ }
+
+
+
+
+
+
    </table>
 
-
+{this.state.saveSuccess? <h6>Member Information Saved.</h6>:null}
       </div>
 
-
-{this.state.deleteMember? 
-   
-    <div className="deleteWarning">
-    Are you sure you want to delete this member?
-    <div id="userDeleteCancelButton">
-    <button className="adminEditGameButton" id="userCancelBtn"type="button" onClick={this.clickDeleteMember}>
-         Cancel
- </button> 
-</div>
-<div id="userDeleteConfirmButton">
- <button className="adminEditGameButton" id="userConfirmDeleteBtn"type="button" onClick={this.clickDeleteMember}>
-         Delete
-       </button> 
-       </div>
-</div>
-    :
-    null
-}
+{this.state.memberDelete? <h6>Member deleted</h6>:null}
 
 
 {this.state.editMember?
@@ -177,62 +329,106 @@ clickDeleteMember(){
 
 
 <div id="adminEditUserForm">
-<div id="editMemberName">Member Name</div>
+<div id="editMemberName">{this.state.firstName}<span>{this.state.lastName}</span></div>
 <div id="userEditForm">
 
 <form onSubmit={this.handleSubmit}>
-<input className="profileInput" type="text" name="firstName"value={this.state.street} onChange={this.handleChange} placeholder="FirstName"/>
+  <h6>First Name</h6>
+<input className="editUserInput" type="text" name="firstName"value={this.state.firstName} onChange={this.handleChange} placeholder="FirstName"/>
 <div className="space"></div>
-
-<input className="profileInput" type="text" name="lastName"value={this.state.street} onChange={this.handleChange} placeholder="Last Name"/>
+<h6>Last Name</h6>
+<input className="editUserInput" type="text" name="lastName"value={this.state.lastName} onChange={this.handleChange} placeholder="Last Name"/>
 <div className="space"></div>
-
-<input className="profileInput" type="text" name="userName"value={this.state.street} onChange={this.handleChange} placeholder="User Name"/>
+<h6>User Name</h6>
+<input className="editUserInput" type="text" name="userName"value={this.state.userName} onChange={this.handleChange} placeholder="User Name"/>
 <div className="space"></div>
-
-<input className="profileInput" type="text" name="type"value={this.state.street} onChange={this.handleChange} placeholder="Street"/>
-<div className="space"></div>
-
-<select id="roleSelect" value={this.state.value} onChange={this.handleChange}>
-            <option value="member">Role</option>
-            <option value="member">Member</option>
-            <option value="admin">Admin</option>
-            <option value="coach">Coach</option>
-            </select>
+<h6>User Type</h6>
+<input id="userTypeInput"className="profileInput" type="text" disabled name="userType"value={this.state.userType} onChange={this.handleChange} placeholder="User Type"
 
 
 
-
-
-
+/>
 <div className="space"></div>
 
 
-<input className="profileInput" type="text" name="street"value={this.state.street} onChange={this.handleChange} placeholder="Street"/>
+<label> Member
+<input type="radio"
+                   name="selectUserType"
+                   value={"Member"}
+                   checked={this.state.userType==="Member"}
+                   onClick={(e)=>{
+                    this.setState({userType:"Member"})
+                   }}
+                
+            />
+</label>
+<label> Admin
+<input type="radio"
+                   name="selectUserType"
+                   value={"Admin"}
+                   checked={this.state.userType==="Admin"}
+                   onClick={(e)=>{
+                    this.setState({userType:"Admin"})
+                   }}
+                
+            />
+</label>
+<label> Coach
+<input type="radio"
+                   name="selectUserType"
+                   value={"Coach"}
+                   checked={this.state.userType==="Coach"}
+                   onClick={(e)=>{
+                    this.setState({userType:"Coach"})
+                   }}
+                
+            />
+</label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
 <div className="space"></div>
 
-<input className="profileInput" type="text" name="city"value={this.state.city} onChange={this.handleChange} placeholder="City"/>
+<h6>Street</h6>
+<input className="editUserInput" type="text" name="street"value={this.state.street} onChange={this.handleChange} placeholder="Street"/>
 <div className="space"></div>
-<input className="profileInput" type="text" name="state"value={this.state.state} onChange={this.handleChange} placeholder="State"/>
+<h6>City</h6>
+<input className="editUserInput" type="text" name="city"value={this.state.city} onChange={this.handleChange} placeholder="City"/>
+<div className="space"></div>
+<h6>State</h6>
+<input className="editUserInput" type="text" name="state"value={this.state.state} onChange={this.handleChange} placeholder="State"/>
 
 <div className="space"></div>
-
-<input className="profileInput" type="text" name="zip"value={this.state.zip} onChange={this.handleChange} placeholder="Zip code"/>
+<h6>Zip</h6>
+<input className="editUserInput" type="text" name="zip"value={this.state.zip} onChange={this.handleChange} placeholder="Zip code"/>
 <div className="space"></div>
-
-<input className="profileInput" type="text" name="phone"value={this.state.phone} onChange={this.handleChange} placeholder="Phone"/>
+<h6>Phone</h6>
+<input className="editUserInput" type="text" name="phone"value={this.state.phone} onChange={this.handleChange} placeholder="Phone"/>
 <div className="space"></div>
-<input className="profileInput" type="text" name="email"value={this.state.street} onChange={this.handleChange} placeholder="Email"/>
+<h6>Email</h6>
+<input className="editUserInput" type="text" name="email"value={this.state.email} onChange={this.handleChange} placeholder="Email"/>
 
 
 <div className="space"></div>
 
 <div className="memberBtnContainer">
-<button id="updateUserBtn"type="submit">
+<button id="updateUserBtn" className="sectionButton"type="submit">
            Save
          </button>
          <div className="space"></div>
- <button id="cancelSaveUserBtn"type="button" onClick={this.clickEditMember}>
+ <button id="cancelSaveUserBtn"type="button" className="sectionButton" onClick={this.cancelEditMember}>
            Cancel
          </button>
          <div className="space"></div>
@@ -254,6 +450,20 @@ null
       );
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 }
 
 

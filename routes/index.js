@@ -44,6 +44,8 @@ router.put('/home/about/edit',function(req,res,next){
     });
   });
 });
+
+
 router.get('/about',function(req,res,next){
 //res.render('about');
 return res.json({title: "About"});
@@ -223,11 +225,17 @@ HomePage.findById(req.body.id)
 });
 });
 
+
+
+
 router.put('/home/calls-to-action/add',function(req,res,next){
   HomePage.findById(req.body.id)
   .exec(function(err,doc){
     if(err) return next(err);
+
+
     doc.callsToAction.push(req.body.callsToAction);
+   
     doc.save(function(err,savedDoc){
       if(err) return next(err);
       res.status(200);
@@ -237,35 +245,37 @@ router.put('/home/calls-to-action/add',function(req,res,next){
 });
 
 
+
+
+
+
 router.put('/home/calls-to-action/edit',function(req,res,next){
-  HomePage.findByIdAndUpdate(req.body.id, {$pull:{callsToAction:{_id: req.body.ctaId}}},{new: true})
-  .exec(function(err,doc){
-doc.callsToAction.push(req.body.callsToAction);
-doc.save(function(err,savedDoc){
-   if(err) return next(err);
-  res.status(200);
-  return res.json(doc);
-})
-
+  HomePage.updateOne({_id: req.body.id,"callsToAction._id": req.body.ctaId},
  
+{$set:{"callsToAction.$.title": req.body.callsToAction.title, "callsToAction.$.body":req.body.callsToAction.body, "callsToAction.$.link": req.body.link}}
+  )
+   
+  .exec(function(err,page){
+    if (err) return next(err);
+      res.status(200);
+      res.json(page);
   });
-});
-
+})
 
 
 router.put('/home/announcements/edit',function(req,res,next){
-  HomePage.findByIdAndUpdate(req.body.id, {$pull:{announcements:{_id: req.body.anId}}},{new: true})
-  .exec(function(err,doc){
-doc.announcements.push(req.body.announcements);
-doc.save(function(err,savedDoc){
-   if(err) return next(err);
+  HomePage.updateOne({_id:req.body.id, "announcements._id":req.body.anId},
+  {$set:{"announcements.$.title":req.body.announcements.title, "announcements.$.body":req.body.announcements.body, "announcements.$.link":req.body.announcements.link}}
+  
+  )
+  .exec(function(err,page){
+     if(err) return next(err);
   res.status(200);
-  return res.json(doc);
-})
-
+  return res.json(page);
+  });
  
   });
-});
+
 
 
 

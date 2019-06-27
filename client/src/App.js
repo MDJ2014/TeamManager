@@ -16,6 +16,9 @@ import PrivacyStatement from './components/privacyStatement';
 import LicenseAgreement from './components/LicenseAgreement';
 import TermsOfUse from './components/TermsOfUse';
 
+
+
+
 function App() {
   return (
     <Router>

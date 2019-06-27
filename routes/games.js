@@ -21,14 +21,17 @@ router.get('/', function(req, res, next) {
         });
  });
 
-/*Get Team Games / Schedule*/
- router.get('/team', mid.requiresLogin, function(req, res, next) {
-     var a = req.body.teamId;
-     
-       Game.find().or([{homeTeam: a},{awayTeam: a}])
+/*Get Team Games / Schedule   , mid.requiresLogin        */
+ router.get('/team/:id', function(req, res, next) {
+    // var a = req.body.teamId;
+     var teamId = req.params.id;
+       Game.find().or([{homeTeam: teamId},{awayTeam: teamId}])
+       .populate({ path: 'homeTeam', select: 'teamName'})
+       .populate({path: 'awayTeam',select:'teamName'})
         .exec(
         function(err, games)  {
             if(err) return next(err);
+            res.status(200);
             res.json(games);
             //render update form
         });
@@ -37,8 +40,8 @@ router.get('/', function(req, res, next) {
 
  
 
- /*Post a new game */
- router.post('/', mid.requiresMod, function(req,res,next){
+ /*Post a new game , mid.requiresMod, */
+ router.post('/' ,function(req,res,next){
     var game = new Game(req.body);
 
     game.save(function(err, game){
@@ -50,8 +53,8 @@ router.get('/', function(req, res, next) {
 
 
 
-/*update game */
-router.put('/game/:id', mid.requiresMod, function(req,res,next){
+/*update game , mid.requiresMod*/
+router.put('/game/:id', function(req,res,next){
  
     var newData = req.body;
 

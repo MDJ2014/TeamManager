@@ -5,6 +5,16 @@
     background-color: white;
     border-bottom: 1px solid darkslategray;
 }
+#top{
+    background: white;
+    width: 100%;
+    height: 8em;
+    margin-bottom: 10%;
+}
+#teamEditCancelBtn{
+    margin-top: 1%;
+    width: 4em;
+}
 
 #editTeamTop{
     display: flex;
@@ -12,22 +22,113 @@ grid-column-start: 1;
 grid-column-end: 3;
 grid-row-start: 1;
 grid-row-end: 2;
-width: 50%;
+width: 90%;
 margin: auto;
-padding-left: 10%;
+
 
 }
 #adminEditTeamTeamName{
-margin-top: 10%;
-margin-right: 10%;
+margin-top: 5%;
+
 font-weight: bold;
+display: grid;
+grid-template-columns: 1fr 2fr;
+grid-template-rows: 1fr;
+
+padding-left: 15%;
+
 }
+#editTitleTeamName{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  
+    padding-top: 30%;       
+
+}
+
+#editTeamNameForm{
+    margin-left: 20%;
+}
+
+.team-edit-form-input{
+  
+    width: 100%;
+    height: 2em;
+    font-weight: bold;
+    }
+
+#adminTeamEditSectionLogoContainer{
+ 
+  
+    grid-column-start: 2;
+grid-column-end: 3;
+grid-row-start: 1;
+grid-row-end: 2;
+width: 6em;
+
+height: 6em;
+
+
+
+
+
+
+
+    }
+    #adminTeamEditSectionLogo{
+        
+          
+        margin-right:auto;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        height: 6em;
+      
+          width:auto;
+          border: solid 2px darkslategray;
+        border-radius: 240px;
+
+        -webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+        -moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+
+        box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+      
+
+
+
+        background-size: 6.5em;
+        
+        background-repeat: no-repeat;
+
+        background-position: center center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+    
+#teamNameEditBtn{
+    grid-column-start: 1;
+grid-column-end: 2;
+grid-row-start: 2;
+grid-row-end: 3;
+}
+
+#editTeamNameForm{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
 #schedule{
     grid-column-start: 1;
     grid-column-end:2 ;
     grid-row-start: 2;
     grid-row-end: 3;
- 
+ margin-top: 3%;
     padding-right: 10px;
 }
 #scheduleEdit{
@@ -88,30 +189,15 @@ border-right: 1px solid darkslategray;
 
 
 
-
-#adminTeamEditSectionLogoContainer{
-width:20%;
-
+#gameTable{
+    width: 100%;
 }
-#adminTeamEditSectionLogo{
-    
-    
-    
-    margin-right:auto;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    height: 6em;
 
-      width:auto;
-      border: solid 2px darkslategray;
-    border-radius: 240px;
-    -webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.67);
-    -moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.67);
-    box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.67);
-    background-image: url('../../assets/vikings.png');
-    background-size: 6.5em;
-    background-repeat: no-repeat;
-}
+
+
+
+
+
 .adminEditTeamCat{
     font-weight: bold;
     width: 50%;
@@ -119,9 +205,6 @@ width:20%;
     border-bottom: 3px solid darkslategray;
 }
 
-#adminEditTeamBody{
-
-}
 #editScheduleHeader{
     display:grid;
 grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -270,6 +353,7 @@ grid-template-rows: 1fr;
     background-color: red;
 }
 #gameDelCancelBtn{
+    margin-left: 20%;
     width: 4em;
 }
 
@@ -332,3 +416,33 @@ table{
     padding-top: 3px;
     padding-bottom: 3px;
 }
+
+.topLink{
+      float: right;
+      & a{
+        color:darkslategray;
+        text-decoration: none;
+        
+      }
+}
+a:hover{
+    color: lightslategray;
+}
+#pageLinks{
+     float: right;
+     width: 5%;
+     margin-right: 20%;
+}
+.headerLinks{
+    color:darkslategray;
+    text-decoration: none;
+    margin-left: 10%;
+    font-size: 1.5em;
+   
+}
+
+
+
+
+
+ 

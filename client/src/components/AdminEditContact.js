@@ -20,6 +20,7 @@ class AdminEditContact extends Component{
         }
         this.handleSubmit=this.handleSubmit.bind(this);
         this.handleChange=this.handleChange.bind(this);
+        this.setSuccessMessage = this.setSuccessMessage.bind(this);
     }
 
     getResponse = async()=>{
@@ -78,7 +79,7 @@ class AdminEditContact extends Component{
          .catch(function(response){
          this.setState({errorMessage: response.message})
         })
-        //.then(this.setErrorMessage())
+      
     }
 
 
@@ -124,7 +125,7 @@ render(){
          </button>
 
          {this.state.saveSuccess?
-         <h6>About saved</h6>
+         <h6>Contact information saved</h6>
         :
         null}
         </div>

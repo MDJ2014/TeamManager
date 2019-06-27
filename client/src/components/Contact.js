@@ -15,10 +15,10 @@ class Contact extends Component {
                      zip:"",
                      phone:"",
                      email:"",
-                    saveSuccess:"",
-                    errorMessage:""
-            }
-          
+                             }
+
+
+       
         }
 
       getResponse = async()=>{
@@ -42,6 +42,9 @@ class Contact extends Component {
               
             });
           }
+
+
+
 
 render(){
 

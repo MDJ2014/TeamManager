@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 
  import AdminEditHome from '../components/AdminEditHome';
- import EditTeams from '../components/EditTeams';
-// import Messages from '../messages/Messages';
+ import AdminEditTeams from './AdminEditTeams';
  import EditUser from '../components/EditUser';
-// import AdminEditPlayer from '../adminEditPlayers/AdminEditPlayers';
-// import Accounts from '../accounts/Accounts';
+ import AdminEditPlayers from '../components/AdminEditPlayers';
+ import Accounts from '../components/Accounts';
 
 import { Link } from 'react-router-dom';
 import AdminEditAbout from './AdminEditAbout';
@@ -14,6 +13,8 @@ import Messages from './Messages';
 import AdminEditPrivacy from '../components/AdminEditPrivacy';
 import AdminEditTerms from '../components/AdminEditTerms';
 import AdminEditLicense from '../components/AdminEditLicense';
+
+
 
 class Admin extends Component {
     constructor(props){
@@ -49,6 +50,7 @@ handleUpdate(){
   this.props.updatePage();
 }
 
+
     render() {
 
 
@@ -64,12 +66,8 @@ handleUpdate(){
 <div id="adminContainer">
 
 <div id="stats">
-<div id="teamStats" className="statBox">Teams: 9</div>
-<div id="gameStats" className="statBox">Games: 50</div>
-<div id="memberStats" className="statBox">Members: 100</div>
-<div id="playerStats" className="statBox">Players: 36</div>
-<div id="coachStats" className="statBox">Coaches: 36</div>
-<div id="incomeStats" className="statBox">Income: $2000</div>
+
+
 </div>
 
 
@@ -97,10 +95,7 @@ handleUpdate(){
          <button className="adminBtn"type="button" name="players" onClick={this.handleMenu}>
           Players <span>></span>
          </button>   
-         <button className="adminBtn"type="button" name="accounts" onClick={this.handleMenu}>
-          Accounts <span>></span>
-         </button>    
-         <button className="adminBtn"type="button" name="privacy" onClick={this.handleMenu}>
+          <button className="adminBtn"type="button" name="privacy" onClick={this.handleMenu}>
           Privacy Statement <span>></span>
          </button>    
          <button className="adminBtn"type="button" name="terms" onClick={this.handleMenu}>
@@ -127,7 +122,7 @@ this.state.editView === 'contact'?
 :
 
 this.state.editView === 'teams'?
-<EditTeams/>
+<AdminEditTeams/>
 :
 
 this.state.editView === 'messages'?
@@ -138,14 +133,16 @@ this.state.editView === 'members'?
 <EditUser/>
 
 :
-/*
+
 this.state.editView === 'players'?
-<AdminEditPlayer/>
+<AdminEditPlayers/>
 :
+
+
 this.state.editView === 'accounts'?
 <Accounts/>
 :
-*/
+
 this.state.editView === 'privacy'?
 <AdminEditPrivacy/>
 :

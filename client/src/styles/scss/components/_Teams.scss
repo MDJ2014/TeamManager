@@ -31,3 +31,75 @@
 .teamBody{
     margin-left: 1%;
 }
+
+
+#left{
+    margin-left: 0%;
+}
+
+.outer2{
+  width:100%;
+  height: auto;
+  margin-left:0;
+  margin-right:auto;
+  border: 0px solid white;
+  display:flex;
+
+}
+
+.bar2{
+  height:auto;
+  width: 75%;
+  margin-left:0;
+  margin-right:auto;
+  margin-top: 60px;
+    border: 3px double lightslategray;
+    border-radius: 0px 10px 10px 0px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2f4f4f+19,54707f+68,778899+99,778899+99 */
+    background: #2f4f4f; /* Old browsers */
+    background: -moz-linear-gradient(top,  #2f4f4f 19%, #54707f 68%, #778899 99%, #778899 99%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #2f4f4f 19%,#54707f 68%,#778899 99%,#778899 99%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #2f4f4f 19%,#54707f 68%,#778899 99%,#778899 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f4f4f', endColorstr='#778899',GradientType=0 ); /* IE6-9 */
+
+
+}
+
+.mid2{
+    width: 20%;
+    padding-top: 1%;
+    margin-right: 1%;
+    margin-left: 70%;
+
+  color:white;
+  font-weight: bold;
+  font-size: 1.5em;
+  
+ 
+
+}
+
+.skewed2{
+  background-color: white;
+
+  height: 30px;
+  width: .5em;
+
+transform:skewX(-26deg);
+}
+
+.radial2{
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#778899+2,778899+2,2f4f4f+43 */
+background: #778899; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #778899 2%, #778899 2%, #2f4f4f 43%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover,  #778899 2%,#778899 2%,#2f4f4f 43%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center,  #778899 2%,#778899 2%,#2f4f4f 43%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#778899', endColorstr='#2f4f4f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+width: 1em;
+}
+.right2{
+    border-right: 1px solid black;
+}
+.bars{
+  height: 3.5em;
+}

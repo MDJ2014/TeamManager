@@ -1,0 +1,53 @@
+
+
+#rosterHeader{
+    display: flex;
+    font-weight: bold;
+}
+#rosterRow{
+    display:flex;
+}
+.listLong{
+    width: 6em;
+}
+.listShort{
+    width: 4em;
+}
+#playerEditBtn{
+width: 5%;
+}
+#playerDeleteBtn{
+     width: 5%;
+}
+#playerDeleteButton{
+    margin: 0%;
+    padding: 0%;
+    color: red;
+}
+#playerDeleteButton:hover{
+    color: white;
+    background-color: red;
+}
+#playerEditButton{
+margin: 0%;
+padding: 0%;
+
+
+}
+
+
+#playerDelCancelBtn{
+    
+    width: 4em;
+}
+
+
+#commitDeletePlayerBtn{
+    width: 4em;
+    border: 2px solid red;
+    color: red;
+}
+#commitDeletePlayerBtn:hover{
+    color: white;
+    background-color: red;
+}

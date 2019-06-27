@@ -6,7 +6,8 @@
   
    #playerForm{
     h6{
-        margin-left: 20%;
+        // margin-left: 20%;
+
     }
 }
 
@@ -17,4 +18,26 @@
 
 #playerUpdateButton{
     margin-left: 10%;
+}
+.playerInput{
+    width: 60%;
+    height: 2em;
+}
+
+#playerEditContainer{
+    border: 2px solid darkslategray;
+    background-color: white;
+    width:30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+#editPlayerBtns{
+    margin-top: 2%;
+    display: flex;
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
 }

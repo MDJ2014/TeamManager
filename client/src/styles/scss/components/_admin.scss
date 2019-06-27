@@ -6,7 +6,7 @@
     background-color: darkslategray;
     }
     
-    
+   
     
     #adminContainer{
     
@@ -24,7 +24,7 @@
     
     
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     width: 100%;
     align-items: center;
@@ -63,12 +63,7 @@
         grid-column-start: 5;
         grid-column-end: 6;
     }
-    #incomeStats{
-        grid-row-start: 1;
-        grid-row-end: 2;
-        grid-column-start: 6;
-        grid-column-end: 7;
-    }
+ 
     
     #adminMenu{
     grid-row-start: 1;

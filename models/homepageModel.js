@@ -10,7 +10,7 @@ var HomePageSchema = new mongoose.Schema({
     mainAnnouncement: {title:{type: String}, body:{type: String}, link:{type:String}},
     announcements:[{title:{type: String}, body:{type: String}, link:{type:String}}],
     mainCallOut: {title:{type: String}, body:{type: String}, link:{type:String}},
-    callsToAction:[{title:{type: String}, body:{type: String}, link:{type:String}}],
+    callsToAction:[{title:{type: String, default:"Empty"}, body:{type: String, default:"empty"}, link:{type:String, default:"empty"}}],
     notice: String,
     terms: String,
     license: String,

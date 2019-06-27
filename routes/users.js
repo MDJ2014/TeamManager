@@ -16,6 +16,7 @@ var mid = require('../middleware');
 //mid.requiresAdmin
 router.get('/', function (req, res, next) {
   User.find({})
+  .sort({"name.lastName": 1})
     .exec(
       function (err, users) {
         if (err) return next(err);
@@ -143,13 +144,23 @@ router.get('/user', mid.requiresLogin, function (req, res, next) {
   User.findById(req.session.userId)
     .exec(function (err, user) {
       if (err) return next(err);
-      res.status(201);
+      res.status(200);
       res.json(user);
       //render update form and delete
     });
 });
 
-
+/** , mid.requiresLogin*/
+router.get('/coaches', function (req, res, next) {
+  User.find({"userType":"Coach"})
+  .populate("position.team")
+    .exec(function (err, user) {
+      if (err) return next(err);
+      res.status(200);
+      res.json(user);
+      //render update form and delete
+    });
+});
 
 
 
@@ -222,22 +233,47 @@ router.post('/register', function (req, res, next) {
 
 
 
-
-router.put('/user/update', mid.requiresLogin, function (req, res, next) {
-  var newData = req.body;
-
-  User.findById(req.session.userId)
-    .exec(function (err, user) {
+/** , mid.requiresLogin*/
+router.put('/update',function(req,res,next){
+  var newData = req.body.userNewData;
+  /**req.session.userId */
+  User.findById(req.body.id)
+  .exec(function(err,user){
+    if (err) return next(err);
+    user.update(newData, {new:true})
+    .exec(function(err,doc){
       if (err) return next(err);
+      res.status(200);
+      res.json(doc);
+    })
+  })
+});
 
-      user.update(newData, {new:true})
-        .exec(function (err, doc) {
-          if (err) return next(err);
-          res.status(200);
-          res.json(doc);
-        });
 
-    });
+
+router.put('/position',function(req,res,next){
+  
+  
+  var item="";
+  if(req.body.newData.title){
+item = "position.title";
+  }else{
+    item="position.preference"
+  }
+  
+  /**req.session.userId */
+  User.findById(req.body.id)
+  .exec(function(err,user){
+    if (err) return next(err);
+user.update({$set:{[item]:req.body.newData.title}})
+
+   
+    .exec(function(err,doc){
+      if (err) return next(err);
+      res.status(200);
+      res.json(doc);
+    })
+  })
 });
 
 
@@ -245,8 +281,8 @@ router.put('/user/update', mid.requiresLogin, function (req, res, next) {
 
 
 
-/**Delete User */
-router.delete('/user/delete', mid.requiresAdmin, function(req, res, next){
+/**Delete User mid.requiresAdmin, */
+router.delete('/user/delete',  function(req, res, next){
   User.findByIdAndDelete(req.body.userId, function (err, deletedDoc) {
     if (err) return next(err);
     Player.deleteMany({ parent: req.body.userId }, function (err, playerDocs) {

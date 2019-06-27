@@ -1,48 +1,36 @@
-
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
 
 #aboutContainer{
                 background-color: white;
-            width:80%;
+            width:100%;
             margin-left:auto;
             margin-right:auto;
-               padding: 2%;
+            margin-bottom: 5%;
+              padding: 5%;
                 -webkit-box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58); 
                 box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58);
               }
 
-#pledge{
-    padding-top: 3%;
-    padding-left: 3%;
-    padding-bottom: 1%;
-    font-weight: bold;
-    text-align: left;
-}     
-#codeOfConduct{
-    text-align: left;
-    padding-left: 5%;
-    padding-top: 5%;
-   
-ol {
-    margin: 0 0 1.5em;
-    padding: 0;
-    counter-reset: item;
-  }
+#slideContainer{
+padding-left: 32%;
+padding-right: 32%;
+padding-top: 3%;
   
-  ol > li {
-    margin: 0;
-    padding: 0 0 0 2em;
-    text-indent: -2em;
-    list-style-type: none;
-    counter-increment: item;
-  }
-  
-  ol > li:before {
-    display: inline-block;
-    width: 1em;
-    padding-right: 0.5em;
-    font-weight: bold;
-    text-align: right;
-    content: counter(item) ".";
-  }
-}         
+}
+#aboutStatement{
+  margin-top: 10%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px double darkslategray;
+  border-radius: 5px;
+}
+#aboutStatementBody{
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}

@@ -91,3 +91,15 @@ width: 95%;
     .systemTable tr:nth-child(even){
         background-color: lightgray;
         }
+.editUserInput{
+    width: 70%;
+    height: 2em;
+}
+#userTypeInput{
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select:none; 
+    user-select:none;
+    -o-user-select:none;
+   
+}
