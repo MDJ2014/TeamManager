@@ -12,6 +12,7 @@
     "react-select": "^3.0.4",
     "react-slick": "^0.24.0",
     "reactjs-popup": "^1.4.1",
+    "remarkable": "^1.7.1",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {

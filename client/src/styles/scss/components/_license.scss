@@ -1,4 +1,4 @@
-#licenseContainer{
+.innerContainer{
     width: 80%;
     height: auto;
  margin-right: auto;
@@ -10,7 +10,10 @@
  padding-bottom: 3%;
  padding-right: 3%;
  padding-left: 3%;
-
+text-align: left;
+& h2{
+    text-align: center;
+}
 }
 #licenseOuterContainer{
     margin-bottom: 1%;

@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
+var Remarkable = require('remarkable');
 
 
 
+
+var md = new Remarkable({
+  html:         true,        // Enable HTML tags in source
+  xhtmlOut:     true,        // Use '/' to close single tags (<br />)
+  breaks:       true,        // Convert '\n' in paragraphs into <br>
+})
 
 
 class LicenseAgreement extends Component{
@@ -10,6 +17,7 @@ class LicenseAgreement extends Component{
       
      this.state = {
         license: "",
+       
       
         }
 
@@ -28,8 +36,11 @@ class LicenseAgreement extends Component{
       componentDidMount(){
         this.getResponse()
         .then(res => {
-          const receivedData = res;
-          this.setState({license: receivedData.license});
+
+          let preFormatedData = res.license;
+         
+        let receivedData = md.render(preFormatedData);
+         this.setState({license: receivedData});
         });
       }
       
@@ -45,16 +56,16 @@ class LicenseAgreement extends Component{
 
 
 
-
 render(){   
+
 return(
     <React.Fragment>
         <div id="licenseOuterContainer">
-       <h2>License Agreement</h2>
+     
        {this.state.license?
-       <div  id="licenseContainer">
+       <div  className="innerContainer"  dangerouslySetInnerHTML={{ __html: this.state.license }}>
 
-{this.state.license}
+
 
        </div>
 

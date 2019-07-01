@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
+var Remarkable = require('remarkable');
 
+
+
+
+var md = new Remarkable({
+  html:         true,        // Enable HTML tags in source
+  xhtmlOut:     true,        // Use '/' to close single tags (<br />)
+  breaks:       true,        // Convert '\n' in paragraphs into <br>
+})
 
 
 
@@ -28,8 +37,11 @@ class TermsOfUse extends Component{
       componentDidMount(){
         this.getResponse()
         .then(res => {
-          const receivedData = res;
-          this.setState({terms: receivedData.terms});
+
+          let preFormatedData = res.terms;
+          let receivedData = md.render(preFormatedData);
+        
+          this.setState({terms: receivedData});
         });
       }
       
@@ -52,9 +64,8 @@ return(
         <div id="termsContainer">
        <h2>Terms Of Use</h2>
        {this.state.terms?
-       <div>
+       <div className="innerContainer" dangerouslySetInnerHTML={{ __html: this.state.terms}}>
 
-{this.state.terms}
 
        </div>
 

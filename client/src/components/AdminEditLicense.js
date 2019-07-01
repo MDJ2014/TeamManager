@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 
+var Remarkable = require('remarkable');
+
+
+var md = new Remarkable();
 
 
 
@@ -11,7 +15,9 @@ class AdminEditLicense extends Component{
                 page:"",
                 license:"",
                 saveSuccess:"",
-                errorMessage:""
+                errorMessage:"",
+                typographer:  true,
+                linkify: true
         }
         this.handleSubmit=this.handleSubmit.bind(this);
         this.handleChange=this.handleChange.bind(this);
@@ -48,8 +54,11 @@ class AdminEditLicense extends Component{
     handleSubmit= async(event)=>{
         event.preventDefault();
 
+      //  var markedLicense =md.render(this.state.license);
+
         const body = JSON.stringify({
             id: this.state.page,
+           // license: markedLicense
             license: this.state.license
         });
 

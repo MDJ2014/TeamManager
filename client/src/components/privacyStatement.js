@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
+var Remarkable = require('remarkable');
 
-
-
+var md = new Remarkable({
+  html:         true,        // Enable HTML tags in source
+  xhtmlOut:     true,        // Use '/' to close single tags (<br />)
+  breaks:       true,        // Convert '\n' in paragraphs into <br>
+})
 
 
 class PrivacyStatement extends Component{
@@ -28,8 +32,11 @@ class PrivacyStatement extends Component{
       componentDidMount(){
         this.getResponse()
         .then(res => {
-          const receivedData = res;
-          this.setState({privacyStatement: receivedData.privacy});
+
+          let preFormatedData = res.privacy;
+          let receivedData = md.render(preFormatedData);
+          this.setState({privacyStatement: receivedData});
+
         });
       }
       
@@ -40,21 +47,17 @@ class PrivacyStatement extends Component{
 
 
 
-
-
-
-
-
-
 render(){   
 return(
     <React.Fragment>
-        <div id="privacyContainer">
+        <div id="privacyOuterContainer">
        <h2>Privacy Statement</h2>
-       {this.state.privacyStatement?
-       <div>
 
-{this.state.privacyStatement}
+       
+       {this.state.privacyStatement?
+       <div  id="privacyContainer" className="innerContainer"  dangerouslySetInnerHTML={{ __html: this.state.privacyStatement }}>
+
+
 
        </div>
 

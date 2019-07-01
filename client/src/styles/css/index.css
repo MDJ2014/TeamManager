@@ -2272,7 +2272,7 @@ a:hover {
   color: white;
   background-color: red; }
 
-#licenseContainer {
+.innerContainer {
   width: 80%;
   height: auto;
   margin-right: auto;
@@ -2283,7 +2283,10 @@ a:hover {
   padding-top: 3%;
   padding-bottom: 3%;
   padding-right: 3%;
-  padding-left: 3%; }
+  padding-left: 3%;
+  text-align: left; }
+  .innerContainer h2 {
+    text-align: center; }
 
 #licenseOuterContainer {
   margin-bottom: 1%;
