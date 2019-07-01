@@ -4,6 +4,7 @@ var multer  = require('multer');
 var fs = require('fs');
 var User = require('../models/userModel').User;
 var Team = require('../models/teamModel').Team;
+var Message = require('../models/messgeModel').Message;
 var Player = require('../models/playerModel').Player;
 var Game = require('../models/gameModel').Game;
 var mid = require('../middleware');
@@ -104,53 +105,100 @@ Team.find({})
 
 
 
+/**GET specific team */
+router.get('/team/:id', function(req,res,next){
+    let teamData={
+        teamId: req.params.id,
+        teamInfo:"",
+        messages:"",
+        games:""
+    }
 
+    Team.findById(req.params.id)
+    .populate("coaches roster")
+    .exec(function(err,doc){
+        if(err) return next(err);
+        teamData.teamInfo = doc;
+
+        var teamId = req.params.id;
+        Game.find().or([{homeTeam: teamId},{awayTeam: teamId}])
+        .populate('homeTeam', 'teamName')
+        .populate('awayTeam', 'teamName')
+        .exec(function(err,gameDoc){
+            if(err) return next(err);
+            teamData.games = gameDoc;
+            
+         Message.find().or([{"team": teamId}, {"universal":true}])
+            .exec(function(err, messageDoc){
+                if(err) return next(err);
+                teamData.messages=messageDoc;
+                res.status(201);
+                res.json(teamData);
+
+
+            });
+
+
+
+
+
+
+        });
+
+
+
+
+    });
+
+
+
+});
 
 /*GET specific team, mid.requiresLogin */
-router.get('/team', function(req,res,next){
-Team.findById(req.body.teamId)
-.exec(function(err,doc){
-    if(err) return next(err);
+// router.get('/tm/:id', function(req,res,next){
+// Team.findById(req.params.id)
+// .exec(function(err,doc){
+//     if(err) return next(err);
 
-var a = req.body.teamId;
+// var a = req.body.teamId;
       
-Game.find().or([{homeTeam: a},{awayTeam: a}])
- .exec(
- function(err, games)  {
-     if(err) return next(err);
+// Game.find().or([{homeTeam: a},{awayTeam: a}])
+//  .exec(
+//  function(err, games)  {
+//      if(err) return next(err);
    
-  id = req.body.teamId
-   var wins = 0;
-   var losses = 0;
+//   id = req.body.teamId
+//    var wins = 0;
+//    var losses = 0;
 
 
-   for(let game of games){
-       if(game.homeTeam == id){
-            if(game.homeTeamScore > game.awayTeamScore){
-                wins +=1;
-            }else{losses +=1}
-       }else if(game.awayTeam == id){
-            if(game.awayTeamScore > game.homeTeamScore){
-                wins+=1;
-            }else{losses +=1;}
-       }
+//    for(let game of games){
+//        if(game.homeTeam == id){
+//             if(game.homeTeamScore > game.awayTeamScore){
+//                 wins +=1;
+//             }else{losses +=1}
+//        }else if(game.awayTeam == id){
+//             if(game.awayTeamScore > game.homeTeamScore){
+//                 wins+=1;
+//             }else{losses +=1;}
+//        }
 
-   }
+//    }
 
 
-doc.update({wins: wins, losses: losses}, function(err, savedDoc){
-    if(err) return next(err);
-     res.status(201);
-    res.json(doc);
-//render add player form add logo form, update team form 
-});
+// doc.update({wins: wins, losses: losses}, function(err, savedDoc){
+//     if(err) return next(err);
+//      res.status(201);
+//     res.json(doc);
+// //render add player form add logo form, update team form 
+// });
   
 
-});
+// });
 
    
-});
-});
+// });
+// });
 
 
 
@@ -309,8 +357,10 @@ doc.update({$set:{"team":null}})
        },{$set:{"position.team":req.body.teamId}}, {upsert:true})
        .exec(function(err,doc){
         if(err) return next(err);
+
+
         Team.findByIdAndUpdate({_id: req.body.teamId},
-            {$push:{"coaches": {$each:coaches}}})
+            {$addToSet: {"coaches": {$each:coaches}}})
             .exec(function(err,saveddoc){
                 if(err) return next(err);
                     res.status(201);
@@ -325,7 +375,13 @@ doc.update({$set:{"team":null}})
 
    }) 
 
- 
+
+
+
+
+
+
+
    router.put('/delete-coach',  function(req,res,next){
    
   

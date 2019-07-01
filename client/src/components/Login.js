@@ -41,11 +41,7 @@ class LogIn extends Component {
   
   
   componentDidMount(){
-  //   this.getResponse()
-  //   .then(res => {
-  //     const data = res;
-  //     this.setState({renderedResponse: data.title});
-  //   })
+ 
  this.setState({renderedResponse: this.props.type});
  
   }
@@ -99,16 +95,8 @@ if(this.state.emailValid && this.state.passwordValid){
   formValid = false;
 }
     this.setState({emailValid: emailValid, passwordValid:passValid, formValid: formValid});
-    //return re.test(value);
+    
   }
-
-
-
-
-
-
-
-
 
 
 
@@ -152,13 +140,11 @@ if(this.state.emailValid && this.state.passwordValid){
 
          
 <div id="outside">
-<div id="top"><h1></h1>        
-    <p></p>  
-</div>    
+  
 <div id="left"><p id="pspace"></p><img src={trophy}></img></div>
 <div id="middle">
   
-<div id="formContainer">
+<div className="formContainer">
 <div className="form-header">Log In</div>
 <div className="form-body">
 
@@ -189,7 +175,7 @@ null
       <button className="form-btn" type="submit" form="loginForm" disabled={this.state.formValid===false}>
 Log In
 </button>
-<div className="space"></div>
+
      </form>
 
 
@@ -197,6 +183,9 @@ Log In
 
 </div>
 <div className="form-footer"></div>
+
+
+
 </div>
 
 

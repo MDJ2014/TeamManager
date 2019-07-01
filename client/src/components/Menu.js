@@ -27,7 +27,7 @@ this.props.onClick(page);
 <li><Link to="/admin"><div id="gear"></div></Link></li>
 <li><Link to="/teams">Teams</Link></li>
 <li><Link to="/team">My Team</Link></li>
-<li><Link to="users/profile">My Profile</Link></li>
+<li><Link to="/profile">My Profile</Link></li>
 <li><Link to="/register">Register</Link></li>
 <li><Link to="/login/login">Log In</Link></li>
 <li><Link to="/users/logout">Log Out</Link></li>

@@ -49,10 +49,10 @@ class LicenseAgreement extends Component{
 render(){   
 return(
     <React.Fragment>
-        <div id="licenseContainer">
+        <div id="licenseOuterContainer">
        <h2>License Agreement</h2>
        {this.state.license?
-       <div>
+       <div  id="licenseContainer">
 
 {this.state.license}
 

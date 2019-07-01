@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-
+import Schedule from './Schedule';
+import Roster from './Roster';
+import { Link } from 'react-router-dom';
 
 
 
@@ -9,11 +11,10 @@ class Team extends Component {
       super(props);
     
       this.state = {
-        renderedResponse: '',
+          teamData: '',
           
       };
-    //   this.handleChange = this.handleChange.bind(this);
-    //   this.handleSubmit = this.handleSubmit.bind(this);
+   
     }
 
 
@@ -37,12 +38,13 @@ class Team extends Component {
 
 
       componentDidMount(){
- 
-        // fetch('/users/profile')
-        // .then(data => data.json())
-        // .then((data) => { 
-        //   this.setState({ profileData: data }, ()=>console.log("data fetched...", data)) 
-        // }); 
+       var teamId =  this.props.match.params.id;
+
+        fetch(`/teams/team/${teamId}`)
+        .then(data => data.json())
+        .then((data) => { 
+          this.setState({teamData: data}) 
+        }); 
       
        }
 
@@ -50,147 +52,73 @@ class Team extends Component {
 
 
 
-// handleSubmit(event){
-
-
-// }
-
     render(){
         
 
 
     
           return(
-  <div id="teamContainer">
-  <div id="teamHeader">
-  <div id="teamPageName">Team name</div>
-  <div id="teamPageLogo">
-  <div id="teamPageHeaderLogo"></div>
+            <div>
+            {this.state.teamData? 
+<div id="teamContainer">
+
+<div id="teamHeader">
+ <div id="teamPageName">{this.state.teamData.teamInfo.teamName}</div>
+ <div>  <Link to={this.props.location.back} style={{ textDecoration: 'none' }}><h6 id="backLink">Back</h6></Link></div>
+  <div id="teamPageHeaderLogo">
+  <img className="center" src={`/images/${this.state.teamData.teamInfo.logo}.png`}></img>
   </div>
   <div id="teamPageCoaches">
 
+{this.state.teamData.teamInfo.coaches.map(function(coach){
+return <div className="coachContainer">
+ <div className="coachTitle">{coach.position.title}</div>
+ <div className="coachName">{coach.name.firstName}</div>
+ <div className="coachName">{coach.name.lastName}</div>
+ </div>
 
-  <div id="coachContainer">
-   <div id="coachTitle">Head coach:</div>
-  <div id="coachName">Tommy Tubervile</div>
-  </div>
+})}
+  
 
-  <div id="coachContainer">
-   <div id="coachTitle">Head coach:</div>
-  <div id="coachName">Tommy Tubervile</div>
+ 
   </div>
-  
-  </div>
-  </div>
+ </div>
 
-  <div id="teamPageMessages">
-  
-  <div id="msgBody">
-  <div id="msgTitle">Title</div>
-  <div id="msgText">this is a message</div>
-  
+ <div id="teamPageMessages">
+{this.state.teamData.messages.map(function(message){
+  return <div className="msgBody">
+ <div className="msgTitle">{message.title}</div>
+ <div className="msgAuthor">{message.author}</div>
+ <div className="msgText">{message.body}</div>
   </div>
-  
-  
-  
-  </div>
+})}
+ 
 
-<div id="teamPageBody">
+
+
+ </div>
+
+
+
+ <div id="teamPageBody">
 <div id="teamSchedule">
 
 
 <div id="scheduleTitle">Schedule</div>
 
-  
-<table id="scheduleTable">
-   <thead>
-   <tr>
-   <th>Date</th>
-   <th>Opponent</th>
-   <th>Location</th>
-   <th>Home/Away</th>
-   <th>Our Score</th>
-   <th>Their Score</th>
-   </tr>
-   </thead>
+<div>
 
-   <tbody id="scheduleTableBody">
-
-
-
-  <tr>
-<td>9/20/2019</td>
-<td>Raiders</td>
-<td>City Park #3</td>
-<td>Home</td>
-<td>17</td>
-<td>14</td>
-
-</tr>
-
-
-<tr>
-<td>9/25/2019</td>
-<td>Pats</td>
-<td>City Park #1</td>
-<td>Away</td>
-<td></td>
-<td></td>
-
-</tr>
-
-
-
-   </tbody>
-   </table>
-
-
-
-
-
-
-
-
-
-
+<Schedule teamId={this.state.teamData.teamId} edit={false}/>
 
 </div>
+</div>
+
+
 <div id="teamRoster">
-<div id="rosterTitle">
-Roster
+<div id="rosterTitle">Roster</div>
+<div>
+  <Roster edit={false} teamToAssign={this.state.teamData.teamId}/>
 </div>
-
-<table id="rosterTable">
-   <thead>
-   <tr>
-   <th>First name</th>
-   <th>Last Name</th>
-   <th>NicName</th>
-   <th>Age</th>
-   <th>Position</th>
-   <th>Number</th>
-   </tr>
-   </thead>
-
-   <tbody id="scheduleTableBody">
-
-
-
-  <tr>
-<td>Bucky</td>
-<td>Radicadawski</td>
-<td>BuckyRad</td>
-<td>8</td>
-<td>tackle</td>
-<td>54</td>
-
-</tr>
-
-
-
-
-   </tbody>
-   </table>
 
 
 
@@ -202,10 +130,20 @@ Roster
 
 </div>
 </div>
+
+<div id="standing"></div>
+
+
+
+
+
+
+
 
 
   </div>
-
+  : <h6>......loading</h6>}
+</div>
           );
 
     }

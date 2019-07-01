@@ -337,7 +337,7 @@ return(
 <div className="adminEditTeamBody">
 
 {this.state.showSchedule? 
-<Schedule  teamId={this.props.teamToEdit._id} editGame={this.handleEditGame} />
+<Schedule  teamId={this.props.teamToEdit._id} editGame={this.handleEditGame} edit={true}/>
 
 : null}
 
@@ -383,7 +383,7 @@ this.state.addGame?
 
 {this.state.showRoster?
  <Roster teamToAssign={this.props.teamToEdit._id} reRender={()=>this.refreshRoster()}
- editPlayer={this.handleSelectEditPlayer}
+ editPlayer={this.handleSelectEditPlayer } edit={true}
  /> 
  :null}
 

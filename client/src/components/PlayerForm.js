@@ -160,38 +160,38 @@ let player = this.props.playerToEdit;
 <div id="playerContainer" key={player._id}>
 
 
-<div id="playerFormBody" className="form-body">
-<form id="playerForm" action="" onSubmit={this.handleSubmit}>
+<div id="playerEditFormBody" className="form-body">
+<form id="playerEditForm" action="" onSubmit={this.handleSubmit}>
 <h6>First name</h6>
- <input className="form-input " type="text" name="playerFirstName"value={this.state.playerFirstName} onChange={this.handleChange} placeholder={player.name.firstName}/>
+ <input className="player-edit-form-input" type="text" name="playerFirstName"value={this.state.playerFirstName} onChange={this.handleChange} placeholder={player.name.firstName}/>
 
  <h6>Last name</h6>
- <input className="form-input" type="text" name="playerLastName"value={this.state.playerLastName} onChange={this.handleChange} placeholder={player.name.lastName}/>
+ <input className="player-edit-form-input"type="text" name="playerLastName"value={this.state.playerLastName} onChange={this.handleChange} placeholder={player.name.lastName}/>
 
  <h6>Nicname</h6>
- <input className="form-input" type="text" name="playerNicName"value={this.state.playerNicName} onChange={this.handleChange} placeholder={player.nicName}/>
+ <input className="player-edit-form-input" type="text" name="playerNicName"value={this.state.playerNicName} onChange={this.handleChange} placeholder={player.nicName}/>
 
  <h6>Age</h6>
- <input className="form-input" type="text" name="playerAge"value={this.state.playerAge} onChange={this.handleChange} placeholder={player.playerAge}/>
+ <input className="player-edit-form-input" type="text" name="playerAge"value={this.state.playerAge} onChange={this.handleChange} placeholder={player.playerAge}/>
  
  <h6>Position Pref</h6>
- <input className="form-input" type="text" name="playerPositionPreference"value={this.state.playerPositionPreference} onChange={this.handleChange} placeholder={player.positionPref}/>
+ <input className="player-edit-form-input" type="text" name="playerPositionPreference"value={this.state.playerPositionPreference} onChange={this.handleChange} placeholder={player.positionPref}/>
  <div className="space"></div>
- <div id="editPlayerBtns">
-<button id="playerUpdateButton" className="sectionButton" type="submit">
+
+
+<button id="playerEditSaveButton" className="sectionButton" type="submit">
            Save
          </button>
-         <div className="space"></div>  
-         {this.state.welcomeSuccess?
-        <h6> Saved!</h6>
-    :null}
-         <button id="playerUpdateButton" className="sectionButton" type="button" onClick={this.handelEditCancel}>
+         <div className="space"></div>
+         <button id="cancelPlayerEditSaveButton" className="sectionButton" type="button" onClick={this.handelEditCancel}>
            Cancel
          </button>   
-
-
-         </div>            
+  
+     
 </form>
+{this.state.welcomeSuccess?
+        <h6> Saved!</h6>
+    :null}
 </div>
 
 
@@ -203,27 +203,28 @@ let player = this.props.playerToEdit;
 :
 
 
-<div id="formContainer">
-<div className="form-header">{this.props.formTitle} player</div>
-<div id="playerFormBody" className="form-body">
-<form id="playerForm" action="" onSubmit={this.handleAddPlayerSubmit}>
+<div id="addPlayerFormContainer">
+<div id="player-form-header">{this.props.formTitle} player</div>
+<div id="player-form-body" className="form-body">
+<form id="playerForm" className="addPlayerForm"action="" onSubmit={this.handleAddPlayerSubmit}>
 
 <h6>First name</h6>
- <input  className="form-input player-form-input"  type="text" name="newPlayerFirstName"value={this.state.newPlayerFirstName} onChange={this.handleChange} placeholder="Player's First Name"/>
+ <input  className="addPlayerInput"  type="text" name="newPlayerFirstName"value={this.state.newPlayerFirstName} onChange={this.handleChange} placeholder="Player's First Name"/>
  <div className="space"></div>
  <h6>Last name</h6>
- <input  className="form-input player-form-input"  type="text" name="newPlayerLastName"value={this.state.newPlayerLastName} onChange={this.handleChange} placeholder="Player's Last Name"/>
+ <input className="addPlayerInput"   type="text" name="newPlayerLastName"value={this.state.newPlayerLastName} onChange={this.handleChange} placeholder="Player's Last Name"/>
  <div className="space"></div>
  <h6>Nic name</h6>
- <input  className="form-input player-form-input"  type="text" name="newPlayerNicName"value={this.state.newPlayerNicName} onChange={this.handleChange} placeholder="Player's Nic Name"/>
+ <input className="addPlayerInput"   type="text" name="newPlayerNicName"value={this.state.newPlayerNicName} onChange={this.handleChange} placeholder="Player's Nic Name"/>
  <div className="space"></div>
  <h6>Age</h6>
- <input  className="form-input player-form-input"  type= "text" name="newPlayerAge"value={this.state.newPlayerAge} onChange={this.handleChange} placeholder="Player's Age"/>
+ <input className="addPlayerInput"   type= "text" name="newPlayerAge"value={this.state.newPlayerAge} onChange={this.handleChange} placeholder="Player's Age"/>
  <div className="space"></div>
  <h6>Position Preference</h6>
- <input  className="form-input player-form-input"  type="text" name="newPlayerPositionPreference"value={this.state.newPlayerPositionPreference} onChange={this.handleChange} placeholder="Player's Position Preference"/>
+ <input  className="addPlayerInput"   type="text" name="newPlayerPositionPreference"value={this.state.newPlayerPositionPreference} onChange={this.handleChange} placeholder="Position Preference"/>
  <div className="space"></div>
-<button id="playerRegisterButton" className="form-btn" type="submit">
+
+<button id="playerSaveButton" className="sectionButton" type="submit">
            Save
          </button>
 
@@ -234,7 +235,7 @@ let player = this.props.playerToEdit;
 
 </form>
 </div>
-<div className="form-footer"></div>
+<div id="player-form-footer"></div>
 </div>
 
 

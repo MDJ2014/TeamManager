@@ -161,14 +161,12 @@ this.setState({confirmPasswordValid:true});
 
          
 <div id="outside">
-<div id="top"><h1>Registration</h1>        
-    <p></p>  
-</div>    
+   
 <div id="left"><p id="pspace"></p><img src={trophy}></img></div>
 <div id="middle">
   
-<div id="formContainer">
-<div className="form-header">Create New Account</div>
+<div className="formContainer" id="registerFormContainer">
+<div className="form-header registerFormHeader">Create New Account</div>
 <div className="form-body">
 
 <h6>Register Now for Douglasville Youth Tackle Football!</h6>

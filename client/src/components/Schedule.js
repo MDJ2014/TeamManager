@@ -89,10 +89,15 @@ return <tr key={game._id}>
  <td>{game.awayTeam._id===this.props.teamId? "Away": "Home"}</td>
  <td>{game.awayTeam._id===this.props.teamId? game.awayTeamScore: game.homeTeamScore} </td>
  <td>{game.awayTeam._id !==this.props.teamId? game.awayTeamScore:game.homeTeamScore}</td>
+
+{this.props.edit===true? 
  <td>
    <button className="adminEditButton" id="gameEditBtn"type="button" onClick={()=>this.props.editGame(game)}>
            Edit
-         </button></td>
+         </button>
+</td>
+: null}
+{this.props.edit===true? 
  <td>
  <Popup trigger={<button  className="adminEditButton deleteBtn">Del</button>} 
 modal id="delGameModal" item={null}>
@@ -139,6 +144,7 @@ modal id="delGameModal" item={null}>
     )}
   </Popup>
  </td>
+ : null}
 </tr>
 },this)}
 

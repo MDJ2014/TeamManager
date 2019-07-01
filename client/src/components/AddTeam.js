@@ -89,8 +89,10 @@ return(
   <option value="Lions">Lions</option>
   <option value="Panthers">Panthers</option>
   <option value="Patriots">Patriots</option>
+  <option value="Raiders">Raiders</option>
   <option value="Rams">Rams</option>
   <option value="Ravens">Ravens</option>
+  <option value="Seahawks">Seahawks</option>
   <option value="Vikings">Vikings</option>
 
 </select>
@@ -121,8 +123,10 @@ return(
   <option value="lions">Lions</option>
   <option value="panthers">Panthers</option>
   <option value="pats">Patriots</option>
+  <option value="raiders">Raiders</option>
   <option value="rams">Rams</option>
   <option value="ravens">Ravens</option>
+  <option value="seahawks">Seahawks</option>
   <option value="vikings">Vikings</option>
 </select>
 

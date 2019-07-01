@@ -319,11 +319,17 @@ header {
   padding: 5%;
   -webkit-box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58);
   box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58); }
+  #aboutContainer p {
+    font-weight: bold;
+    color: white; }
 
 #slideContainer {
   padding-left: 32%;
   padding-right: 32%;
-  padding-top: 3%; }
+  padding-top: 3%;
+  background-image: url("../../assets/fields.png");
+  background-repeat: no-repeat;
+  background-size: cover; }
 
 #aboutStatement {
   margin-top: 10%;
@@ -499,7 +505,7 @@ input:valid {
   grid-row-start: 4;
   grid-row-end: 5; }
 
-#formContainer {
+.formContainer {
   width: 60%;
   height: auto;
   margin: auto;
@@ -508,7 +514,7 @@ input:valid {
   padding-bottom: 0px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 6fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr;
   border-radius: 8px;
   background-color: white; }
 
@@ -537,6 +543,7 @@ input:valid {
   text-align: center;
   color: white;
   padding-top: 2%;
+  padding-bottom: 2%;
   border-radius: 8px 8px 0 0; }
 
 .form-body {
@@ -627,6 +634,14 @@ input:valid {
   border: 1px solid black;
   font-weight: normal; }
 
+.registerFormHeader {
+  padding-top: 5%; }
+
+#registerFormContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 6fr 1fr; }
+
 #profileHeaderContainer {
   background-color: white;
   height: 15em;
@@ -655,11 +670,19 @@ input:valid {
   padding-right: 70%;
   border-bottom: 3px solid darkslategray; }
 
-#fade {
+#teamLinks {
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 1;
-  grid-row-end: 2; }
+  grid-row-end: 2;
+  padding-top: 10%;
+  border-bottom: 3px solid darkslategray; }
+
+.teamLink:hover {
+  -webkit-box-shadow: 1px 2px 11px -4px darkslategray;
+  -moz-box-shadow: 1px 2px 11px -4px darkslategray;
+  box-shadow: 1px 2px 11px -4px darkslategray;
+  border: solid 3px lightslategray; }
 
 #teams {
   grid-column-start: 1;
@@ -667,6 +690,22 @@ input:valid {
   grid-row-start: 2;
   grid-row-end: 3;
   background-color: white; }
+
+.teamLinkLogos {
+  float: right;
+  height: 4em;
+  width: 4em;
+  margin-right: 6em;
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  border: solid 2px darkslategray;
+  border-radius: 150px; }
+  .teamLinkLogos img {
+    position: relative;
+    top: 50%;
+    margin-top: 30px;
+    transform: translateY(-50%); }
 
 #profileContainer {
   height: auto;
@@ -741,7 +780,11 @@ input:valid {
   background-color: darkslategray; }
 
 #playersContainer {
-  display: inline-block; }
+  height: auto;
+  width: 100%;
+  padding-bottom: 3%;
+  padding-left: 5%;
+  padding-right: 5%; }
 
 #myPlayers {
   width: 100%;
@@ -754,35 +797,34 @@ input:valid {
 
 #playerContainer {
   height: auto;
-  min-width: 25%;
-  margin-left: 6%;
+  width: 20%;
+  margin-left: .8em;
   margin-top: 3%;
-  padding-bottom: 3%;
   font-weight: bold;
   padding-top: 1%;
   padding-bottom: 1%;
-  padding-left: 6%;
+  padding-left: 3%;
+  padding-right: 3%;
   border: solid 3px darkslategray;
   border-radius: 8px;
   -webkit-box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58);
   box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58);
+  font-size: 13px;
   float: left; }
 
 .playerFormLabels {
   width: 6em; }
 
 .playerFormResult {
-  margin-left: 1em; }
+  margin-left: .5em; }
 
 .myTeamLogo {
   width: 100%;
-  height: auto;
   margin-top: 3%; }
 
 .teamLogo {
   height: 10em;
   width: 10em;
-  margin-right: 6em;
   display: inline-block;
   vertical-align: middle;
   background-repeat: no-repeat;
@@ -801,9 +843,87 @@ input:valid {
   display: flex; }
 
 #myPlayerEditBtn {
-  margin-left: 20%;
-  margin-right: auto;
-  margin-bottom: 3%; }
+  width: 40%;
+  margin: auto; }
+
+#playerForm {
+  padding-left: 24%;
+  padding-right: 24%; }
+  #playerForm input {
+    width: 10em; }
+
+#editPlayerBtns {
+  width: 90%;
+  height: auto;
+  margin: auto;
+  margin-left: 0; }
+
+.addPlayerForm {
+  margin: 0;
+  padding: 0; }
+
+.addPlayerInput {
+  background-color: antiquewhite;
+  width: 70%;
+  height: 2em;
+  margin: auto;
+  font-weight: bold; }
+
+#addPlayerFormContainer {
+  width: 40%;
+  height: auto;
+  margin: auto;
+  -webkit-box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58);
+  box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58);
+  padding-bottom: 0px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 6fr 1fr;
+  border-radius: 8px;
+  background-color: white; }
+
+#player-form-header {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-bottom: 5%;
+  background-color: darkslategray;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 8px 8px 0 0; }
+
+#player-form-body {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  background-color: white;
+  margin-bottom: 3%;
+  height: auto; }
+
+#player-form-footer {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  background-color: antiquewhite;
+  padding-top: 5%;
+  border-radius: 0 0 8px 8px; }
+
+#playerSaveButton {
+  width: 6em;
+  margin-left: 18%; }
+
+#playerEditFormBody {
+  padding-top: 10%; }
+
+.player-edit-form-input {
+  background-color: blanchedalmond;
+  height: 2em; }
 
 #playerFormBody {
   width: 80%;
@@ -839,87 +959,23 @@ input:valid {
 #addressForm {
   width: 100%; }
 
-#coachName {
-  margin-right: 25%; }
-
-#coachTitle {
-  margin-right: 2%;
-  font-weight: bold; }
-
-#msgBody {
-  background-color: white;
-  border: 3px solid darkslategray;
-  width: 50%;
-  border-radius: 10px;
-  text-align: center;
-  height: auto;
-  margin: auto; }
-
-#msgTitle {
-  font-weight: bold; }
-
 #teamContainer {
-  background-color: white;
   height: auto;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 2fr 1fr 4fr; }
-
-#teamPageBody {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  background-color: greeen;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr; }
-
-#teamPageCoaches {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  height: auto;
-  display: flex; }
+  width: 90%;
+  margin: auto; }
 
 #teamHeader {
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 2;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 4fr;
   grid-template-rows: 1fr;
   border-bottom: 3px solid darkslategray;
   justify-content: center;
   align-items: center; }
-
-#teamPageHeaderLogo {
-  background-image: url("../../assets/vikings.png");
-  border: 3px solid darkslategray;
-  background-position: center center;
-  border-radius: 150px;
-  height: 9em;
-  width: 9em;
-  background-repeat: no-repeat; }
-
-#teamPageLogo {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  height: 150px;
-  width: 150px; }
-
-#teamPageMessages {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  padding-top: 2%;
-  padding-bottom: 2%; }
 
 #teamPageName {
   grid-column-start: 1;
@@ -930,6 +986,73 @@ input:valid {
   font-size: 2em;
   text-align: right;
   padding-right: 2%; }
+
+#teamPageHeaderLogo {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 3px solid darkslategray;
+  background-position: center center;
+  border-radius: 150px;
+  height: 9em;
+  width: 9em;
+  background-repeat: no-repeat; }
+  #teamPageHeaderLogo img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+
+#teamPageCoaches {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  height: auto;
+  display: flex; }
+
+.coachContainer {
+  width: 7em;
+  text-align: left; }
+
+.coachName {
+  margin-left: 10%; }
+
+.coachTitle {
+  font-weight: bold; }
+
+#teamPageMessages {
+  width: 100%;
+  padding-top: 2%;
+  padding-bottom: 2%; }
+
+.msgBody {
+  background-color: white;
+  border: 3px solid darkslategray;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+  border-radius: 10px;
+  text-align: center;
+  height: auto; }
+
+.msgTitle {
+  font-weight: bold; }
+
+.msgAuthor {
+  font-style: italic;
+  margin-bottom: 1%; }
+
+.msgText {
+  margin-bottom: 2%; }
+
+#teamPageBody {
+  background-color: pink;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr; }
 
 #teamRoster {
   grid-column-start: 2;
@@ -987,6 +1110,20 @@ input:valid {
 #scheduleTableBody tr {
   text-align: center; }
 
+#standing {
+  height: 1em;
+  width: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding: 1%; }
+
+#backLink {
+  color: darkslategray;
+  font-size: 1em; }
+
+#backLink:hover {
+  color: lightslategray; }
+
 #allTeamsContainer {
   text-align: center;
   padding-bottom: 5%;
@@ -996,17 +1133,26 @@ input:valid {
   padding-left: 5%; }
 
 .teamImg {
-  background-image: url("../../assets/vikings.png");
   border: 3px solid darkslategray;
-  background-position: center center;
   border-radius: 150px;
   height: 9em;
   width: 9em;
-  background-repeat: no-repeat; }
+  text-align: center;
+  line-height: 200px; }
+  .teamImg img {
+    top: 50%;
+    margin-top: 20px;
+    left: 50%;
+    margin-left: -1px; }
 
 .singleTeamContainer {
   margin-top: 3%;
-  margin-bottom: 3%; }
+  margin-bottom: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center; }
 
 .teamImgContainer {
   width: 9em;
@@ -1017,6 +1163,15 @@ input:valid {
 
 .teamBody {
   margin-left: 1%; }
+
+.teamImgName {
+  text-decoration: none;
+  color: darkslategray;
+  font-size: 1.2em;
+  font-weight: bold; }
+
+.teamImgName:hover {
+  color: lightslategray; }
 
 #left {
   margin-left: 0%; }
@@ -1083,6 +1238,26 @@ input:valid {
 
 .bars {
   height: 3.5em; }
+
+#allTeamsHeader {
+  border-bottom: 3px solid darkslategray;
+  width: 75%;
+  margin: auto; }
+
+#teamHeaderTop {
+  padding-top: 5%;
+  display: block;
+  position: relative; }
+
+#teamHeaderTop::after {
+  content: "";
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
 
 #adminHeader {
   width: 100%;
@@ -2096,3 +2271,20 @@ a:hover {
 .popupDelBtn:hover {
   color: white;
   background-color: red; }
+
+#licenseContainer {
+  width: 80%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  background-color: white;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-right: 3%;
+  padding-left: 3%; }
+
+#licenseOuterContainer {
+  margin-bottom: 1%;
+  padding-bottom: 1%; }

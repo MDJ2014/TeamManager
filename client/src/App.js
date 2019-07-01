@@ -38,8 +38,8 @@ function App() {
     <Route path="/register" component={Header}/>
     <Route path="/register" component={Menu}/>
     <Route path="/register" component={Footer}/>
-    <Route path="/users/profile" component={Menu}/>
-    <Route path="/users/profile" component={Footer}/>
+    <Route path="/profile" component={Menu}/>
+    <Route path="/profile" component={Footer}/>
     <Route path="/team" component={Menu}/>
     <Route path="/teams" component={Menu}/>
     <Route path="/privacy-statement" component={Menu}/>
@@ -63,13 +63,13 @@ function App() {
     <Route path="/login" component={LogIn}/>
     <Route path="/register" component={Register}/>
     <Route exact path="/" component={Footer}/>
-    <Route path="/users/profile" component={Profile}/>
-    <Route path="/team" component={Team}/>
+     <Route path="/team/:id" component={Team}/>
     <Route path="/teams" component={Teams}/>
     <Route path="/admin" component={Admin}/>
     <Route path="/privacy-statement" component={PrivacyStatement}/>
 <Route path="/license-agreement" component={LicenseAgreement}/>
 <Route path="/terms" component={TermsOfUse}/>
+<Route path="/profile" component={Profile}/>
 
 
 

@@ -63,6 +63,7 @@ margin-right: auto;
 
     width: 20em;
 }
+
 .profileFormLabels{
 
 margin-right: 0%;
@@ -72,6 +73,7 @@ width: 6em;
 #btnContainer{
    margin-top: 7px;
 }
+
 .sectionButton{
     width: 6em;
   height: 2em;  
@@ -88,8 +90,13 @@ width: 6em;
     
 }
 #playersContainer{
-    display: inline-block;
   
+
+    height:auto;
+    width: 100%;
+  padding-bottom: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
    
    
 }

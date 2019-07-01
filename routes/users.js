@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../models/userModel').User;
 var Payment = require('../models/paymentModel').Payment;
 var Player = require('../models/playerModel').Player;
+var Team = require('../models/teamModel').Team;
 var mid = require('../middleware');
 
 
@@ -56,84 +57,26 @@ router.get('/logout', function (req, res, next) {
 });
 
 
-
-/*Profile* mid.requiresLogin,*/
 router.get('/profile', function (req, res, next) {
-  res.status(200);
-
-   if(! req.session.userId){
-    var err = new Error("You are not authorized to view this page!");
-    err.status = 403;
-   // return writeError("You are not authorized to view this page!");
-   //return res.render('newError',{newMessage: "You are not authorized to view this page!"})
-   return next(err);
-  }
-
 var profileData={
-firstname:"",
-lastname:"",
-username:"",
-street:"",
-city:"",
-state:"",
-zip:"",
-phone:"",
-email:"",
-players:"",
-pay:""
+  userData:"",
+  playerData:""
+
 };
+User.findById(req.session.userId)
+.exec(function (err, user) {
+  if(err) return next(err);
+  profileData.userData = user;
+  Player.find({parent: req.session.userId})
+  .populate("team")
 
-
-
-
-//req.session.userId
-  User.findById(req.session.userId)
-    .exec(function (err, user) {
-      if (err) {
-        return next(err);
-      } else {
-         // profileData.user=user;
-         profileData.firstname = user.name.firstName;
-         profileData.lastname = user.name.lastName;
-         profileData.username = user.userName;
-         profileData.street = user.userAddress.street;
-         profileData.city = user.userAddress.city;
-         profileData.state = user.userAddress.state;
-         profileData.zip = user.userAddress.zip;
-         profileData.phone=user.userPhone;
-         profileData.email=user.userEmail;
-
-          Player.find({parent: req.session.userId})
-          .exec(function(err,players){
-            if(err){
-              return next(err);
-            }else{
-              profileData.players =players;
-           
-              Payment.find({payerId: req.session.userId})
-              .exec(function(err,payment){
-                if(err){return next(err)
-                }else{
-                  profileData.pay=payment;
-
-                  res.status(200);
-                  return res.json(profileData);
-
-                }
-              }
-          
-              );
-            }
-          }
-
-
-          )
-
-
-
-      //  return res.render('profile', { title: "Profile", name: user.name.firstName });
-      }
-    });
+  .exec(function (err, player) {
+    if(err) return next(err);
+    profileData.playerData = player;
+      res.status(200);
+    return res.json(profileData);
+  })
+  })
 
 
 });

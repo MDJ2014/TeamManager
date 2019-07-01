@@ -1,3 +1,5 @@
+@import '../variables';
+
 #profilePlayerForm{
     width: 40%;
     margin: auto;
@@ -6,39 +8,47 @@
 
 #playerContainer{
     height: auto;
-    min-width: 25%;
-    margin-left: 6%;
+    width:20%;
+    
+    margin-left: .8em;
     margin-top: 3%;
-    padding-bottom: 3%;
+   
     font-weight: bold;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    padding-left: 6%;
+   padding-top: 1%;
+   padding-bottom: 1%;
+   padding-left: 3%;
+   padding-right: 3%;
+   
     border: solid 3px darkslategray;
     border-radius: 8px;
     -webkit-box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58); 
     box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58);
-    float:left;
-
+    
+font-size: 13px;
+float:left;
 }
+
 .playerFormLabels{
     width: 6em;
+ 
 }
 .playerFormResult{
-    margin-left: 1em;
+    margin-left: .5em;
+
 }
+
 .myTeamLogo{
-    width:100%;
-    height: auto;
-   margin-top: 3%;
-  
+    width: 100%;
+   
+    margin-top: 3%;
+ 
 }
 .teamLogo{
 
  
     height: 10em;
       width:10em;
-      margin-right: 6em;
+     
       display: inline-block;
       vertical-align: middle;
       background-repeat: no-repeat;
@@ -55,12 +65,118 @@
 #playerEditBtnContainer{
     width: 100%;
     height: auto;
-   
+  
     display: flex;
 }
 #myPlayerEditBtn{
-   
-    margin-left:20%;
-    margin-right: auto;
-    margin-bottom: 3%;
+   width: 40%;
+    margin:auto
 }
+
+
+#playerForm{
+    padding-left: 24%;
+    padding-right: 24%;
+    & input{
+width: 10em;
+    }
+    & h6{
+    
+    }
+}
+
+
+#editPlayerBtns{
+    width: 90%;
+    height: auto;
+    margin:auto;
+  margin-left: 0;
+}
+
+
+
+.addPlayerForm{
+margin: 0;
+padding: 0;
+}
+
+
+.addPlayerInput{
+    background-color: $input-color;
+    width: 70%;
+    height: 2em;
+   margin: auto;
+    font-weight: bold;
+ 
+}
+
+#addPlayerFormContainer{
+    width: 40%;
+    height: auto;
+    margin: auto;
+    -webkit-box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58); 
+    box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58);
+    padding-bottom: 0px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 6fr 1fr;
+   
+    border-radius: 8px;
+    background-color: white;
+}
+
+#player-form-header{
+           
+    grid-column-start: 1;
+    grid-column-end:2 ;
+    grid-row-start: 1;
+    grid-row-end: 2;   
+    margin-bottom: 5%;
+   background-color: $main-color;
+   font-weight: bold;
+   text-align: center;
+   color: white;
+   padding-top: 2%;
+   padding-bottom: 2%;
+   border-radius:  8px 8px 0 0;
+  
+   }
+   
+   #player-form-body{
+  
+       grid-column-start: 1;
+       grid-column-end:2 ;
+       grid-row-start: 2;
+       grid-row-end: 3;  
+       background-color:white;
+       margin-bottom: 3%;
+       height:auto;
+   
+   }
+   
+   #player-form-footer{
+     
+       grid-column-start: 1;
+       grid-column-end:2 ;
+       grid-row-start: 3;
+       grid-row-end: 4;  
+       background-color: $input-color;
+       padding-top: 5%;
+       border-radius: 0 0 8px 8px ;
+    
+   }
+
+   #playerSaveButton{
+       width: 6em;
+      margin-left: 18%;
+   }
+
+   #playerEditFormBody{
+padding-top: 10%;
+   }
+  
+   .player-edit-form-input{
+       background-color: blanchedalmond;
+       height: 2em;
+
+   }

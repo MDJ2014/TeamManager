@@ -28,6 +28,7 @@ this.setPlayerEdit= this.setPlayerEdit.bind(this);
 this.toggleEdit = this.toggleEdit.bind(this);
 this.cancelEdit = this.cancelEdit.bind(this);
 this.handleSavedUpdate = this.handleSavedUpdate.bind(this);
+this.getLogos = this.getLogos.bind(this);
     }
 
 
@@ -56,10 +57,11 @@ this.handleSavedUpdate = this.handleSavedUpdate.bind(this);
 
     componentDidMount(){
  
-        fetch('/users/profile')
+       // fetch('/users/profile')
+       this.getResponse()
         .then(data => data.json())
         .then((data) => { 
-          this.setState({ profileData: data }, ()=> console.log(this.state.profileData)) 
+          this.setState({ profileData: data }) 
         }); 
       
        }
@@ -94,14 +96,14 @@ this.setState({profileData:data});
         if(this.state.playerToEdit === player._id){
         
       return(
-      <PlayerForm playerToEdit={player} cancelEdit={this.cancelEdit}/> 
+      <PlayerForm playerToEdit={player} cancelEdit={this.cancelEdit} key={player._id}/> 
       );
       
           
         }else{
       
       return(
-      <Players editmode={this.toggleEdit} playerToShow={player} updateList={this.handleSavedUpdate}/>
+      <Players editmode={this.toggleEdit} playerToShow={player} updateList={this.handleSavedUpdate} key={player._id}/>
       )
       
       
@@ -118,124 +120,146 @@ this.setState({profileData:data});
           
           }
 
+getLogos(){
+  let playerData="";
+  if(this.state.profileData.playerData){
+       playerData = this.state.profileData.playerData;
+   }
+
+  let logos =[];
+
+  for(let i=0; i<playerData.length; i++){
+         if(playerData[i].team){
+            logos.push(
+              {"logo":playerData[i].team.logo, "teamId": playerData[i].team._id}
+              
+              );
+      }
+   }
+
+  
+   
+   let distinctList = Array.from(new Set(logos.map(item=>item.logo)))
+   .map(itemLogo=>{return {logo: itemLogo, teamId:logos.find(x=> x.logo === itemLogo).teamId}})
+
+
+ 
+    return distinctList;
+
+    
+    //Array.from(new Set(logos));
+}
+
+
+
+
 render(){
-    let pageData = this.state.profileData;
-    return(<div id="profileContainer">
-  <ProfileHeader name={pageData.username}/>
-  <div id="profileBody">
-  <section id="peronalInformation" className="profileSection"> 
-  <div className="profileSectionLabel"><h2>Personal Information</h2></div>
-  <div className="personalDetails">
-  <div id="profileUserFirstName" className="profileFieldContainer">
-           <div className="profileFormLabels">First name:</div>
-           <div className="profileFormResult">{pageData.firstname}</div>
-           </div>
+  
+   let pageData = this.state.profileData.userData;
+    let playerData=this.state.profileData.playerData;
+     let teamLogos = this.getLogos();
 
-       <div id="profileUserLastName" className="profileFieldContainer">
-           <div className="profileFormLabels">Last name:</div>
-           <div className="profileFormResult">{pageData.lastname}</div>
-           </div>
+    return(<div>
+  {pageData? 
+    
+  
+   <div id="profileContainer">
+<ProfileHeader name={pageData.userName} team={teamLogos}/>
+<div id="profileBody">
+<section id="peronalInformation" className="profileSection"> 
+<div className="profileSectionLabel"><h2>Personal Information</h2></div>
+<div className="personalDetails">
+<div id="profileUserFirstName" className="profileFieldContainer">
+         <div className="profileFormLabels">First name:</div>
+         <div className="profileFormResult">{pageData.name.firstName}</div>
+         </div>
+ <div id="profileUserLastName" className="profileFieldContainer">
+         <div className="profileFormLabels">Last name:</div>
+         <div className="profileFormResult">{pageData.name.lastName}</div>
+         </div>        
 
-       <div id="profileUserEmail" className="profileFieldContainer">
-           <div className="profileFormLabels">Email:</div>
-           <div className="profileFormResult">{pageData.email}</div>
-           </div>
-           
-      </div>
+<div id="profileUserEmail" className="profileFieldContainer">
+         <div className="profileFormLabels">Email:</div>
+         <div className="profileFormResult">{pageData.userEmail}</div>
+         </div>
+</div>
 
-{pageData.street && pageData.city && pageData.state && pageData.zip && pageData.phone
-    ?
-  
-  <div id="addressInfo" className="personalDetails">
-  <div id="profileUserStreet" className="profileFieldContainer">
-      <div className="profileFormLabels">Street:</div>
-      <div className="profileFormResult">{pageData.street}</div>
-  </div>
-  <div id="profileUserCity" className="profileFieldContainer">
-      <div className="profileFormLabels">City:</div>
-      <div className="profileFormResult">{pageData.city}</div>
-  </div>
-  <div id="profileUserState" className="profileFieldContainer">
-      <div className="profileFormLabels">State:</div>
-      <div className="profileFormResult">{pageData.state}</div>
-  </div>
-  <div id="profileUserZip" className="profileFieldContainer">
-      <div className="profileFormLabels">Zip code:</div>
-      <div className="profileFormResult">{pageData.zip}</div>
-  </div>
-  
-  
-  <div id="contactInfo">
-  <div id="profileUserPhone" className="profileFieldContainer">
-      <div className="profileFormLabels">Phone:</div>
-  <div className="profileFormResult">{pageData.phone}</div>
-  </div>
-  </div>
-  
-  </div>
-  
-  :
- 
- 
- <Address/>
- }
+{pageData.userAddress.street && pageData.userAddress.city && pageData.userAddress.state && pageData.userAddress.zip && pageData.userPhone
+  ?
+
+<div id="addressInfo" className="personalDetails">
+<div id="profileUserStreet" className="profileFieldContainer">
+    <div className="profileFormLabels">Street:</div>
+    <div className="profileFormResult">{pageData.userAddress.street}</div>
+</div>
+<div id="profileUserCity" className="profileFieldContainer">
+    <div className="profileFormLabels">City:</div>
+    <div className="profileFormResult">{pageData.userAddress.city}</div>
+</div>
+<div id="profileUserState" className="profileFieldContainer">
+    <div className="profileFormLabels">State:</div>
+    <div className="profileFormResult">{pageData.userAddress.state}</div>
+</div>
+<div id="profileUserZip" className="profileFieldContainer">
+    <div className="profileFormLabels">Zip code:</div>
+    <div className="profileFormResult">{pageData.userAddress.zip}</div>
+</div>
+
+
+<div id="contactInfo">
+<div id="profileUserPhone" className="profileFieldContainer">
+    <div className="profileFormLabels">Phone:</div>
+<div className="profileFormResult">{pageData.userPhone}</div>
+</div>
+</div>
+
+</div>
+
+:
+
+
+<Address/>
+}
 </section>
-{this.state.profileData.street? 
+  </div>
+
+{pageData.userAddress.street? 
 <section id="playerSection" className="profileSection">
 <div id="playerSectionTitle"className="profileSectionLabel"><h2>My Players</h2>
-
 <div id="btnContainer">
 <button id="playerAddBtn"type="button" className="sectionButton" onClick={()=>this.setPlayerEdit("add")}>
-     {this.state.playerSet==="add"? 'Close' : 'Add Player'}
-     </button>
-</div>
-</div>
-<div id="newPlayerFormContainer">
+   {this.state.playerSet==="add"? 'Close' : 'Add Player'}
+   </button>
+   </div>
+   </div>
+   <div id="newPlayerFormContainer">
 {this.state.playerSet==="add"?
-
 <PlayerForm playerToEdit={false} addPlayer={this.handleAddPlayerSubmit} formTitle={this.state.playerSet}/>
-
-
 :
 null
 }
-
 </div>
-
+ 
 </section>
-    :
+
+:
 
 null
 }
-
 <section id="myPlayers">
-   <div id="playersContainer">
-
+<div id="playersContainer">
 {pageData? 
-
-
-pageData.players.map((item)=>{
+playerData.map((item)=>{
     return this.renderItemOrEditItem(item);
   },this)
-
-: <h6>Loading....</h6>}
-
-
-
-
- 
-   
- 
-  
-   
-   
+  : <h6>Loading....</h6>}
    </div>
-   </section>
+</section>
 
-
-
-</div>
-   </div>);
+    </div>
+    :null}
+      </div>
+   );
 }
 
 

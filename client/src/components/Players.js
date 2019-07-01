@@ -34,7 +34,8 @@ this.handlePlayerEdit = this.handlePlayerEdit.bind(this);
         // .then((data) => { 
         //   this.setState({ profileData: data }, ()=>console.log("data fetched...", data)) 
         // }); 
-       
+
+      
        }
 
 
@@ -78,7 +79,15 @@ render(){
 
 <div id="profilePlayerTeam" className="profileFieldContainer">
     <div className="playerFormLabels">Team:</div>
-    <div className="playerFormResult">{player.team}</div>
+
+    {player.team !==null? 
+     <div className="playerFormResult">{player.team.teamName}</div>
+     : 
+ 
+     <div className="playerFormResult">Not assigned</div>
+ 
+ }
+  
     </div>
 
     <div id="profilePlayerNumber" className="profileFieldContainer">
@@ -86,18 +95,28 @@ render(){
     <div className="playerFormResult">{player.playerNumber}</div>
     </div>
 
-    <div id="profilePlayerNumber" className="profileFieldContainer">
+    <div id="profilePlayerPosition" className="profileFieldContainer">
     <div className="playerFormLabels">Position:</div>
     <div className="playerFormResult">{player.assignedPosition}</div>
     </div>
+    
+<div className="myTeamLogo">
+    <div className="teamLogo">
+{player.team !==null? 
+<img className="center" src={`/images/${player.team.logo}.png`}></img>
+:
+<img className="center" src={`/images/${"undefined"}.png`}></img>
 
-<div className="myTeamLogo"><div className="teamLogo"><img src={Logo}></img></div></div>
+}
+    </div></div>
 <div className="space"></div>
+
 <div id="playerEditBtnContainer">
 <button id="myPlayerEditBtn"type="button" className="sectionButton"onClick={this.handlePlayerEdit}>
    Edit
       </button>
       </div>
+      
       <div className="space"></div>
 </div>
     

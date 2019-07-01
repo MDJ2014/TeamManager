@@ -1,52 +1,63 @@
 
- #coachName{
-    margin-right: 25%;
-}
-#coachContainer{
-   
-}
-#coachTitle{
-    margin-right: 2%;
-    font-weight: bold;
-}
 
-
- 
-#msgBody{
- 
-    background-color: white;
-    border: 3px solid darkslategray;
-    width: 50%;
-    border-radius: 10px;
-    text-align:center;
-    height: auto;
-    margin: auto;
-}
-#msgTitle{
-    font-weight: bold;
-}
 #teamContainer{
-    background-color: white;
+  
      height: auto;
-     width: 100%;
-     display: grid;
-     grid-template-columns: 1fr;
-     grid-template-rows: 2fr 1fr 4fr;
+     width: 90%;
+     margin:auto;
+   
  }
-#teamPageBody{
+
+ #teamHeader{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 4fr;
+    grid-template-rows: 1fr;
+    border-bottom: 3px solid darkslategray;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+#teamPageName{
     grid-column-start: 1;
     grid-column-end: 2;
-    grid-row-start: 3;
-    grid-row-end: 4;
-    background-color: greeen;
+    grid-row-start: 1;
+    grid-row-end: 2;
+   font-weight: bold;
+   font-size: 2em;
+   text-align: right;
+   padding-right: 2%;
  
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    
+}
+
+#teamPageHeaderLogo{
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    border: 3px solid darkslategray;
+    background-position: center center;
+    border-radius: 150px;
+    height: 9em;
+      width: 9em;
+     background-repeat: no-repeat;
+     & img{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 
 
- #teamPageCoaches{
+#teamPageCoaches{
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 1;
@@ -58,67 +69,81 @@
 }
 
 
-
+.coachContainer{
+  width: 7em;
+  text-align: left;
  
- #teamHeader{
-     grid-column-start: 1;
-     grid-column-end: 4;
-     grid-row-start: 1;
-     grid-row-end: 2;
-   
-     display: grid;
-     grid-template-columns: 1fr 1fr 4fr;
-     grid-template-rows: 1fr;
-     border-bottom: 3px solid darkslategray;
-     justify-content: center;
-     align-items: center;
- }
- 
- #teamPageHeaderLogo{
-    background-image: url('../../assets/vikings.png');
-    border: 3px solid darkslategray;
-    background-position: center center;
-    border-radius: 150px;
-    height: 9em;
-      width:9em;
-     background-repeat: no-repeat;
-
-}
-
- #teamPageLogo{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-   
-    height: 150px;
-    width: 150px;
-    
 }
 
 
+ .coachName{
+margin-left: 10%;
+}
+
+.coachTitle{
+
+    font-weight: bold;
+}
+
+
+ 
 #teamPageMessages{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
+ 
+   width: 100%;
     padding-top: 2%;
     padding-bottom: 2%;
+  
+}
+
+
+
+
+
+
+.msgBody{
+ 
+    background-color: white;
+    border: 3px solid darkslategray;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    border-radius: 10px;
+    text-align:center;
+    height: auto;
 
 }
- #teamPageName{
-     grid-column-start: 1;
-     grid-column-end: 2;
-     grid-row-start: 1;
-     grid-row-end: 2;
+
+.msgTitle{
     font-weight: bold;
-    font-size: 2em;
-    text-align: right;
-    padding-right: 2%;
+}
+
+.msgAuthor{
+    font-style: italic;
+    margin-bottom: 1%;
+}
+
+.msgText{
+    margin-bottom: 2%;
+}
+
+
+
+
+
+
+#teamPageBody{
+
+    background-color: pink;
+ width: 100%;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
   
-     
- }
- 
+}
+
+
   
  #teamRoster{
     grid-column-start: 2;
@@ -165,12 +190,6 @@ margin: auto;
 
 
 
- 
-
-
- 
- 
-
  .scheduleHeader{
      display: flex;
      width: 99%;
@@ -202,9 +221,21 @@ text-align: center;
 }
  
  
+ #standing{
+     height: 1em;
+     width: 100%;
+     margin-top: 1%;
+     margin-bottom: 1%;
+     padding: 1%;
+ }
  
+ 
+ #backLink{
+    color: darkslategray;
+    font-size: 1em;
+ }
 
- 
- 
- 
+ #backLink:hover{
+     color: lightslategray;
+ }
  

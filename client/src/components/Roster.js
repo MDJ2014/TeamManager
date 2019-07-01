@@ -137,12 +137,18 @@ return <tr key={player._id}>
   <td>{player.positionPref}</td>
   <td>{player.assignedPosition}</td>
   <td>{player.playerNumber}</td>
-  <td><button className="adminEditButton" id="playerEditButton"type="button" onClick={()=>this.props.editPlayer(player)}>
+
+  <td>
+    {this.props.edit===true? 
+    <button className="adminEditButton" id="playerEditButton"type="button" onClick={()=>this.props.editPlayer(player)}>
            Edit
-         </button></td>
+         </button>
+         : null}
+         </td>
+
  <td>
 
- 
+ {this.props.edit===true? 
          <Popup trigger={<button  className="adminEditButton deleteBtn">Del</button>} 
 modal id="tmModal" item={player._id}>
     {close => (
@@ -188,7 +194,7 @@ modal id="tmModal" item={player._id}>
     )}
   </Popup>
 
-
+: null}
    </td>        
 </tr>
 
