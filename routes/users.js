@@ -119,7 +119,8 @@ router.post('/login', function (req, res, next) {
       } else {
         req.session.userId = user._id;
         req.session.userName = user.userName;
-        return res.redirect('/users/profile');
+      //  return res.redirect('/users/profile');
+      res.json({loggedIn:true});
       }
     });
   } else {
@@ -132,7 +133,6 @@ router.post('/login', function (req, res, next) {
 
 
 });
-
 
 
 
@@ -161,7 +161,7 @@ router.post('/register', function (req, res, next) {
       if (err) return next(err);
       req.session.userId = user._id;
       req.session.userName = user.userName;
-     // return res.redirect('/users/profile');
+    //  return res.redirect('/users/profile');
      return res.json(user);
     });
 
@@ -192,6 +192,21 @@ router.put('/update',function(req,res,next){
   })
 });
 
+
+router.put('/address',function(req,res,next){
+ 
+  /**req.session.userId */
+  User.findById(req.session.userId)
+  .exec(function(err,user){
+    if (err) return next(err);
+    user.update({$set:{userAddress:req.body.userAddress, userPhone: req.body.userPhone}}, {new:true})
+    .exec(function(err,doc){
+      if (err) return next(err);
+      res.status(200);
+      res.json(doc);
+    })
+  })
+});
 
 
 router.put('/position',function(req,res,next){

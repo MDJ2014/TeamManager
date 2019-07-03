@@ -136,10 +136,10 @@ handleAddPlayerSubmit = async(event,formData)=>{
   
     await fetch('/players/register-player',{method: 'POST', headers, body})
     .then(async()=> await fetch('/users/profile',{method:'GET',headers}))
-    .then((data)=>this.props.updateList(data))
+    .then((data)=>this.props.updateList())
    // .then((data)=>this.setState({profileData:data}))
     .catch(function(error){
-      this.setState({error:true, errmsg: error});
+     // this.setState({error:true, errmsg: error});
     })
   
   

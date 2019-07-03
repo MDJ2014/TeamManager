@@ -7,7 +7,7 @@ class Address extends Component {
     super(props);
   
     this.state = {
-      renderedResponse: '',
+ 
       street:"",
       city:"",
       state:"",
@@ -45,27 +45,29 @@ class Address extends Component {
     this.setState({[name]: value});
   }
 
+
+
   handleSubmit= async(event)=>{
     event.preventDefault();
 
-    const body= {
-     userPhone: this.state.phone,
-    userAddress:{
-      street: this.state.street,
-      city: this.state.city,
-      state: this.state.state,
-      zip: this.state.zip
-    }
-    };
-this.props.updateUser(event, body);
-    // const headers = {'content-type': 'application/json', accept: 'application/json'};
+    const body = JSON.stringify({
+      userPhone: this.state.phone,
+     userAddress:{
+       street: this.state.street,
+       city: this.state.city,
+       state: this.state.state,
+       zip: this.state.zip
+     }
+     });
 
-    // await fetch('/users/register',{method: 'POST', headers, body})
-    // .then((res)=>this.setState({redirect:true}))
-    // .catch(function(response){
+    const headers = {'content-type': 'application/json', accept: 'application/json'};
+
+    await fetch('/users/address',{method: 'PUT', headers, body})
+    .then((res)=>this.props.reRender())
+    .catch(function(response){
       //this.setState({error:true, errmsg: error});
       //console.log(response.data)
-   // })
+    })
 
   }
 
@@ -119,7 +121,7 @@ this.props.updateUser(event, body);
 <div className="space"></div>
 <div>*Please complete and save to continue to player registration.</div>
 <div className="space"></div>
-<button type="submit" className="sectionButton">
+<button type="submit" className="sectionButton" id="addressSaveBtn">
            Save
          </button>
 </form>

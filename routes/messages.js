@@ -20,8 +20,8 @@ router.get('/', function(req, res, next) {
     });
 
 /*Get Team Messages   , mid.requiresLogin  */
-router.get('/team', function(req,res,next){
-    Message.find({team: req.body.teamId})
+router.get('/team/:teamId', function(req,res,next){
+    Message.find({team: req.params.teamId})
        .exec(function(err,messages){
         if(err) return next(err);
         res.status(200);

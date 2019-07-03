@@ -61,7 +61,7 @@ render(){
 return(
     <React.Fragment>
         <div id="licenseOuterContainer">
-     
+     <h2>License Agreement</h2>
        {this.state.license?
        <div  className="innerContainer"  dangerouslySetInnerHTML={{ __html: this.state.license }}>
 

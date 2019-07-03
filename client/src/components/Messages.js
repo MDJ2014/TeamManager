@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import EditMessage from '../components/EditMessage';
+import Popup from 'reactjs-popup';
 
 class Messages extends Component{
     constructor(props){
@@ -11,14 +12,17 @@ class Messages extends Component{
            newMessage: false,
            messageStatus: null,
            deleteMessage:false,
+           deleteSuccess: false,
            messageToEdit:""
         }
    
          this.clickNewMessage = this.clickNewMessage.bind(this);
          this.clickEditMessage = this.clickEditMessage.bind(this);
          this.processMessage= this.processMessage.bind(this);
-         this.deleteMessage = this.deleteMessage.bind(this);
+         this.handleDeleteMessage=this.handleDeleteMessage.bind(this);
          this.componentRerender = this.componentRerender.bind(this);
+         this.setSuccessMessage = this.setSuccessMessage.bind(this);
+
     }
 
 
@@ -37,7 +41,7 @@ class Messages extends Component{
         .then(res => {
           const receivedData = res;
           if(receivedData){
-            this.setState({messageData:receivedData},()=>console.log(this.state.messageData));
+            this.setState({messageData:receivedData});
           }else{
              this.setState({messageData: ""}); 
           }
@@ -52,7 +56,7 @@ class Messages extends Component{
         .then(res => {
           const receivedData = res;
           if(receivedData){
-            this.setState({messageData:receivedData},()=>console.log(this.state.messageData));
+            this.setState({messageData:receivedData});
           }else{
              this.setState({messageData: ""}); 
           }
@@ -83,13 +87,37 @@ this.setState({messageStatus: 'edit',messageToEdit:msg})
     
 }
 
+setSuccessMessage(item){
+  setTimeout(() => {
+   this.setState({
+       [item]: ''
+   });
+}, 1400)
+}
+
 
 deleteMessage(msg){
 this.state.deleteMessage? this.setState({deleteMessage:false}) : this.setState({deleteMessage:true});
 }
 
 
+handleDeleteMessage = async(msg)=>{
+  const body = JSON.stringify({
+    messageId: msg,
+ 
+  });
+  const headers = {'content-type': 'application/json', accept: 'application/json'};
+  
+  await fetch('/messages/message',{method: 'DELETE', headers, body})
+  .then((res)=>this.setState({deleteSuccess:true}))
+ .then(this.setSuccessMessage("deleteSuccess"))
+ .then(this.componentRerender())
+  .catch(function(response){
+    //this.setState({error:true, errmsg: error});
+    //console.log(response.data)
+  })
 
+}
 
     render(){
 
@@ -132,9 +160,50 @@ return <tr  key={message._id}>
            </button> 
 </td>
 <td>
-<button  className="adminEditButton deleteBtn" id="deleteBtn"type="button" onClick={this.deleteMessage}>
-             Del
-           </button> 
+<Popup trigger={<button  className="adminEditButton deleteBtn">Del</button>} 
+modal id="tmModal" item={message._id}>
+    {close => (
+      <div className="modal">
+        <a className="close" onClick={close}>
+        &times;
+        </a>
+        <div className="header">Delete message</div>
+        <div className="content">
+          {' '}
+          Are you sure you want to delete {message.title}?
+    
+        </div>
+        <div className="actions">
+         
+          <button
+            className="sectionButton"
+            onClick={() => {
+              console.log('modal closed ')
+              close()
+            }}
+          >
+           Cancel
+          </button>
+
+
+
+          <button
+            className="sectionButton popupDelBtn"
+            
+            onClick={() => {
+              this.handleDeleteMessage(message._id);
+              close();
+            }}
+          >
+            Delete
+          </button>
+
+
+
+        </div>
+      </div>
+    )}
+  </Popup>
 </td>
 </tr>
 },this)}
@@ -150,23 +219,9 @@ return <tr  key={message._id}>
              </div>   
 
 
-{this.state.deleteMessage? 
+{this.state.deleteSuccess? 
   
- 
-    <div className="deleteWarning" id="messageDeleteWarning"><h6>Are you sure you want to delete this message? </h6>
-    <div id="msgDelCancelBtn">
-    <button className="adminEditGameButton" id="msgDelCancelBtn"type="button" onClick={this.deleteMessage}>
-               Cancel
-             </button>
-     </div>      
-     <div id="commitPlayerDelBtn">
-      <button className="adminEditGameButton" id="commitDeleteMessageBtn"type="button" >
-               Delete
-             </button> 
-     </div>  
-    </div>
-  
-    
+ <h6>Message Deleted</h6>    
     
     :
   

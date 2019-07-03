@@ -2,9 +2,6 @@
 import React, {Component} from 'react';
 
 import { Redirect } from 'react-router'
-// import AddPlayer from '../addplayer/AddPlayer';
-// import EditUser from '../edituser/Edituser';
-// import EditPlayer from '../editPlayer/EditPlayer';
  import Players from '../components/Players';
 import { Link } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader';
@@ -29,6 +26,7 @@ this.toggleEdit = this.toggleEdit.bind(this);
 this.cancelEdit = this.cancelEdit.bind(this);
 this.handleSavedUpdate = this.handleSavedUpdate.bind(this);
 this.getLogos = this.getLogos.bind(this);
+this.componentRerender = this.componentRerender.bind(this);
     }
 
 
@@ -65,6 +63,16 @@ this.getLogos = this.getLogos.bind(this);
         }); 
       
        }
+
+componentRerender(){
+  this.getResponse()
+  .then(data => data.json())
+  .then((data) => { 
+    this.setState({ profileData: data, playerSet:"" }) 
+  }); 
+}
+
+
 
 
 
@@ -218,7 +226,7 @@ render(){
 :
 
 
-<Address/>
+<Address reRender={this.componentRerender}/>
 }
 </section>
   </div>
@@ -234,7 +242,7 @@ render(){
    </div>
    <div id="newPlayerFormContainer">
 {this.state.playerSet==="add"?
-<PlayerForm playerToEdit={false} addPlayer={this.handleAddPlayerSubmit} formTitle={this.state.playerSet}/>
+<PlayerForm playerToEdit={false} addPlayer={this.handleAddPlayerSubmit} formTitle={this.state.playerSet} updateList={this.componentRerender}/>
 :
 null
 }

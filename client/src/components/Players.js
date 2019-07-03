@@ -80,7 +80,7 @@ render(){
 <div id="profilePlayerTeam" className="profileFieldContainer">
     <div className="playerFormLabels">Team:</div>
 
-    {player.team !==null? 
+    {player.team !==null && player.team !==""? 
      <div className="playerFormResult">{player.team.teamName}</div>
      : 
  

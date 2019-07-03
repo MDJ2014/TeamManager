@@ -128,7 +128,13 @@ router.get('/team/:id', function(req,res,next){
             if(err) return next(err);
             teamData.games = gameDoc;
             
-         Message.find().or([{"team": teamId}, {"universal":true}])
+            Message.find(
+              
+                {$or:[
+                    {"team":{"$in":teamId}},
+                    {"universal":{"$in":true}}
+                ]}
+            )
             .exec(function(err, messageDoc){
                 if(err) return next(err);
                 teamData.messages=messageDoc;
@@ -138,7 +144,7 @@ router.get('/team/:id', function(req,res,next){
 
             });
 
-
+          
 
 
 

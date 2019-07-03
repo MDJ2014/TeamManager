@@ -60,6 +60,7 @@ class EditMessage extends Component{
         messageId: this.state.editMessage,
         message:{
         universal: universalType,
+        team: this.props.teamId,
         author: this.state.messageAuthor,  
         title: this.state.messageTitle,  
         body:this.state.messageBody
@@ -109,7 +110,7 @@ return(
 
 <div id="adminAddMessage">
 <div className="playerFormTop"></div>
-<form id="messageForm" action="" onSubmit={this.handleSubmit}>
+<form id="messageForm" onSubmit={this.handleSubmit}>
 
  <input className="playerInput" type="text" name="messageAuthor"value={this.state.messageAuthor} onChange={this.handleChange} placeholder="Author"/>
  <div className="space"></div>
@@ -125,7 +126,11 @@ return(
  <button id="saveMessageButton" className="sectionButton" type="submit">
            Save
          </button>
-    
+{this.props.cancelEdit? 
+   <button id="saveMessageButton" className="sectionButton" type="button" onClick={this.props.cancelEdit}>
+           Cancel
+         </button> 
+         :null}
 </form>
 
 {this.state.saveSuccess? <h6>Message saved</h6>: null}

@@ -128,7 +128,7 @@ if(this.state.emailValid && this.state.passwordValid){
     const { redirect } = this.state;
    
     if (redirect) {
-      return <Redirect to='/users/profile'/>;
+      return <Redirect to='/profile'/>;
     }
 {/* <Redirect to={{
             pathname: '/users/profile',

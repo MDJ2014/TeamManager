@@ -57,9 +57,7 @@ class EditPlayer extends Component {
       this.setState({[name]: value});
     }
 
-    // cancelPlayerEdit=()=>{
-    //   this.props.cancelThisEdit();
-    // }
+   
 
     handleSubmit= async(event)=>{
       event.preventDefault();
@@ -76,7 +74,7 @@ if(this.props.adminEdit){
       nicName: this.state.playerNicName,
       playerAge: this.state.playerAge,
       positionPref: this.state.playerPositionPreference,
-      assignedPosition:  this.state.assignedPosition,
+      assignedPosition:  this.state.playerAssignedPosition,
       playerNumber: this.state.playerNumber
     }
    
@@ -176,12 +174,12 @@ let player = this.props.playerToEdit;
 
 
 
- <div id="editPlayerBtns">
-<button id="playerRegisterButton" className="sectionButton" type="submit">
+ <div id="editPlayerButtons">
+<button id="playerEditSaveButton" className="sectionButton" type="submit">
            Save
          </button>
          <div className="space"></div>  
-         <button id="playercancelButton" className="sectionButton" type="button" onClick={this.props.cancelEditPlayer}>
+         <button id="playerEditCancelButton" className="sectionButton" type="button" onClick={this.props.cancelEditPlayer}>
            Cancel
          </button>
          <div className="space"></div>  

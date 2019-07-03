@@ -30,7 +30,7 @@ class AdminEditHome extends Component{
             calloutTitleEdit:"",
             calloutBodyEdit:"",
             calloutLinkEdit:"",
-
+            callOutsSuccess:false,
 
             headerSaved:false,
             errorMessage: "",
@@ -417,8 +417,8 @@ handleCalloutsSubmit= async(event)=>{
 
     await fetch(route,{method: 'PUT', headers, body})
     .then(this.handleErrors)
-    .then((res)=>this.setState({mainCalloutSuccess:res}))
-    .then(this.setSuccessMessage('mainCalloutSuccess'))  
+    .then((res)=>this.setState({callOutsSuccess:res}))
+    .then(this.setSuccessMessage('callOutsSuccess'))  
     .then(this.componentRerender)
      .catch(function(res){
        
@@ -829,7 +829,7 @@ onClick={this.announcementDelete}>
 
     </form>
     </div>
-
+{this.state.callOutsSuccess? <h6>Callout saved.</h6>:null}
     </div>
 
 

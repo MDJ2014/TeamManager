@@ -153,7 +153,7 @@ this.setState({confirmPasswordValid:true});
     const { redirect } = this.state;
 
     if (redirect) {
-      return <Redirect to='/users/profile'/>;
+      return <Redirect to='/profile'/>;
     }
 
       return(

@@ -13,17 +13,6 @@ var MongoStore = require('connect-mongo')(session);
 
 
 
-// var Player = require('./models/playerModel');
-// var Game = require('./models/gameModel');
-// var Payment = require('./models/paymentModel');
-// var User = require('./models/userModel');
-// var Schedule = require('./models/scheduleModel');
-// var TeamMessage = require('./models/teamMessages');
-// var Team = require('./models/teamModel');
-
-
-
-
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -90,6 +79,7 @@ app.use(session({
   mongooseConnection: db
   })
 }));
+
 
 app.use(function(req,res,next){
 res.locals.currentUser = req.session.userId;

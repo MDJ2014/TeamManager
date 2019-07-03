@@ -10,3 +10,59 @@
     height:30px;
     
 }
+
+.menuList{
+    height: 60px;  
+    @include linearGradient(#2f4f4f,#5e696b);
+    padding: 0px;
+    margin: 0px;
+  
+  
+      ul{
+      list-style-type: none;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+  
+          li{
+          float: right; 
+          padding-right: 2em;
+          padding-top: 1em;
+         *{
+          font-size: 1.5em;
+          text-decoration: none;
+          color: white;
+        
+         }
+  
+          }
+  
+  }
+  
+  
+  }
+  
+  .menuList li *:hover{
+    color: $hover-color;
+  }
+  
+  
+#logoutBtn{
+background: none;
+font-size: 1.5em;
+
+text-decoration: none;
+color: white;
+padding: 0;
+cursor: pointer;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+#logoutBtn:hover{
+    color: $hover-color;
+}

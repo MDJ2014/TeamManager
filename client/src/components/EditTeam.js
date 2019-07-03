@@ -156,27 +156,23 @@ clickDelete(){
 }
 
 
+
 handleEditGame(game){
+ this.state.editGame? this.setState({editGame: false}):
  this.setState({editGame: game, addGame: false});
  
 }
 
 
 
-// clickEditGame(item){
-//     this.setState({editGame: item, addGame: false});
-   
-
-// }
 clickAddGame(){
+   this.state.addGame?  this.setState({addGame: false}):
     this.setState({addGame:true, editGame:false});
    
 
 }
 
-handleCloseEditAdd(){
-    this.setState({editGame: false, addGame:false});
-}
+
 
 
 clickAddPlayer(){
@@ -192,8 +188,8 @@ clickDeleteCoach(){
 }
 
 clickAddMessage(){
-    this.setState({addMessage:true, editMessage:false});
-   // this.state.addMessage? this.setState({addMessage: false}):this.setState({addMessage:true});
+   // this.setState({addMessage:true, editMessage:false});
+    this.state.addMessage? this.setState({addMessage: false}):this.setState({addMessage:true, editMessage:false});
 }
 
 clickEditTeamName(){
@@ -251,8 +247,9 @@ handleSelectEditPlayer(player){
 this.setState({playerToEdit:player, addPlayer:false})
 }
   
-setMessageEdit(id){
-  this.setState({editMessage:id, addMessage:false});
+setMessageEdit(message){
+this.state.editMessage? this.setState({editMessage: false}):
+  this.setState({editMessage:message, addMessage:false});
 }
 
 
@@ -350,7 +347,7 @@ return(
 <div className="space"></div>
 
  <button className="sectionButton" id="editTeamAddGameButton"type="submit" onClick={this.clickAddGame}>
-           Add Game
+           {this.state.addGame? "Cancel" : "Add Game"}
          </button>    
 
 
@@ -361,7 +358,7 @@ return(
 <h5>Edit pane</h5>
 
  {this.state.editGame? 
-<EditGame game={this.state.editGame} teamId={this.state.teamToEdit} ageGroup={this.state.ageGroup}  reRender={()=>this.refreshSchedule()} />
+<EditGame game={this.state.editGame} teamId={this.state.teamToEdit} ageGroup={this.state.ageGroup}  reRender={()=>this.refreshSchedule()} close={this.handleEditGame}/>
 :
 this.state.addGame?
 <AddGame teamId={this.state.teamToEdit} ageGroup={this.state.ageGroup} reRender={()=>this.refreshSchedule()}/>
@@ -503,7 +500,8 @@ null
 <div id="messageList">
 
 {this.state.showTeamMessages? 
-<TeamMessages editMessage={this.setMessageEdit}/>
+<TeamMessages teamId={this.props.teamToEdit._id} editMessage={this.setMessageEdit}/>
+
 :null}
 
 </div>
@@ -543,7 +541,7 @@ null
 
 
 <button type="button" id="addMessageBtn" className="sectionButton" onClick={this.clickAddMessage}>
-       Add Message
+      {this.state.addMessage? "Cancel": "Add Message" }
          </button>  
 
 </div>
@@ -555,11 +553,11 @@ null
 
 
 {this.state.addMessage?
-<EditMessage status={"add"} reRender={this.teamMessagesRerender} reSet={()=>this.reSetPane("add")} type={"team"}/>
+<EditMessage status={"add"} reRender={this.teamMessagesRerender} reSet={()=>this.reSetPane("add")} type={"team"} teamId={this.state.teamToEdit}/>
 :
 <div>
 {this.state.editMessage?
-  <EditMessage msgToEdit={this.state.editMessage} status={"edit"} reRender={this.teamMessagesRerender} reSet={()=>this.reSetPane("edit")} type={"team"}/>
+  <EditMessage msgToEdit={this.state.editMessage} status={"edit"} reRender={this.teamMessagesRerender} reSet={()=>this.reSetPane("edit")} type={"team"} cancelEdit={this.setMessageEdit}/>
   :null}
 </div>
 }

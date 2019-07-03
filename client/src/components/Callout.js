@@ -22,6 +22,10 @@ this.changeToAbout = this.changeToAbout.bind(this);
   }
 
 
+  componentDidMount(){
+
+  }
+
 changeToAbout(page){
 this.props.onClick(page);
 }
@@ -35,7 +39,8 @@ this.props.onClick(page);
  <div className="whistle"><img src={this.props.setWhistle} /></div>
  <div className="callout-title"> <h2>{this.props.title}</h2></div>
  </div>
- <p className="callout-body" dangerouslySetInnerHTML={{ __html: markdownBody }}></p>
+ <div className="callout-body" dangerouslySetInnerHTML={{ __html: markdownBody }}></div>
+
  {this.props.link?
  <p className="callout-footer">
       <Link className="link" to={this.props.link}>Link</Link>

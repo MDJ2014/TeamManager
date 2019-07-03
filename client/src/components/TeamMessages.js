@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Popup from 'reactjs-popup';
-import EditMessage from '../components/EditMessage';
 
 
 
@@ -12,6 +11,7 @@ class TeamMessages extends Component {
       super(props);
     
      this.state={
+          team: "",
             messages:"",
             messageToEdit:false,
             deleteSuccess:false
@@ -19,49 +19,71 @@ class TeamMessages extends Component {
                
       };
 
-//   this.componentReRender=this.componentReRender.bind(this);
+
    this.handleDeleteFromTeam=this.handleDeleteFromTeam.bind(this);
    this.setSuccessMessage=this.setSuccessMessage.bind(this);
-//   this.parentRerender=this.parentRerender.bind(this);
-//   this.handleSelectEditPlayer=this.handleSelectEditPlayer.bind(this);
-//   this.handleChange = this.handleChange.bind(this);
-//   this.handleSubmit = this.handleSubmit.bind(this);
+   this.componentReRender = this.componentReRender.bind(this);
+
     }
 
-    componentDidMount(){
+
+    getResponse = async()=>{
+      const response = await fetch(`/messages/team/${this.props.teamId}`,{method:'GET', headers:{'Content-Type': 'application/json'}
     
-        this.componentReRender();
-              
+    });
+      const body = await response.json();
+      if (response.status !== 200) throw Error(body.message);
+      return body; 
+    }
+
+
+
+
+
+
+
+
+    componentDidMount(){
+
+   this.componentReRender();
+            
             }
         
           
-            getResponse = async()=>{
-              const response = await fetch(`/messages/team`,{method:'GET', headers:{'Content-Type': 'application/json'}
-            
-            
-            });
-              const body = await response.json();
-              if (response.status !== 200) throw Error(body.message);
-              return body; 
-            }
+  
         
+
+       
         componentReRender(){
-          
-          this.getResponse(this.props.team) 
+ 
+   
+         this.getResponse() 
           .then(res => {
                   const receivedData = res;
-                         this.setState({messages: receivedData});
+
+                
+                  if(receivedData){
+                this.setState({messages:receivedData});
+                  }else{
+                    this.setState({messages: ""});
+                  }
+
+                         
                 });
-              
+           
         }
         
+
+
         setSuccessMessage(item){
             setTimeout(() => {
              this.setState({
                  [item]: ''
              });
-          }, 1400)
+          }, 1200)
           }
+
+
 
         handleDeleteFromTeam = async(message)=>{
             const body = JSON.stringify({
@@ -97,7 +119,7 @@ class TeamMessages extends Component {
 
 
     render(){
-
+    
 return(
 
 <div>
@@ -193,6 +215,11 @@ modal id="tmModal" item={message._id}>
    </table>
 {this.state.deleteSuccess? <h6>Message deleted</h6>:null}
 </div>
+
+
+
+
+
 );
 
 

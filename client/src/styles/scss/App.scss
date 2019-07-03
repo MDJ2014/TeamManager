@@ -70,39 +70,3 @@ html {
 }
 
 
-
-.menuList{
-  height: 60px;  
-  @include linearGradient(#2f4f4f,#5e696b);
-  padding: 0px;
-  margin: 0px;
-
-
-    ul{
-    list-style-type: none;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-
-        li{
-        float: right; 
-        padding-right: 2em;
-        padding-top: 1em;
-       *{
-        font-size: 1.5em;
-        text-decoration: none;
-        color: white;
-      
-       }
-
-        }
-
-}
-
-
-}
-
-.menuList li *:hover{
-  color: $hover-color;
-}
-

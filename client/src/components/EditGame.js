@@ -265,7 +265,9 @@ Edit Game
  <button id="saveTeamButton" className="sectionButton" type="submit">
            Save
          </button>
-    
+         <button id="saveTeamButton" className="sectionButton" type="button" onClick={this.props.close}>
+           Cancel
+         </button>
 </form>
 {this.state.saveSuccess? <h6>Game saved</h6>:null}
 </div>

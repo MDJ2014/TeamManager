@@ -11,7 +11,7 @@ var UserSchema = new mongoose.Schema({
     position:{title: {type: String,default:"None"}, team:{type: Schema.Types.ObjectId, ref: 'Team', default: null},preference:{type: String, default:"None"}},
     name:{firstName: {type: String, trim: true, required: true}, lastName: {type: String, trim: true, required: true}},
     userName: {type: String, unique: true, required: [true, 'User name required']},
-    userAddress:{street: String, city: String, state: {type: String, uppercase: true}, zip: Number},
+    userAddress:{street: {type: String, default:null}, city: {type: String, default: null}, state: {type: String, uppercase: true, default: null}, zip: {type: Number, default: 0}},
     userPhone:{type: String, trim: true},
     userEmail:{type: String, trim: true, unique: true, required: [true, 'Email required']},
     passWord: {type: String, required: true},
