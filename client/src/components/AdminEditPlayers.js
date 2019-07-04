@@ -90,7 +90,7 @@ class AdminEditPlayer extends Component {
 
 
     handlePlayerDelete= async(item)=>{
-      //event.preventDefault();
+    
     
       const body = JSON.stringify({
         playerId: item._id,

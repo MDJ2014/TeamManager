@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
 
-// import EditGame from '../editGame/EditGame';
-// import AddGame from '../addGame/AddGame';
-// import Roster from '../roster/Roster';
-// import AddTeamPlayer from '../addTeamPlayer/AddTeamPlayer';
-// import AddCoach from '../AddCoach/AddCoach';
-// import AddMessage from '../addMessage/AddMessage';
 import AddTeam from '../components/AddTeam';
 import EditTeam from '../components/EditTeam';
 import Popup from 'reactjs-popup';
@@ -31,12 +25,7 @@ class AdminEditTeams extends Component{
            editTeam: ""
 
         }
-        // this.clickDelete = this.clickDelete.bind(this);
-        // this.clickEditGame = this.clickEditGame.bind(this);
-        // this.clickAddGame = this.clickAddGame.bind(this);
-        // this.clickAddPlayer = this.clickAddPlayer.bind(this);
-        // this.clickAddCoach = this.clickAddCoach.bind(this);
-        // this.clickAddMessage = this.clickAddMessage.bind(this);
+
         this.handleAddTeam = this.handleAddTeam.bind(this);
         this.handleEditTeam = this.handleEditTeam.bind(this);
         this.componentReRender = this.componentReRender.bind(this);
@@ -84,12 +73,6 @@ class AdminEditTeams extends Component{
 
 
 
-
-
-
-
-
-
 clickEditGame(){
     this.setState({editGame: true, addGame: false});
    
@@ -120,7 +103,7 @@ handleAddTeam(){
 
 handleEditTeam(team){
     this.setState({editTeam:team},()=>this.editStart.scrollIntoView());
-   // this.state.editTeam? this.setState({editTeam: false}) : this.setState({editTeam:team});
+
 }
 
 cancelEditTeam(){
@@ -130,7 +113,6 @@ cancelEditTeam(){
 
 
 handleDeleteTeam= async(item)=>{
-    //event.preventDefault();
 
     const body = JSON.stringify({
         teamId: item._id
@@ -152,10 +134,6 @@ handleDeleteTeam= async(item)=>{
 
 
 }
-
-
-
-
 
 
 
@@ -187,10 +165,6 @@ return(
     null
     }
     
-
-
-
-
 
 
 

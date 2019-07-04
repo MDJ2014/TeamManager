@@ -270,35 +270,13 @@ reSet={()=>this.processMessage('')}
 type={"universal"}
  />
 
-
- 
-
-
-
    </div>
     : null}
 
-
-
             </div>
             </div>
-
-
-
-
-
         );
-
-
-
-
-
-
     }
-
-
-
-
 
 }
 

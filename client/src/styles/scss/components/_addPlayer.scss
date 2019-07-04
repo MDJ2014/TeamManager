@@ -1,32 +1,28 @@
-
-#unAssignedPlayers{
-    height: auto;
-    width: 100%;
+#unAssignedPlayers {
+  height: auto;
+  width: 100%;
 }
 
-
-#playerAdd{
-    
-    width: 100%;
-    height: auto;
+#playerAdd {
+  width: 100%;
+  height: auto;
 }
-#addPlayersList{
-    background-color: white;
-    border: 0px solid darkslategray;
-    width: 100%;
-    height: 15em;
-    overflow: scroll;
+#addPlayersList {
+  background-color: white;
+  border: 0px solid darkslategray;
+  width: 100%;
+  height: 15em;
+  overflow: scroll;
 }
-#playerRemoveBtn{
-    width: 6em;
+#playerRemoveBtn {
+  width: 6em;
 }
-#unAssignedPlayers{
-    width: 100%;
-
+#unAssignedPlayers {
+  width: 100%;
 }
-#playerTable{
-    width: 100%;
+#playerTable {
+  width: 100%;
 }
-#assignedPlayerTable{
-    width: 100%;
+#assignedPlayerTable {
+  width: 100%;
 }

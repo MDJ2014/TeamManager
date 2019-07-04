@@ -2,14 +2,13 @@
 
 
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
 
 var ScoreSchema = new mongoose.Schema({
-    game:{},
-    homeTeamScore: {teamId:{}, score: Number},
-    awayTeamScore: {teamId:{}, score: Number},    
-    date:{type: Date}
+    game: {},
+    homeTeamScore: { teamId: {}, score: Number },
+    awayTeamScore: { teamId: {}, score: Number },
+    date: { type: Date }
 });
 
 

@@ -1,52 +1,39 @@
-@import '../scss/mixins';
-@import '../scss/variables';
-
-
-
-
-
-
+@import "../scss/mixins";
+@import "../scss/variables";
 
 .App {
   text-align: center;
 }
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
 }
 
+#pageTitle {
+  text-align: center;
 
-#pageTitle{
- text-align: center;
- 
   margin-top: 1em;
   height: 6em;
   width: 50%;
-@include center;
- h1{
-  
-   color: $title-color;
-   font-size: 3em;
-   -webkit-text-stroke: 1px white;
- 
- 
- 
- }
- }
-#maincontainer{
+  @include center;
+  h1 {
+    color: $title-color;
+    font-size: 3em;
+    -webkit-text-stroke: 1px white;
+  }
+}
+#maincontainer {
   width: 80%;
   height: auto;
   margin-left: auto;
-  margin-right: auto; 
-margin-top: 0px;
+  margin-right: auto;
+  margin-top: 0px;
   background-color: gainsboro;
 
-  -webkit-box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58); 
-  box-shadow: -1px 12px 22px 1px rgba(0,0,0,0.58);
-
+  -webkit-box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58);
+  box-shadow: -1px 12px 22px 1px rgba(0, 0, 0, 0.58);
 }
 
 body {
@@ -56,7 +43,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:white;
+  background-color: white;
 }
 
 code {
@@ -68,5 +55,3 @@ html {
   position: relative;
   min-height: 100%;
 }
-
-

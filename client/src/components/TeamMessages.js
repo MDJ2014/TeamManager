@@ -105,19 +105,6 @@ class TeamMessages extends Component {
           }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     render(){
     
 return(

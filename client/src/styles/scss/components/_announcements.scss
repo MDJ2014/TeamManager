@@ -1,35 +1,33 @@
-@import '../mixins';
+@import "../mixins";
 
-.announcement{
-    border: 1px solid darkslategray;
-    border-radius: 5px;
-    height: auto;
-    width: 90%;
+.announcement {
+  border: 1px solid darkslategray;
+  border-radius: 5px;
+  height: auto;
+  width: 90%;
   margin-top: 20px;
   margin-bottom: 20px;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: white;
-    font-size: 1.5em;
-    -webkit-box-shadow: 0px 3px 4px 0px rgba(50, 50, 15, 0.73);
-    -moz-box-shadow:    0px 3px 4px 0px rgba(50, 50, 15, 0.73);
-    box-shadow:         0px 3px 4px 0px rgba(50, 50, 15, 0.73);
-    
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  font-size: 1.5em;
+  -webkit-box-shadow: 0px 3px 4px 0px rgba(50, 50, 15, 0.73);
+  -moz-box-shadow: 0px 3px 4px 0px rgba(50, 50, 15, 0.73);
+  box-shadow: 0px 3px 4px 0px rgba(50, 50, 15, 0.73);
+}
+
+#mainAnnouncements {
+  padding-bottom: 20px;
+}
+
+.announcement-body {
+  text-align: left;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+
+  blockquote {
+    margin-left: 35%;
   }
-
-  #mainAnnouncements{
-     padding-bottom: 20px;
-  }
-
-  .announcement-body{
-    text-align: left;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 3%;
-    padding-bottom: 3%;
-
-    blockQuote{
-      margin-left: 35%;
-    }
-  } 
-  
+}

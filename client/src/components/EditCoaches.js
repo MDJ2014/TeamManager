@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import Popup from 'reactjs-popup';
-import { throwStatement } from 'babel-types';
-
 
 
 
@@ -22,8 +20,7 @@ class EditCoaches extends Component {
   coachTitle:""
                
       };
-    //   this.handelMenu = this.handelMenu.bind(this);
-  //this.removePlayer = this.removePlayer.bind(this);
+  
   this.componentReRender=this.componentReRender.bind(this);
   this.handleDeleteFromTeam=this.handleDeleteFromTeam.bind(this);
   this.setSuccessMessage=this.setSuccessMessage.bind(this);
@@ -131,28 +128,14 @@ handleSubmit = async(event)=>{
    .then(this.setSuccessMessage("editSuccess"))
    .then(this.componentReRender())
     .catch(function(response){
-      //this.setState({error:true, errmsg: error});
-      //console.log(response.data)
+  
     })
 
   }
 
 
 
-// removePlayer(player){
-//     this.state.removeCoach? this.setState({removePlayer:false}) : this.setState({removePlayer:player});
-// }
-
-
-
-
 render(){
-
-
-
-
-
-
 
 
 return(

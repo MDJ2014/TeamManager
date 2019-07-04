@@ -1,53 +1,46 @@
-
-
-#rosterHeader{
-    display: flex;
-    font-weight: bold;
+#rosterHeader {
+  display: flex;
+  font-weight: bold;
 }
-#rosterRow{
-    display:flex;
+#rosterRow {
+  display: flex;
 }
-.listLong{
-    width: 6em;
+.listLong {
+  width: 6em;
 }
-.listShort{
-    width: 4em;
+.listShort {
+  width: 4em;
 }
-#playerEditBtn{
-width: 5%;
+#playerEditBtn {
+  width: 5%;
 }
-#playerDeleteBtn{
-     width: 5%;
+#playerDeleteBtn {
+  width: 5%;
 }
-#playerDeleteButton{
-    margin: 0%;
-    padding: 0%;
-    color: red;
+#playerDeleteButton {
+  margin: 0%;
+  padding: 0%;
+  color: red;
 }
-#playerDeleteButton:hover{
-    color: white;
-    background-color: red;
+#playerDeleteButton:hover {
+  color: white;
+  background-color: red;
 }
-#playerEditButton{
-margin: 0%;
-padding: 0%;
-
-
+#playerEditButton {
+  margin: 0%;
+  padding: 0%;
 }
 
-
-#playerDelCancelBtn{
-    
-    width: 4em;
+#playerDelCancelBtn {
+  width: 4em;
 }
 
-
-#commitDeletePlayerBtn{
-    width: 4em;
-    border: 2px solid red;
-    color: red;
+#commitDeletePlayerBtn {
+  width: 4em;
+  border: 2px solid red;
+  color: red;
 }
-#commitDeletePlayerBtn:hover{
-    color: white;
-    background-color: red;
+#commitDeletePlayerBtn:hover {
+  color: white;
+  background-color: red;
 }

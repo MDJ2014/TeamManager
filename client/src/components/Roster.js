@@ -10,13 +10,13 @@ class Roster extends Component {
     
       this.state = {
         currentTeam:"",
-  removePlayer: false,
-  roster:"",
-  saveSuccess:false,
-  playerToEdit:false
+       removePlayer: false,
+        roster:"",
+       saveSuccess:false,
+        playerToEdit:false
                
       };
-    //   this.handelMenu = this.handelMenu.bind(this);
+
   this.removePlayer = this.removePlayer.bind(this);
   this.componentReRender=this.componentReRender.bind(this);
   this.handleDeleteFromTeam=this.handleDeleteFromTeam.bind(this);

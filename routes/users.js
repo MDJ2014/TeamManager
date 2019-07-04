@@ -7,17 +7,13 @@ var Team = require('../models/teamModel').Team;
 var mid = require('../middleware');
 
 
-// function writeError(message) {
-//   res.status(400);
-//   res.json({ message: message, status: 400 });
-//   res.end();
-// }
+
 
 /* GET users listing. */
 //mid.requiresAdmin
 router.get('/', function (req, res, next) {
   User.find({})
-  .sort({"name.lastName": 1})
+    .sort({ "name.lastName": 1 })
     .exec(
       function (err, users) {
         if (err) return next(err);
@@ -30,17 +26,17 @@ router.get('/', function (req, res, next) {
 
 
 /*Get registration page mid.loggedOut */
-router.get('/register',  function (req, res, next) {
+router.get('/register', function (req, res, next) {
 
-  res.json({title: "register"});
+  res.json({ title: "register" });
 
 });
 
 /*User Login */
 /*Get form  mid.loggedOut*/
 router.get('/login', function (req, res, next) {
-  res.json({title: "login"});
- // return res.render('login');
+  res.json({ title: "login" });
+
 });
 
 
@@ -58,25 +54,25 @@ router.get('/logout', function (req, res, next) {
 
 
 router.get('/profile', function (req, res, next) {
-var profileData={
-  userData:"",
-  playerData:""
+  var profileData = {
+    userData: "",
+    playerData: ""
 
-};
-User.findById(req.session.userId)
-.exec(function (err, user) {
-  if(err) return next(err);
-  profileData.userData = user;
-  Player.find({parent: req.session.userId})
-  .populate("team")
+  };
+  User.findById(req.session.userId)
+    .exec(function (err, user) {
+      if (err) return next(err);
+      profileData.userData = user;
+      Player.find({ parent: req.session.userId })
+        .populate("team")
 
-  .exec(function (err, player) {
-    if(err) return next(err);
-    profileData.playerData = player;
-      res.status(200);
-    return res.json(profileData);
-  })
-  })
+        .exec(function (err, player) {
+          if (err) return next(err);
+          profileData.playerData = player;
+          res.status(200);
+          return res.json(profileData);
+        })
+    })
 
 
 });
@@ -95,8 +91,8 @@ router.get('/user', mid.requiresLogin, function (req, res, next) {
 
 /** , mid.requiresLogin*/
 router.get('/coaches', function (req, res, next) {
-  User.find({"userType":"Coach"})
-  .populate("position.team")
+  User.find({ "userType": "Coach" })
+    .populate("position.team")
     .exec(function (err, user) {
       if (err) return next(err);
       res.status(200);
@@ -114,19 +110,19 @@ router.post('/login', function (req, res, next) {
       if (err || !user) {
         var err = new Error("Wrong email or password");
         res.status(401);
-       // res.json({"error": "Wrong email or password"});
+
         return next(err);
       } else {
         req.session.userId = user._id;
         req.session.userName = user.userName;
-      //  return res.redirect('/users/profile');
-      res.json({loggedIn:true});
+
+        res.json({ loggedIn: true });
       }
     });
   } else {
     var err = new Error("Email and Password are required.");
     res.status(401);
-    // res.json({"error": "Email and Password are required"});
+
     return next(err);
   }
 
@@ -161,8 +157,8 @@ router.post('/register', function (req, res, next) {
       if (err) return next(err);
       req.session.userId = user._id;
       req.session.userName = user.userName;
-    //  return res.redirect('/users/profile');
-     return res.json(user);
+
+      return res.json(user);
     });
 
 
@@ -177,61 +173,61 @@ router.post('/register', function (req, res, next) {
 
 
 /** , mid.requiresLogin*/
-router.put('/update',function(req,res,next){
+router.put('/update', function (req, res, next) {
   var newData = req.body.userNewData;
   /**req.session.userId */
   User.findById(req.body.id)
-  .exec(function(err,user){
-    if (err) return next(err);
-    user.update(newData, {new:true})
-    .exec(function(err,doc){
+    .exec(function (err, user) {
       if (err) return next(err);
-      res.status(200);
-      res.json(doc);
+      user.update(newData, { new: true })
+        .exec(function (err, doc) {
+          if (err) return next(err);
+          res.status(200);
+          res.json(doc);
+        })
     })
-  })
 });
 
 
-router.put('/address',function(req,res,next){
- 
+router.put('/address', function (req, res, next) {
+
   /**req.session.userId */
   User.findById(req.session.userId)
-  .exec(function(err,user){
-    if (err) return next(err);
-    user.update({$set:{userAddress:req.body.userAddress, userPhone: req.body.userPhone}}, {new:true})
-    .exec(function(err,doc){
+    .exec(function (err, user) {
       if (err) return next(err);
-      res.status(200);
-      res.json(doc);
+      user.update({ $set: { userAddress: req.body.userAddress, userPhone: req.body.userPhone } }, { new: true })
+        .exec(function (err, doc) {
+          if (err) return next(err);
+          res.status(200);
+          res.json(doc);
+        })
     })
-  })
 });
 
 
-router.put('/position',function(req,res,next){
-  
-  
-  var item="";
-  if(req.body.newData.title){
-item = "position.title";
-  }else{
-    item="position.preference"
+router.put('/position', function (req, res, next) {
+
+
+  var item = "";
+  if (req.body.newData.title) {
+    item = "position.title";
+  } else {
+    item = "position.preference"
   }
-  
+
   /**req.session.userId */
   User.findById(req.body.id)
-  .exec(function(err,user){
-    if (err) return next(err);
-user.update({$set:{[item]:req.body.newData.title}})
-
-   
-    .exec(function(err,doc){
+    .exec(function (err, user) {
       if (err) return next(err);
-      res.status(200);
-      res.json(doc);
+      user.update({ $set: { [item]: req.body.newData.title } })
+
+
+        .exec(function (err, doc) {
+          if (err) return next(err);
+          res.status(200);
+          res.json(doc);
+        })
     })
-  })
 });
 
 
@@ -240,7 +236,7 @@ user.update({$set:{[item]:req.body.newData.title}})
 
 
 /**Delete User mid.requiresAdmin, */
-router.delete('/user/delete',  function(req, res, next){
+router.delete('/user/delete', function (req, res, next) {
   User.findByIdAndDelete(req.body.userId, function (err, deletedDoc) {
     if (err) return next(err);
     Player.deleteMany({ parent: req.body.userId }, function (err, playerDocs) {
@@ -252,17 +248,6 @@ router.delete('/user/delete',  function(req, res, next){
 
   })
 })
-
-
-
-
-
-
-
-
-
-
-
 
 
 

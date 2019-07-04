@@ -87,20 +87,6 @@ html {
 .menuList li *:hover {
   color: burlywood; }
 
-#logoutBtn {
-  background: none;
-  font-size: 1.5em;
-  text-decoration: none;
-  color: white;
-  padding: 0;
-  cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
-
-#logoutBtn:hover {
-  color: burlywood; }
-
 #footer {
   left: 0;
   bottom: 0;
@@ -161,7 +147,7 @@ header {
   padding-right: 10%;
   padding-top: 3%;
   padding-bottom: 3%; }
-  .announcement-body blockQuote {
+  .announcement-body blockquote {
     margin-left: 35%; }
 
 #homePage {
@@ -219,7 +205,7 @@ header {
   -moz-box-shadow: 0px 3px 4px 0px rgba(50, 50, 15, 0.73);
   box-shadow: 0px 3px 4px 0px rgba(50, 50, 15, 0.73);
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 4fr .5fr;
+  grid-template-rows: 1fr 4fr 0.5fr;
   background-image: linear-gradient(gainsboro, white, white, gainsboro); }
 
 .callout-top {
@@ -299,7 +285,7 @@ header {
   .callout-small .callout-body {
     font-size: 1.2em;
     text-align: left; }
-    .callout-small .callout-body blockQuote {
+    .callout-small .callout-body blockquote {
       margin-left: 15%; }
   .callout-small .callout-footer {
     font-size: 1.2em; }
@@ -316,7 +302,7 @@ header {
   width: 30%;
   font-size: 2em;
   font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   height: auto;
   margin: auto;
@@ -1380,14 +1366,14 @@ input:valid {
 .statBox {
   padding: 2%;
   margin-left: 5%;
-  border: .2px solid darkslategray;
+  border: 0.2px solid darkslategray;
   -webkit-box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.78);
   -moz-box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.78);
   box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.78);
   height: 6em;
   width: 9em;
   background-color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   font-size: 1em;
   border-radius: 5%; }
@@ -1439,7 +1425,7 @@ input:valid {
   width: 3em;
   height: 1.5em;
   font-weight: normal;
-  font-size: .7em;
+  font-size: 0.7em;
   padding: 0px;
   margin-left: 1%;
   border: 1px solid darkslategray; }

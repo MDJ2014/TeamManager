@@ -1,144 +1,163 @@
-
-
-#allTeamsContainer{
-    text-align: center;
-    padding-bottom: 5%;
-    background-color: white;
+#allTeamsContainer {
+  text-align: center;
+  padding-bottom: 5%;
+  background-color: white;
 }
-#allTeamsBody{
-   padding-left: 5%;
+#allTeamsBody {
+  padding-left: 5%;
 }
-.teamImg{
-  
-    border: 3px solid darkslategray;
-    border-radius: 150px;
-    height: 9em;
-      width:9em;
-      text-align:center;
-      line-height: 200px;
-      & img{
-      
-        top: 50%;
-        margin-top: 20px;
-        left: 50%;
-        margin-left: -1px;
-      }
-   
+.teamImg {
+  border: 3px solid darkslategray;
+  border-radius: 150px;
+  height: 9em;
+  width: 9em;
+  text-align: center;
+  line-height: 200px;
+  & img {
+    top: 50%;
+    margin-top: 20px;
+    left: 50%;
+    margin-left: -1px;
+  }
 }
-.singleTeamContainer{
-    margin-top: 3%;
-    margin-bottom: 3%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    
+.singleTeamContainer {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
-.teamImgContainer{
-    width: 9em;
-    height: auto;
- 
-}
-.teamGroupContainer{
-    display: flex;
-}
-.teamBody{
-    margin-left: 1%;
-   
-}
-
-.teamImgName{
-text-decoration: none;
-color: darkslategray;
-font-size: 1.2em;
-font-weight: bold;
-
-}
-.teamImgName:hover{
-color: lightslategray;
-}
-
-#left{
-    margin-left: 0%;
-}
-
-.outer2{
-  width:100%;
+.teamImgContainer {
+  width: 9em;
   height: auto;
-  margin-left:0;
-  margin-right:auto;
+}
+.teamGroupContainer {
+  display: flex;
+}
+.teamBody {
+  margin-left: 1%;
+}
+
+.teamImgName {
+  text-decoration: none;
+  color: darkslategray;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.teamImgName:hover {
+  color: lightslategray;
+}
+
+#left {
+  margin-left: 0%;
+}
+
+.outer2 {
+  width: 100%;
+  height: auto;
+  margin-left: 0;
+  margin-right: auto;
   border: 0px solid white;
-  display:flex;
-
+  display: flex;
 }
 
-.bar2{
-  height:auto;
+.bar2 {
+  height: auto;
   width: 75%;
-  margin-left:0;
-  margin-right:auto;
+  margin-left: 0;
+  margin-right: auto;
   margin-top: 60px;
-    border: 3px double lightslategray;
-    border-radius: 0px 10px 10px 0px;
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2f4f4f+19,54707f+68,778899+99,778899+99 */
-    background: #2f4f4f; /* Old browsers */
-    background: -moz-linear-gradient(top,  #2f4f4f 19%, #54707f 68%, #778899 99%, #778899 99%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  #2f4f4f 19%,#54707f 68%,#778899 99%,#778899 99%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  #2f4f4f 19%,#54707f 68%,#778899 99%,#778899 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f4f4f', endColorstr='#778899',GradientType=0 ); /* IE6-9 */
-
-
+  border: 3px double lightslategray;
+  border-radius: 0px 10px 10px 0px;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2f4f4f+19,54707f+68,778899+99,778899+99 */
+  background: #2f4f4f; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #2f4f4f 19%,
+    #54707f 68%,
+    #778899 99%,
+    #778899 99%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #2f4f4f 19%,
+    #54707f 68%,
+    #778899 99%,
+    #778899 99%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #2f4f4f 19%,
+    #54707f 68%,
+    #778899 99%,
+    #778899 99%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f4f4f', endColorstr='#778899',GradientType=0 ); /* IE6-9 */
 }
 
-.mid2{
-    width: 20%;
-    padding-top: 1%;
-    margin-right: 1%;
-    margin-left: 70%;
+.mid2 {
+  width: 20%;
+  padding-top: 1%;
+  margin-right: 1%;
+  margin-left: 70%;
 
-  color:white;
+  color: white;
   font-weight: bold;
   font-size: 1.5em;
-  
- 
-
 }
 
-.skewed2{
+.skewed2 {
   background-color: white;
 
   height: 30px;
-  width: .5em;
+  width: 0.5em;
 
-transform:skewX(-26deg);
+  transform: skewX(-26deg);
 }
 
-.radial2{
+.radial2 {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#778899+2,778899+2,2f4f4f+43 */
-background: #778899; /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  #778899 2%, #778899 2%, #2f4f4f 43%); /* FF3.6-15 */
-background: -webkit-radial-gradient(center, ellipse cover,  #778899 2%,#778899 2%,#2f4f4f 43%); /* Chrome10-25,Safari5.1-6 */
-background: radial-gradient(ellipse at center,  #778899 2%,#778899 2%,#2f4f4f 43%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#778899', endColorstr='#2f4f4f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-width: 1em;
+  background: #778899; /* Old browsers */
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    #778899 2%,
+    #778899 2%,
+    #2f4f4f 43%
+  ); /* FF3.6-15 */
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    #778899 2%,
+    #778899 2%,
+    #2f4f4f 43%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(
+    ellipse at center,
+    #778899 2%,
+    #778899 2%,
+    #2f4f4f 43%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#778899', endColorstr='#2f4f4f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  width: 1em;
 }
-.right2{
-    border-right: 1px solid black;
+.right2 {
+  border-right: 1px solid black;
 }
-.bars{
+.bars {
   height: 3.5em;
 }
 
-#allTeamsHeader{
+#allTeamsHeader {
   border-bottom: 3px solid darkslategray;
   width: 75%;
   margin: auto;
-  
 }
 
 #teamHeaderTop {
-padding-top: 5%;
+  padding-top: 5%;
   display: block;
   position: relative;
 }
@@ -152,5 +171,5 @@ padding-top: 5%;
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1;   
+  z-index: -1;
 }

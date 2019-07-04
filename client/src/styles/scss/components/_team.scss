@@ -1,241 +1,189 @@
+#teamContainer {
+  height: auto;
+  width: 90%;
+  margin: auto;
+}
 
-
-#teamContainer{
-  
-     height: auto;
-     width: 90%;
-     margin:auto;
-   
- }
-
- #teamHeader{
-    grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
+#teamHeader {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
   width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 4fr;
-    grid-template-rows: 1fr;
-    border-bottom: 3px solid darkslategray;
-    justify-content: center;
-    align-items: center;
-  
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr;
+  grid-template-rows: 1fr;
+  border-bottom: 3px solid darkslategray;
+  justify-content: center;
+  align-items: center;
 }
 
-#teamPageName{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
-   font-weight: bold;
-   font-size: 2em;
-   text-align: right;
-   padding-right: 2%;
- 
-    
+#teamPageName {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: right;
+  padding-right: 2%;
 }
 
-#teamPageHeaderLogo{
-
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    border: 3px solid darkslategray;
-    background-position: center center;
-    border-radius: 150px;
-    height: 9em;
-      width: 9em;
-     background-repeat: no-repeat;
-     & img{
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
+#teamPageHeaderLogo {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 3px solid darkslategray;
+  background-position: center center;
+  border-radius: 150px;
+  height: 9em;
+  width: 9em;
+  background-repeat: no-repeat;
+  & img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
+#teamPageCoaches {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
 
-#teamPageCoaches{
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
-   
-    height: auto;
-   
-    display: flex;
+  height: auto;
+
+  display: flex;
 }
 
-
-.coachContainer{
+.coachContainer {
   width: 7em;
   text-align: left;
- 
 }
 
-
- .coachName{
-margin-left: 10%;
+.coachName {
+  margin-left: 10%;
 }
 
-.coachTitle{
-
-    font-weight: bold;
+.coachTitle {
+  font-weight: bold;
 }
 
-
- 
-#teamPageMessages{
- 
-   width: 100%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-  
+#teamPageMessages {
+  width: 100%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
-
-
-
-
-
-.msgBody{
- 
-    background-color: white;
-    border: 3px solid darkslategray;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1%;
-    border-radius: 10px;
-    text-align:center;
-    height: auto;
-
+.msgBody {
+  background-color: white;
+  border: 3px solid darkslategray;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+  border-radius: 10px;
+  text-align: center;
+  height: auto;
 }
 
-.msgTitle{
-    font-weight: bold;
+.msgTitle {
+  font-weight: bold;
 }
 
-.msgAuthor{
-    font-style: italic;
-    margin-bottom: 1%;
+.msgAuthor {
+  font-style: italic;
+  margin-bottom: 1%;
 }
 
-.msgText{
-    margin-bottom: 2%;
+.msgText {
+  margin-bottom: 2%;
 }
 
-
-
-
-
-
-#teamPageBody{
-
-    background-color: pink;
- width: 100%;
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-
-  
+#teamPageBody {
+  background-color: pink;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
 }
 
-
-  
- #teamRoster{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    background-color: aliceblue;
-    border-left: 1px solid darkslategray;
-padding: 1%;
-
-
+#teamRoster {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  background-color: aliceblue;
+  border-left: 1px solid darkslategray;
+  padding: 1%;
 }
-#rosterTable{
-width: 90%;
-margin: auto;
+#rosterTable {
+  width: 90%;
+  margin: auto;
 }
-#rosterTitle{
- text-align: center;
- font-weight: bold;
- background-color: darkslategray;
-   color: white;
-    
+#rosterTitle {
+  text-align: center;
+  font-weight: bold;
+  background-color: darkslategray;
+  color: white;
 }
 
- 
- #teamSchedule{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
+#teamSchedule {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
   padding: 1%;
   background-color: aliceblue;
-
 }
 
-
-#scheduleTitle{
-   text-align: center;
-   font-weight: bold;
-   background-color: darkslategray;
-   color: white;
-   
+#scheduleTitle {
+  text-align: center;
+  font-weight: bold;
+  background-color: darkslategray;
+  color: white;
 }
 
-
-
- .scheduleHeader{
-     display: flex;
-     width: 99%;
-     margin: auto;
-     font-weight: bold;
-     padding-left: 7%;
-    
- }
- .scheduleHeader div{
-     margin-right: 2.5em;
- }
- .scheduleRow{
-     display: flex;
-     width: 99%;
-     margin: auto;
-     font-size: 1.1em;
-     padding-left: 5%;
- }
- 
- 
- 
- 
- #scheduleTable{
-    width: 100%;
+.scheduleHeader {
+  display: flex;
+  width: 99%;
+  margin: auto;
+  font-weight: bold;
+  padding-left: 7%;
 }
-#scheduleTableBody tr{
-
-text-align: center;
+.scheduleHeader div {
+  margin-right: 2.5em;
 }
- 
- 
- #standing{
-     height: 1em;
-     width: 100%;
-     margin-top: 1%;
-     margin-bottom: 1%;
-     padding: 1%;
- }
- 
- 
- #backLink{
-    color: darkslategray;
-    font-size: 1em;
- }
+.scheduleRow {
+  display: flex;
+  width: 99%;
+  margin: auto;
+  font-size: 1.1em;
+  padding-left: 5%;
+}
 
- #backLink:hover{
-     color: lightslategray;
- }
- 
+#scheduleTable {
+  width: 100%;
+}
+#scheduleTableBody tr {
+  text-align: center;
+}
+
+#standing {
+  height: 1em;
+  width: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding: 1%;
+}
+
+#backLink {
+  color: darkslategray;
+  font-size: 1em;
+}
+
+#backLink:hover {
+  color: lightslategray;
+}

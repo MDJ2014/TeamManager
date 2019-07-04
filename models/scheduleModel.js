@@ -6,10 +6,9 @@ var Schema = mongoose.Schema;
 var GameSchema = require('mongoose').model('Game').schema
 
 var ScheduleSchema = new mongoose.Schema({
-    team: {type: Schema.Types.ObjectId, ref: 'Team'},   
-    //games: [{type: Schema.Types.ObjectId, ref: 'Game'}],
-    games:[GameSchema],
-    dateAssigned: {type: Date, default: Date.now}
+    team: { type: Schema.Types.ObjectId, ref: 'Team' },
+    games: [GameSchema],
+    dateAssigned: { type: Date, default: Date.now }
 });
 
 

@@ -6,17 +6,14 @@ import { Link } from 'react-router-dom';
 class Menu extends Component {
   constructor(props){
     super(props);
-  // if(window.reactApp){
-  //   this.setState({user: window.reactApp.currentUser})
-  // }else{
-  //   this.setState({user: undefined})
-  //}
+
  this.state = {
-    // user: undefined,
+     usertype: undefined,
      authenticated: false
     }
 this.changeToAbout = this.changeToAbout.bind(this);
 this.handleLogout = this.handleLogout.bind(this);
+
   }
 
    
@@ -25,14 +22,13 @@ this.handleLogout = this.handleLogout.bind(this);
   
   });
     const body = await response;
-    if (response.status !== 200) 
-    //throw Error(body.message);
-    {
-
- //this.setState({"redirect":true})
-
+    if (response.status !== 200) { 
+     this.setState({authenticated: false, usertype: undefined})
+     //this.setState({"redirect":true})
+        // return {found: false}
     } else{
-       return body; 
+      return body; 
+     
     }
   }
 
@@ -40,19 +36,33 @@ this.handleLogout = this.handleLogout.bind(this);
 
 
   componentDidMount(){
-
     this.getResponse()
-    .then(res => {
+    //.then(res=>res.json())
+    .then((response) => {
+      if(response === undefined || response === null){
+        return {empty: true}
+      }else{
+         return response.json() 
+      }
+     
+   })
+   .then((data)=> {
+     if(data.empty){
+      this.setState({authenticated: false, usertype: undefined})
+     }else{
+      this.setState({authenticated: data, usertype: data.userType})
+     }
 
-      
-      const data = res;
-      this.setState({authenticated: data},()=>alert(this.state.authenticated));
-    })
+   })
+    //.then(data=>  this.setState({authenticated: data, usertype: data.userType}))
+   
 
 
   }
 
-
+  
+  // .then((res)=>alert(res)
+ 
 
 
 
@@ -66,14 +76,6 @@ this.props.onClick(page);
 handleLogout= async(event)=>{
   event.preventDefault();
 
-  // const body = JSON.stringify({
-  //   userEmail: this.state.email, 
-  //   passWord:this.state.password,
-  //   firstName: this.state.firstName, 
-  //   lastName: this.state.lastName, 
-  //   userName: this.state.userName, 
-  //   confirmPassword: this.state.confirmPassword
-  // });
 
   const headers = {'content-type': 'application/json', accept: 'application/json'};
 
@@ -99,7 +101,11 @@ handleLogout= async(event)=>{
  <div className="menuList">
  
    <ul>
+
+{this.state.usertype === "Admin" ? 
 <li><Link to="/admin"><div id="gear"></div></Link></li>
+: null}
+
 {this.state.authenticated? 
     null
       : 
@@ -113,7 +119,7 @@ handleLogout= async(event)=>{
       }
 
 {this.state.authenticated?
-  <li><Link onClick={this.handleLogout}>Log Out</Link></li>
+  <li><Link to="" onClick={this.handleLogout}>Log Out</Link></li>
   : null}
 
 {this.state.authenticated? 

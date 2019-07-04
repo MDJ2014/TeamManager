@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 
 
@@ -7,62 +7,59 @@ import React, {Component} from 'react';
 
 
 class Accounts extends Component {
-    constructor(props){
-      super(props);
-    
-      this.state = {
-        renderedResponse: '',
-        playerFirstName:'',
-        playerLastName:'',
-        playerNicName:'',
-        playerAge:'',
-        playerPositionPreference:''
-  
-  
-      };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-     // this.cancelEdit = this.cancelPlayerEdit.bind(this);
-    }
+  constructor(props) {
+    super(props);
 
-    handleChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-  
-      this.setState({[name]: value});
-    }
+    this.state = {
+      renderedResponse: '',
+      playerFirstName: '',
+      playerLastName: '',
+      playerNicName: '',
+      playerAge: '',
+      playerPositionPreference: ''
 
-    // cancelPlayerEdit=()=>{
-    //   this.props.cancelThisEdit();
-    // }
 
-    handleSubmit= async(event)=>{
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.cancelEdit = this.cancelPlayerEdit.bind(this);
+  }
 
-      const body = JSON.stringify({
-    playerId : this.props.playerToEdit,    
-    playerFirstName: this.state.playerFirstName,
-    playerLastName: this.state.playerLastName,
-    playerNicName: this.state.playerNicName,
-    playerAge: this.state.playerAge,
-    playerPositionPreference: this.state.playerPositionPreference
-});
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
 
-const headers = {'content-type': 'application/json', accept: 'application/json'};
+    this.setState({ [name]: value });
+  }
 
-await fetch('/players/player',{method: 'PUT', headers, body})
-.then((res)=>this.props.editPlayer())
-.catch(function(response){
-  //this.setState({error:true, errmsg: error});
-  //console.log(response.data)
-})
+
+  handleSubmit = async (event) => {
+
+    const body = JSON.stringify({
+      playerId: this.props.playerToEdit,
+      playerFirstName: this.state.playerFirstName,
+      playerLastName: this.state.playerLastName,
+      playerNicName: this.state.playerNicName,
+      playerAge: this.state.playerAge,
+      playerPositionPreference: this.state.playerPositionPreference
+    });
+
+    const headers = { 'content-type': 'application/json', accept: 'application/json' };
+
+    await fetch('/players/player', { method: 'PUT', headers, body })
+      .then((res) => this.props.editPlayer())
+      .catch(function (response) {
+        //this.setState({error:true, errmsg: error});
+        //console.log(response.data)
+      })
 
 
 
 
-this.props.editPlayer();
+    this.props.editPlayer();
 
-}
+  }
 
 
 
@@ -71,16 +68,16 @@ this.props.editPlayer();
 
 
 
-    render(){
-  return(
-<div>Accounts</div>
+  render() {
+    return (
+      <div>Accounts</div>
 
 
-  )
+    )
 
-          
 
-    }
+
+  }
 
 
 

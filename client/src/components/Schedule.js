@@ -25,11 +25,7 @@ this.componentReRender = this.componentReRender.bind(this);
       }
 
 
-     
-    // componentWillReceiveProps({someProp}) {
-    //     this.setState({...this.state,someProp})
-    //   }
-  
+ 
 
       getResponse = async(teamId)=>{
         const response = await fetch(`/games/team/${teamId}`,{method:'GET', headers:{'Content-Type': 'application/json'}

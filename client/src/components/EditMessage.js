@@ -31,7 +31,10 @@ class EditMessage extends Component{
      });
       }else{
         this.setState({
-
+          editMessage: "",
+          messageAuthor:"",
+          messageTitle:"",
+          messageBody:""
         });
       }
      

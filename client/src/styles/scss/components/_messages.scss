@@ -1,63 +1,61 @@
-@import '../variables';
+@import "../variables";
 
-#messageEditContainer{
- 
+#messageEditContainer {
+  text-align: center;
+}
+#messageContainer {
+  background-color: white;
+  width: 50%;
+  margin: auto;
+}
+#newMessageBtn {
+  width: 8em;
+  height: 3em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+}
+#editMessageBody {
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  background-color: white;
+  border: 1px solid $main-color;
 
-    text-align: center;
-}
-#messageContainer{
-    background-color: white;
-    width: 50%;
-    margin: auto;
-}
-#newMessageBtn{
-    width: 8em;
-    height: 3em;
-    margin-left: auto;
-    margin-right:auto;
-    margin-top: 1em;
-}
-#editMessageBody{
-    width: 20%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    background-color: white;
-    border: 1px solid $main-color;
-
-    h4{
+  h4 {
     margin-top: 2%;
     margin-bottom: 2%;
+  }
 }
+#editMsgTextArea {
+  width: 95%;
+  height: 4em;
 }
-#editMsgTextArea{
-    width: 95%;
-    height: 4em;
+#messageSaveBtn {
+  width: 6em;
+  height: 2em;
+  margin: auto;
 }
-#messageSaveBtn{
-    width: 6em;
-    height: 2em;
-    margin: auto;
+#messageDeleteWarning {
+  margin-left: 30%;
 }
-#messageDeleteWarning{
-    margin-left: 30%;
+#msgDelCancelBtn {
+  margin-right: 1%;
+  margin-left: 1%;
+  width: 4em;
 }
-#msgDelCancelBtn{
-    margin-right: 1%;
-    margin-left: 1%;
-    width: 4em;
-}
-#commitDeleteMessageBtn{
-    width:4em;
+#commitDeleteMessageBtn {
+  width: 4em;
 }
 
-#messageTextArea{
-    width: 15em;
-    height: 10em;
+#messageTextArea {
+  width: 15em;
+  height: 10em;
 }
-#saveMessageButton{
-    margin-bottom: 5%;
+#saveMessageButton {
+  margin-bottom: 5%;
 }
-#messageTable{
-    width: 100%;
+#messageTable {
+  width: 100%;
 }

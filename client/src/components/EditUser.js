@@ -28,7 +28,7 @@ class EditUser extends Component {
      errorMessage:""
     };
 
-   // this.onClick = this.onClick.bind(this);
+
    this.handleChange = this.handleChange.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
    this.clickDeleteMember=this.clickDeleteMember.bind(this);
@@ -186,7 +186,7 @@ clickDeleteMember(){
 }
 
 handleMemberDelete= async(item)=>{
-  //event.preventDefault();
+
 
   const body = JSON.stringify({
     userId: item._id,
@@ -196,7 +196,7 @@ handleMemberDelete= async(item)=>{
    const headers = {'content-type': 'application/json', accept: 'application/json'};
 
    await fetch('/users/user/delete',{method: 'DELETE', headers, body})
-   //.then(this.handleErrors)
+ 
    .then((res)=>this.setState({memberDelete:res}))
    .then(this.setDeleteSuccess('memberDelete'))  
    .then(this.componentRerender)
@@ -386,17 +386,6 @@ null
 </label>
 
 
-
-
-
-
-
-
-
-
-
-
-
    
 
 <div className="space"></div>
@@ -452,24 +441,8 @@ null
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   
 }
-
-
-
-
-
 
   
 

@@ -1,448 +1,404 @@
-#adminEditTeam{
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    grid-template-rows: 1fr 4fr 4fr 4fr 4fr;
-    background-color: white;
-    border-bottom: 1px solid darkslategray;
+#adminEditTeam {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr 4fr 4fr 4fr 4fr;
+  background-color: white;
+  border-bottom: 1px solid darkslategray;
 }
-#top{
-    background: white;
-    width: 100%;
-    height: 8em;
-    margin-bottom: 10%;
+#top {
+  background: white;
+  width: 100%;
+  height: 8em;
+  margin-bottom: 10%;
 }
-#teamEditCancelBtn{
-    margin-top: 1%;
-    width: 4em;
-}
-
-#editTeamTop{
-    display: flex;
-grid-column-start: 1;
-grid-column-end: 3;
-grid-row-start: 1;
-grid-row-end: 2;
-width: 90%;
-margin: auto;
-
-
-}
-#adminEditTeamTeamName{
-margin-top: 5%;
-
-font-weight: bold;
-display: grid;
-grid-template-columns: 1fr 2fr;
-grid-template-rows: 1fr;
-
-padding-left: 15%;
-
-}
-#editTitleTeamName{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
-  
-    padding-top: 30%;       
-
+#teamEditCancelBtn {
+  margin-top: 1%;
+  width: 4em;
 }
 
-#editTeamNameForm{
-    margin-left: 20%;
+#editTeamTop {
+  display: flex;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  width: 90%;
+  margin: auto;
+}
+#adminEditTeamTeamName {
+  margin-top: 5%;
+
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+
+  padding-left: 15%;
+}
+#editTitleTeamName {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  padding-top: 30%;
 }
 
-.team-edit-form-input{
-  
-    width: 100%;
-    height: 2em;
-    font-weight: bold;
-    }
-
-#adminTeamEditSectionLogoContainer{
- 
-  
-    grid-column-start: 2;
-grid-column-end: 3;
-grid-row-start: 1;
-grid-row-end: 2;
-width: 6em;
-
-height: 6em;
-
-
-
-
-
-
-
-    }
-    #adminTeamEditSectionLogo{
-        
-          
-        margin-right:auto;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        height: 6em;
-      
-          width:auto;
-          border: solid 2px darkslategray;
-        border-radius: 240px;
-
-        -webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.67);
-        -moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.67);
-
-        box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.67);
-      
-
-
-
-        background-size: 6.5em;
-        
-        background-repeat: no-repeat;
-
-        background-position: center center;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-    }
-    
-#teamNameEditBtn{
-    grid-column-start: 1;
-grid-column-end: 2;
-grid-row-start: 2;
-grid-row-end: 3;
+#editTeamNameForm {
+  margin-left: 20%;
 }
 
-#editTeamNameForm{
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 4;
+.team-edit-form-input {
+  width: 100%;
+  height: 2em;
+  font-weight: bold;
 }
 
-#schedule{
-    grid-column-start: 1;
-    grid-column-end:2 ;
-    grid-row-start: 2;
-    grid-row-end: 3;
- margin-top: 3%;
-    padding-right: 10px;
+#adminTeamEditSectionLogoContainer {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  width: 6em;
+
+  height: 6em;
 }
-#scheduleEdit{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start:2 ;
-    grid-row-end: 3;
- 
-    border-left: 1px solid darkslategray;
- 
-}
-#roster{
-    grid-column-start: 1;
-    grid-column-end:2 ;
-    grid-row-start: 3;
-    grid-row-end:4 ;
-border-right: 1px solid darkslategray;
-}
-#rosterEdit{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 4;
-    border-top: 1px solid darkslategray;
- 
-}
-#coaches{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 4;
-    grid-row-end: 5;
-    border-right: 1px solid darkslategray;
-}
-#coachesEdit{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 4;
-    grid-row-end:5 ;
-    border-top: 1px solid darkslategray;
+#adminTeamEditSectionLogo {
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  height: 6em;
+
+  width: auto;
+  border: solid 2px darkslategray;
+  border-radius: 240px;
+
+  -webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+  -moz-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+
+  box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.67);
+
+  background-size: 6.5em;
+
+  background-repeat: no-repeat;
+
+  background-position: center center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#messages{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 5;
-    grid-row-end:6 ;
-   
-    border-right: 1px solid darkslategray;
-}
-#messageEdit{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 5;
-    grid-row-end:6;
-   
-  
+#teamNameEditBtn {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 
-
-
-#gameTable{
-    width: 100%;
+#editTeamNameForm {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
 }
 
+#schedule {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  margin-top: 3%;
+  padding-right: 10px;
+}
+#scheduleEdit {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
 
-
-
-
-
-.adminEditTeamCat{
-    font-weight: bold;
-    width: 50%;
-    margin: auto;
-    border-bottom: 3px solid darkslategray;
+  border-left: 1px solid darkslategray;
 }
-
-#editScheduleHeader{
-    display:grid;
-grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-grid-template-rows: 1fr;
-font-weight: bold;
+#roster {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  border-right: 1px solid darkslategray;
 }
-#editScheduleDate{
-grid-column-start: 1;
-grid-column-end: 2;
-grid-row-start: 1;
-grid-row-end: 2;
+#rosterEdit {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  border-top: 1px solid darkslategray;
 }
-#editScheduleOpponent{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
+#coaches {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  border-right: 1px solid darkslategray;
 }
-#editScheduleLocation{
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editScheduleHomeAway{
-    grid-column-start:4 ;
-    grid-column-end: 5;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editScheduleTeamScore{
-    grid-column-start: 5 ;
-    grid-column-end: 6;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editScheduleOpponentScore{
-    grid-column-start:6 ;
-    grid-column-end: 7;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editScheduleGameEditBtn{
-    grid-column-start:7 ;
-    grid-column-end: 8;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editScheduleGameSpace{
-    grid-column-start:8 ;
-    grid-column-end: 9;
-    grid-row-start: 1;
-    grid-row-end: 2;
+#coachesEdit {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  border-top: 1px solid darkslategray;
 }
 
-#game{
-    display:grid;
-grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr .5fr .5fr;
-grid-template-rows: 1fr;
+#messages {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 5;
+  grid-row-end: 6;
 
+  border-right: 1px solid darkslategray;
 }
-#editGameDate{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editGameOpponent{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editGameLocation{
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editGameHome{
-    grid-column-start:4 ;
-    grid-column-end: 5;
-    grid-row-start: 1;
-    grid-row-end: 2;
-  
-}
-#editGameTeamScore{
-    grid-column-start: 5 ;
-    grid-column-end: 6;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editGameOpponentScore{
-    grid-column-start:6 ;
-    grid-column-end: 7;
-    grid-row-start: 1;
-    grid-row-end: 2;
- 
-}
-#editScheduleGameEditBtn{
-    grid-column-start:8 ;
-    grid-column-end: 9;
-    grid-row-start: 1;
-    grid-row-end: 2;
- 
+#messageEdit {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 6;
 }
 
-.adminEditGameButton{
-    width: 2.5em;
-    height: 1.5em;
-    font-size: .7em;
-    font-weight: normal;
-    padding: 0%;    
-}
-#editGameDelBtn{
-    grid-column-start:9 ;
-    grid-column-end: 10;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-#editTeamAddGameButton{
-    width: 10%;
-    margin: auto;
-}
-#gameDeleteBtn{
-    color: red;
-    margin-left: 3%;
-
+#gameTable {
+  width: 100%;
 }
 
-.deleteWarning{
-    display: flex;
-    width: 60%;
-    margin: auto;
-    color: red;
+.adminEditTeamCat {
+  font-weight: bold;
+  width: 50%;
+  margin: auto;
+  border-bottom: 3px solid darkslategray;
 }
 
-#gameCommitDeleteBtn{
-    margin-left: 50%;
-    width: 4em;
-    border: 2px solid red;
-    color: red;
+#editScheduleHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  font-weight: bold;
 }
-#gameCommitDeleteBtn:hover{
-    color: white;
-    background-color: red;
+#editScheduleDate {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
-#gameDelCancelBtn{
-    margin-left: 20%;
-    width: 4em;
+#editScheduleOpponent {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+#editScheduleLocation {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+#editScheduleHomeAway {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+#editScheduleTeamScore {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+#editScheduleOpponentScore {
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+#editScheduleGameEditBtn {
+  grid-column-start: 7;
+  grid-column-end: 8;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+#editScheduleGameSpace {
+  grid-column-start: 8;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
-#addPlayerBtn{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3%;
-    width: 7em;
-    height: 2em;
+#game {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
+  grid-template-rows: 1fr;
 }
-#adminEditCoachesList{
-    display: flex;
-    font-weight: bold;
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
+#editGameDate {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
-.coachEditHeader{
-    margin-right: 15%;
+#editGameOpponent {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
-#editCoachRow{
-    display:flex;   
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
+#editGameLocation {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
-.coachEditRow{
-    margin-right: 15%;
+#editGameHome {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
-table{
-    width: 60%;
-    margin:auto;
+#editGameTeamScore {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
-.tbleRow{
-    margin-right: 20%;
+#editGameOpponentScore {
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
-#coaches{
-    border-right: 1px solid darkslategray;
-   background-color: white;
+#editScheduleGameEditBtn {
+  grid-column-start: 8;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
-#coachesEdit{
-    border-bottom: 1px solid darkslategray;
+.adminEditGameButton {
+  width: 2.5em;
+  height: 1.5em;
+  font-size: 0.7em;
+  font-weight: normal;
+  padding: 0%;
 }
-#addMessageBtn{
+#editGameDelBtn {
+  grid-column-start: 9;
+  grid-column-end: 10;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+#editTeamAddGameButton {
+  width: 10%;
+  margin: auto;
+}
+#gameDeleteBtn {
+  color: red;
+  margin-left: 3%;
+}
+
+.deleteWarning {
+  display: flex;
+  width: 60%;
+  margin: auto;
+  color: red;
+}
+
+#gameCommitDeleteBtn {
+  margin-left: 50%;
+  width: 4em;
+  border: 2px solid red;
+  color: red;
+}
+#gameCommitDeleteBtn:hover {
+  color: white;
+  background-color: red;
+}
+#gameDelCancelBtn {
+  margin-left: 20%;
+  width: 4em;
+}
+
+#addPlayerBtn {
   margin-left: auto;
-    margin-right: auto;
-      width: 7em;
-    height: 2em;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    margin: auto;
+  margin-right: auto;
+  margin-top: 3%;
+  width: 7em;
+  height: 2em;
+}
+#adminEditCoachesList {
+  display: flex;
+  font-weight: bold;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.coachEditHeader {
+  margin-right: 15%;
+}
+#editCoachRow {
+  display: flex;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.coachEditRow {
+  margin-right: 15%;
+}
+table {
+  width: 60%;
+  margin: auto;
+}
+.tbleRow {
+  margin-right: 20%;
+}
+#coaches {
+  border-right: 1px solid darkslategray;
+  background-color: white;
 }
 
-.editSaveBtns{
-    margin-left: auto;
-    margin-right: auto;
-      width: 7em;
-    height: 2em;
-    padding-top: 3px;
-    padding-bottom: 3px;
+#coachesEdit {
+  border-bottom: 1px solid darkslategray;
+}
+#addMessageBtn {
+  margin-left: auto;
+  margin-right: auto;
+  width: 7em;
+  height: 2em;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin: auto;
 }
 
-.topLink{
-      float: right;
-      & a{
-        color:darkslategray;
-        text-decoration: none;
-        
-      }
+.editSaveBtns {
+  margin-left: auto;
+  margin-right: auto;
+  width: 7em;
+  height: 2em;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
-a:hover{
-    color: lightslategray;
-}
-#pageLinks{
-     float: right;
-     width: 5%;
-     margin-right: 20%;
-}
-.headerLinks{
-    color:darkslategray;
+
+.topLink {
+  float: right;
+  & a {
+    color: darkslategray;
     text-decoration: none;
-    margin-left: 10%;
-    font-size: 1.5em;
-   
+  }
 }
-
-
-
-
-
- 
+a:hover {
+  color: lightslategray;
+}
+#pageLinks {
+  float: right;
+  width: 5%;
+  margin-right: 20%;
+}
+.headerLinks {
+  color: darkslategray;
+  text-decoration: none;
+  margin-left: 10%;
+  font-size: 1.5em;
+}

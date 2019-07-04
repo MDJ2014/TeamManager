@@ -1,21 +1,21 @@
-.innerContainer{
-    width: 80%;
-    height: auto;
- margin-right: auto;
- margin-left: auto;
- margin-top: 3%;
- margin-bottom: 3%;
-    background-color: white;
- padding-top: 3%;
- padding-bottom: 3%;
- padding-right: 3%;
- padding-left: 3%;
-text-align: left;
-& h2{
+.innerContainer {
+  width: 80%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  background-color: white;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-right: 3%;
+  padding-left: 3%;
+  text-align: left;
+  & h2 {
     text-align: center;
+  }
 }
-}
-#licenseOuterContainer{
-    margin-bottom: 1%;
-    padding-bottom: 1%;
+#licenseOuterContainer {
+  margin-bottom: 1%;
+  padding-bottom: 1%;
 }

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 import logo from '../assets/citySeal.png';
@@ -8,374 +8,360 @@ import logo from '../assets/citySeal.png';
 
 
 class AllTeams extends Component {
-    constructor(props){
-      super(props);
-    
-      this.state = {
-        allTeams: '',
-          
-      };
-   
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      allTeams: '',
+
+    };
+
+  }
+
+
+  getResponse = async () => {
+    const response = await fetch('/teams', {
+      method: 'GET', headers: { 'Content-Type': 'application/json' }
+
+    });
+    const body = await response;
+    if (response.status !== 200)
+    //throw Error(body.message);
+    {
+
+    } else {
+      return body;
     }
 
 
-    getResponse = async()=>{
-        const response = await fetch('/teams',{method:'GET', headers:{'Content-Type': 'application/json'}
-      
+
+  }
+
+
+
+  componentDidMount() {
+
+    this.getResponse()
+      .then(data => data.json())
+      .then((data) => {
+        this.setState({ allTeams: data }, () => console.log("data fetched...", data))
       });
-        const body = await response;
-        if (response.status !== 200) 
-        //throw Error(body.message);
-        {
-    
-        } else{
-           return body; 
-        }
-  
-    
-    
-      }
+
+  }
 
 
 
-      componentDidMount(){
- 
-        this.getResponse()
-        .then(data => data.json())
-        .then((data) => { 
-          this.setState({ allTeams: data }, ()=>console.log("data fetched...", data)) 
-        }); 
-      
-       }
+  render() {
+
+
+
+    return (
+      <div id="allTeamsContainer">
+        <div id="allTeamsHeader">
+          <div id="teamHeaderTop">
+            <img src={logo} alt="city logo" height="100" width="100" />
+            <h2>Our Teams</h2>
+          </div>
+
+        </div>
+
+
+
+        <div className="bar2">
+          <div className="outer2">
+            <div className="mid2">Six Year Olds</div>
+            <div id="left" className="skewed2 bars" ></div>
+            <div className="skewed2 radial2 bars"></div>
+            <div className="skewed2 right2 bars"></div>
+          </div>
+        </div>
+
+
+
+
+        {this.state.allTeams ?
+          <div id="sixYearOlds" className="singleTeamContainer">
+
+            {this.state.allTeams.filter(function (team) {
+              return team.ageGroup === 6;
+            }).map(function (ageGroupTeam) {
+              return <div className="teamBody" key={ageGroupTeam._id}>
+                <Link to={{
+                  pathname: `/team/${ageGroupTeam._id}`,
+                  back: "/teams"
+
+                }} style={{ textDecoration: 'none' }}>
+                  <div className="teamImgContainer">
+                    <div className="teamImg">
+                      <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
+                    </div>
+                    <div className="teamImgName">{ageGroupTeam.teamName}</div>
+                  </div>
+                </Link>
+              </div>
+            })
+            }
+
+          </div>
+
+          : null}
+
+
+
+        <div className="bar2">
+          <div className="outer2">
+            <div className="mid2">Seven Year Olds</div>
+            <div id="left" className="skewed2 bars" ></div>
+            <div className="skewed2 radial2 bars"></div>
+            <div className="skewed2 right2 bars"></div>
+          </div>
+        </div>
+
+
+
+
+        {this.state.allTeams ?
+          <div id="sevenYearOlds" className="singleTeamContainer">
+
+            {this.state.allTeams.filter(function (team) {
+              return team.ageGroup === 7;
+            }).map(function (ageGroupTeam) {
+              return <div className="teamBody" key={ageGroupTeam._id}>
+                <Link to={{
+                  pathname: `/team/${ageGroupTeam._id}`,
+                  back: "/teams"
+
+                }} style={{ textDecoration: 'none' }}>
+                  <div className="teamImgContainer">
+                    <div className="teamImg">
+                      <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
+                    </div>
+                    <div className="teamImgName">{ageGroupTeam.teamName}</div>
+                  </div>
+                </Link>
+              </div>
+            })
+            }
+
+          </div>
+
+          : null}
+
+
+
+
+        <div className="bar2">
+          <div className="outer2">
+            <div className="mid2">Eight Year Olds</div>
+            <div id="left" className="skewed2 bars" ></div>
+            <div className="skewed2 radial2 bars"></div>
+            <div className="skewed2 right2 bars"></div>
+          </div>
+        </div>
+
+
+        {this.state.allTeams ?
+          <div id="eightYearOlds" className="singleTeamContainer">
+
+            {this.state.allTeams.filter(function (team) {
+              return team.ageGroup === 8;
+            }).map(function (ageGroupTeam) {
+              return <div className="teamBody" key={ageGroupTeam._id}>
+                <Link to={{
+                  pathname: `/team/${ageGroupTeam._id}`,
+                  back: "/teams"
+
+                }} style={{ textDecoration: 'none' }}>
+                  <div className="teamImgContainer">
+                    <div className="teamImg">
+                      <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
+                    </div>
+                    <div className="teamImgName">{ageGroupTeam.teamName}</div>
+                  </div>
+                </Link>
+              </div>
+            })
+            }
+
+          </div>
+
+          : null}
+
+
+        <div className="bar2">
+          <div className="outer2">
+            <div className="mid2">Nine Year Olds</div>
+            <div id="left" className="skewed2 bars" ></div>
+            <div className="skewed2 radial2 bars"></div>
+            <div className="skewed2 right2 bars"></div>
+          </div>
+        </div>
+
+
+
+
+        {this.state.allTeams ?
+          <div id="nineYearOlds" className="singleTeamContainer">
+
+            {this.state.allTeams.filter(function (team) {
+              return team.ageGroup === 9;
+            }).map(function (ageGroupTeam) {
+              return <div className="teamBody" key={ageGroupTeam._id}>
+                <Link to={{
+                  pathname: `/team/${ageGroupTeam._id}`,
+                  back: "/teams"
+
+                }} style={{ textDecoration: 'none' }}>
+                  <div className="teamImgContainer">
+                    <div className="teamImg">
+                      <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
+                    </div>
+                    <div className="teamImgName">{ageGroupTeam.teamName}</div>
+                  </div>
+                </Link>
+              </div>
+            })
+            }
+
+          </div>
+
+          : null}
+
+
+
+        <div className="bar2">
+          <div className="outer2">
+            <div className="mid2">Ten Year Olds</div>
+            <div id="left" className="skewed2 bars" ></div>
+            <div className="skewed2 radial2 bars"></div>
+            <div className="skewed2 right2 bars"></div>
+          </div>
+        </div>
 
 
 
 
 
+        {this.state.allTeams ?
+          <div id="tenYearOlds" className="singleTeamContainer">
 
-    render(){
-        
+            {this.state.allTeams.filter(function (team) {
+              return team.ageGroup === 10;
+            }).map(function (ageGroupTeam) {
+              return <div className="teamBody" key={ageGroupTeam._id}>
+                <Link to={{
+                  pathname: `/team/${ageGroupTeam._id}`,
+                  back: "/teams"
 
-    
-          return(
-  <div id="allTeamsContainer">
-    <div id="allTeamsHeader">
-      <div id="teamHeaderTop">
-<img src={logo} alt="city logo" height="100" width="100"/>
-        <h2>Our Teams</h2>
+                }} style={{ textDecoration: 'none' }}>
+                  <div className="teamImgContainer">
+                    <div className="teamImg">
+                      <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
+                    </div>
+                    <div className="teamImgName">{ageGroupTeam.teamName}</div>
+                  </div>
+                </Link>
+              </div>
+            })
+            }
+
+          </div>
+
+          : null}
+
+
+
+
+        <div className="bar2">
+          <div className="outer2">
+            <div className="mid2">Eleven Year Olds</div>
+            <div id="left" className="skewed2 bars" ></div>
+            <div className="skewed2 radial2 bars"></div>
+            <div className="skewed2 right2 bars"></div>
+          </div>
+        </div>
+
+
+
+
+
+        {this.state.allTeams ?
+          <div id="elevenYearOlds" className="singleTeamContainer">
+
+            {this.state.allTeams.filter(function (team) {
+              return team.ageGroup === 11;
+            }).map(function (ageGroupTeam) {
+              return <div className="teamBody" key={ageGroupTeam._id}>
+                <Link to={{
+                  pathname: `/team/${ageGroupTeam._id}`,
+                  back: "/teams"
+
+                }} style={{ textDecoration: 'none' }}>
+                  <div className="teamImgContainer">
+                    <div className="teamImg">
+                      <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
+                    </div>
+                    <div className="teamImgName">{ageGroupTeam.teamName}</div>
+                  </div>
+                </Link>
+              </div>
+            })
+            }
+
+          </div>
+
+          : null}
+
+
+
+        <div className="bar2">
+          <div className="outer2">
+            <div className="mid2">Twelve Year Olds</div>
+            <div id="left" className="skewed2 bars" ></div>
+            <div className="skewed2 radial2 bars"></div>
+            <div className="skewed2 right2 bars"></div>
+          </div>
+        </div>
+
+
+
+
+        {this.state.allTeams ?
+          <div id="twelveYearOlds" className="singleTeamContainer">
+
+            {this.state.allTeams.filter(function (team) {
+              return team.ageGroup === 12;
+            }).map(function (ageGroupTeam) {
+              return <div className="teamBody" key={ageGroupTeam._id}>
+                <Link to={{
+                  pathname: `/team/${ageGroupTeam._id}`,
+                  back: "/teams"
+
+                }} style={{ textDecoration: 'none' }}>
+                  <div className="teamImgContainer">
+                    <div className="teamImg">
+                      <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
+                    </div>
+                    <div className="teamImgName">{ageGroupTeam.teamName}</div>
+                  </div>
+                </Link>
+              </div>
+            })
+            }
+
+          </div>
+
+          : null}
+
+
+
       </div>
-        
-    </div>
 
- 
 
 
+    );
 
- <div className="bar2">
-  <div className="outer2">
-<div className="mid2">Six Year Olds</div>
-  <div id="left"className="skewed2 bars" ></div>
-  <div className="skewed2 radial2 bars"></div>
-  <div className="skewed2 right2 bars"></div>
-  </div>
-</div>
-
-
-  
-
-{this.state.allTeams? 
-  <div id="sixYearOlds" className="singleTeamContainer">
-
-{this.state.allTeams.filter(function(team){
-  return team.ageGroup === 6;
-}).map(function(ageGroupTeam){
-  return <div className="teamBody" key={ageGroupTeam._id}>
-  <Link to={{
-    pathname: `/team/${ageGroupTeam._id}`,
-    back:"/teams"
-    
-  }} style={{ textDecoration: 'none' }}>
-      <div className="teamImgContainer">
-  <div className="teamImg">
-  <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
-  </div>
-  <div className="teamImgName">{ageGroupTeam.teamName}</div>
-  </div>
- </Link>
-   </div>
-})
-}
-
- </div>
-
-:null}
-
-
-
-  <div className="bar2">
-  <div className="outer2">
-<div className="mid2">Seven Year Olds</div>
-  <div id="left"className="skewed2 bars" ></div>
-  <div className="skewed2 radial2 bars"></div>
-  <div className="skewed2 right2 bars"></div>
-  </div>
-</div>
-
-
-
- 
-{this.state.allTeams? 
-  <div id="sevenYearOlds" className="singleTeamContainer">
-
-{this.state.allTeams.filter(function(team){
-  return team.ageGroup === 7;
-}).map(function(ageGroupTeam){
-  return <div className="teamBody" key={ageGroupTeam._id}>
-  <Link to={{
-    pathname: `/team/${ageGroupTeam._id}`,
-    back:"/teams"
-    
-  }} style={{ textDecoration: 'none' }}>
-      <div className="teamImgContainer">
-  <div className="teamImg">
-  <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
-  </div>
-  <div className="teamImgName">{ageGroupTeam.teamName}</div>
-  </div>
- </Link>
-   </div>
-})
-}
-
- </div>
-
-:null}
-
-
-
-
-  <div className="bar2">
-  <div className="outer2">
-<div className="mid2">Eight Year Olds</div>
-  <div id="left"className="skewed2 bars" ></div>
-  <div className="skewed2 radial2 bars"></div>
-  <div className="skewed2 right2 bars"></div>
-  </div>
-</div>
-
-
-{this.state.allTeams? 
-  <div id="eightYearOlds" className="singleTeamContainer">
-
-{this.state.allTeams.filter(function(team){
-  return team.ageGroup === 8;
-}).map(function(ageGroupTeam){
-  return <div className="teamBody" key={ageGroupTeam._id}>
-   <Link to={{
-    pathname: `/team/${ageGroupTeam._id}`,
-    back:"/teams"
-    
-  }} style={{ textDecoration: 'none' }}>
-      <div className="teamImgContainer">
-  <div className="teamImg">
-  <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
-  </div>
-  <div className="teamImgName">{ageGroupTeam.teamName}</div>
-  </div>
- </Link>
-   </div>
-})
-}
-
- </div>
-
-:null}
-
-
- <div className="bar2">
-  <div className="outer2">
-<div className="mid2">Nine Year Olds</div>
-  <div id="left"className="skewed2 bars" ></div>
-  <div className="skewed2 radial2 bars"></div>
-  <div className="skewed2 right2 bars"></div>
-  </div>
-</div>
-
-
-
- 
-{this.state.allTeams? 
-  <div id="nineYearOlds" className="singleTeamContainer">
-
-{this.state.allTeams.filter(function(team){
-  return team.ageGroup === 9;
-}).map(function(ageGroupTeam){
-  return <div className="teamBody" key={ageGroupTeam._id}>
-   <Link to={{
-    pathname: `/team/${ageGroupTeam._id}`,
-    back:"/teams"
-    
-  }} style={{ textDecoration: 'none' }}>
-      <div className="teamImgContainer">
-  <div className="teamImg">
-  <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
-  </div>
-  <div className="teamImgName">{ageGroupTeam.teamName}</div>
-  </div>
- </Link>
-   </div>
-})
-}
-
- </div>
-
-:null}
-
-
-
-
-
-
-
-
-
-
-  <div className="bar2">
-  <div className="outer2">
-<div className="mid2">Ten Year Olds</div>
-  <div id="left"className="skewed2 bars" ></div>
-  <div className="skewed2 radial2 bars"></div>
-  <div className="skewed2 right2 bars"></div>
-  </div>
-</div>
-
-
-
-
-  
-{this.state.allTeams? 
-  <div id="tenYearOlds" className="singleTeamContainer">
-
-{this.state.allTeams.filter(function(team){
-  return team.ageGroup === 10;
-}).map(function(ageGroupTeam){
-  return <div className="teamBody" key={ageGroupTeam._id}>
-   <Link to={{
-    pathname: `/team/${ageGroupTeam._id}`,
-    back:"/teams"
-    
-  }} style={{ textDecoration: 'none' }}>
-      <div className="teamImgContainer">
-  <div className="teamImg">
-  <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
-  </div>
-  <div className="teamImgName">{ageGroupTeam.teamName}</div>
-  </div>
- </Link>
-   </div>
-})
-}
-
- </div>
-
-:null}
-
-
-
-
-  <div className="bar2">
-  <div className="outer2">
-<div className="mid2">Eleven Year Olds</div>
-  <div id="left"className="skewed2 bars" ></div>
-  <div className="skewed2 radial2 bars"></div>
-  <div className="skewed2 right2 bars"></div>
-  </div>
-</div>
-
-
-
-
- 
-{this.state.allTeams? 
-  <div id="elevenYearOlds" className="singleTeamContainer">
-
-{this.state.allTeams.filter(function(team){
-  return team.ageGroup === 11;
-}).map(function(ageGroupTeam){
-  return <div className="teamBody" key={ageGroupTeam._id}>
-   <Link to={{
-    pathname: `/team/${ageGroupTeam._id}`,
-    back:"/teams"
-    
-  }} style={{ textDecoration: 'none' }}>
-      <div className="teamImgContainer">
-  <div className="teamImg">
-  <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
-  </div>
-  <div className="teamImgName">{ageGroupTeam.teamName}</div>
-  </div>
- </Link>
-   </div>
-})
-}
-
- </div>
-
-:null}
-
-
-
-  <div className="bar2">
-  <div className="outer2">
-<div className="mid2">Twelve Year Olds</div>
-  <div id="left"className="skewed2 bars" ></div>
-  <div className="skewed2 radial2 bars"></div>
-  <div className="skewed2 right2 bars"></div>
-  </div>
-</div>
-
-
-
- 
-{this.state.allTeams? 
-  <div id="twelveYearOlds" className="singleTeamContainer">
-
-{this.state.allTeams.filter(function(team){
-  return team.ageGroup === 12;
-}).map(function(ageGroupTeam){
-  return <div className="teamBody" key={ageGroupTeam._id}>
-   <Link to={{
-    pathname: `/team/${ageGroupTeam._id}`,
-    back:"/teams"
-    
-  }} style={{ textDecoration: 'none' }}>
-      <div className="teamImgContainer">
-  <div className="teamImg">
-  <img className="center" src={`/images/${ageGroupTeam.logo}.png`}></img>
-  </div>
-  <div className="teamImgName">{ageGroupTeam.teamName}</div>
-  </div>
- </Link>
-   </div>
-})
-}
-
- </div>
-
-:null}
-
-
-
-
-
-
-  </div>
-  
- 
-
-          );
-
-    }
+  }
 
 }
 

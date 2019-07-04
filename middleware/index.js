@@ -2,62 +2,62 @@ var User = require('../models/userModel').User;
 
 
 
-function loggedOut(req,res,next){
-    if(req.session && req.session.userId){
+function loggedOut(req, res, next) {
+    if (req.session && req.session.userId) {
         return res.redirect('/users/profile');
     }
     next();
 }
 
-function requiresLogin(req,res,next){
-if(req.session && req.session.userId){
-return next();
-}else{
-    var err = new Error("Must be logged in to view this page.");
-    err.status = 401;
-    return next(err);
-}
-
-}
-
-function requiresAdmin(req,res,next){
-var type = "";
-    User.findById(req.session.userId, function(err,doc){
-      if(err) return next(err);
-      type = doc.userType;
-
- if(req.session && req.session.userId && type == "Admin"){
-    return next();
-    }else{
-        var err = new Error("Must be logged in as administrator to view this page.");
+function requiresLogin(req, res, next) {
+    if (req.session && req.session.userId) {
+        return next();
+    } else {
+        var err = new Error("Must be logged in to view this page.");
         err.status = 401;
         return next(err);
     }
-    
-      
-    });
-   
-    }
 
+}
 
-    function requiresMod(req,res,next){
-        var type = "";
-            User.findById(req.session.userId, function(err,doc){
-              if(err) return next(err);
-              type = doc.userType;
-        
-         if(req.session && req.session.userId && type == "Admin" || type == "Mod"){
+function requiresAdmin(req, res, next) {
+    var type = "";
+    User.findById(req.session.userId, function (err, doc) {
+        if (err) return next(err);
+        type = doc.userType;
+
+        if (req.session && req.session.userId && type == "Admin") {
             return next();
-            }else{
-                var err = new Error("Must be logged in as moderator or administrator to view this page.");
-                err.status = 401;
-                return next(err);
-            }
-            
-              
-            });
-           
-            }
+        } else {
+            var err = new Error("Must be logged in as administrator to view this page.");
+            err.status = 401;
+            return next(err);
+        }
+
+
+    });
+
+}
+
+
+function requiresMod(req, res, next) {
+    var type = "";
+    User.findById(req.session.userId, function (err, doc) {
+        if (err) return next(err);
+        type = doc.userType;
+
+        if (req.session && req.session.userId && type == "Admin" || type == "Mod") {
+            return next();
+        } else {
+            var err = new Error("Must be logged in as moderator or administrator to view this page.");
+            err.status = 401;
+            return next(err);
+        }
+
+
+    });
+
+}
 
 
 
