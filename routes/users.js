@@ -11,12 +11,13 @@ var mid = require('../middleware');
 
 /* GET users listing. */
 //mid.requiresAdmin
-router.get('/', function (req, res, next) {
+router.get('/',mid.requiresAdmin, function (req, res, next) {
   User.find({})
     .sort({ "name.lastName": 1 })
     .exec(
       function (err, users) {
         if (err) return next(err);
+        res.status(200);
         res.json(users);
 
       });
@@ -25,17 +26,17 @@ router.get('/', function (req, res, next) {
 
 
 
-/*Get registration page mid.loggedOut */
-router.get('/register', function (req, res, next) {
+/*Get registration page  */
+router.get('/register', mid.loggedOut, function (req, res, next) {
 
-  res.json({ title: "register" });
+  res.json({loggedIn: false});
 
 });
 
 /*User Login */
-/*Get form  mid.loggedOut*/
-router.get('/login', function (req, res, next) {
-  res.json({ title: "login" });
+
+router.get('/login',mid.loggedOut, function (req, res, next) {
+  res.json({ loggedIn: false });
 
 });
 
@@ -52,8 +53,8 @@ router.get('/logout', function (req, res, next) {
   }
 });
 
-
-router.get('/profile', function (req, res, next) {
+/** ,mid.requiresLogin*/
+router.get('/profile',mid.requiresLogin, function (req, res, next) {
   var profileData = {
     userData: "",
     playerData: ""
@@ -85,12 +86,23 @@ router.get('/user', mid.requiresLogin, function (req, res, next) {
       if (err) return next(err);
       res.status(200);
       res.json(user);
-      //render update form and delete
+     
     });
 });
 
+
+router.get('/user/admin',mid.requiresMod, function(req,res,next){
+
+  res.status(200);
+  res.json({admin: true});
+
+})
+
+
+
+
 /** , mid.requiresLogin*/
-router.get('/coaches', function (req, res, next) {
+router.get('/coaches', mid.requiresLogin, function (req, res, next) {
   User.find({ "userType": "Coach" })
     .populate("position.team")
     .exec(function (err, user) {

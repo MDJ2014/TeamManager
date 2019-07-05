@@ -10,7 +10,7 @@ var mid = require('../middleware');
 
 
 /* GET all games. */
-router.get('/', function (req, res, next) {
+router.get('/',  mid.requiresLogin, function (req, res, next) {
     Game.find({})
         .exec(
             function (err, games) {
@@ -21,8 +21,8 @@ router.get('/', function (req, res, next) {
             });
 });
 
-/*Get Team Games / Schedule   , mid.requiresLogin        */
-router.get('/team/:id', function (req, res, next) {
+/*Get Team Games / Schedule          */
+router.get('/team/:id',  mid.requiresLogin, function (req, res, next) {
 
     var teamId = req.params.id;
     Game.find().or([{ homeTeam: teamId }, { awayTeam: teamId }])
@@ -41,7 +41,7 @@ router.get('/team/:id', function (req, res, next) {
 
 
 /*Post a new game , mid.requiresMod, */
-router.post('/', function (req, res, next) {
+router.post('/', mid.requiresMod, function (req, res, next) {
     var game = new Game(req.body);
 
     game.save(function (err, game) {
@@ -54,7 +54,7 @@ router.post('/', function (req, res, next) {
 
 
 /*update game , mid.requiresMod*/
-router.put('/game/:id', function (req, res, next) {
+router.put('/game/:id', mid.requiresMod, function (req, res, next) {
 
     var newData = req.body;
 

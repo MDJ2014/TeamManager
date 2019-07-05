@@ -49,15 +49,16 @@ class AdminEditHome extends Component {
             deleteAnnouncement: false,
 
             minorAnnouncementSuccess: "",
-            minorAnnouncementDelete: ""
+            minorAnnouncementDelete: "",
+
+            access: ""
 
 
         }
 
 
         this.handleChange = this.handleChange.bind(this);
-        this.calloutEdit = this.calloutEdit.bind(this);
-        this.clickCalloutDelete = this.clickCalloutDelete.bind(this);
+         this.clickCalloutDelete = this.clickCalloutDelete.bind(this);
         this.addMinorCallout = this.addMinorCallout.bind(this);
         this.handleHeaderSubmit = this.handleHeaderSubmit.bind(this);
         this.setSuccessMessage = this.setSuccessMessage.bind(this);
@@ -78,15 +79,45 @@ class AdminEditHome extends Component {
     }
 
 
-    getResponse = async () => {
-        const response = await fetch('/home', {
-            method: 'GET', headers: { 'Content-Type': 'application/json' }
+  
+  
+getResponse = async() =>{
+    fetch('/home/admin', {
+      method: 'GET', headers: { 'Content-Type': 'application/json' }
+    
+    })
 
+
+
+    .then(res =>{
+      if(res.status !==200){
+        this.setState({access: 'denied'})
+      }else{
+        return res.json();
+    
+      }
+    })
+
+   
+
+
+    .then(data => {
+        const receivedData = data;
+        this.setState({
+            data: receivedData, pageHeader: receivedData.header, mainAnnouncementTitle: receivedData.mainAnnouncement.title,
+            welcome: receivedData.welcome, mainAnnouncementBody: receivedData.mainAnnouncement.body,
+            mainAnnouncementLink: receivedData.mainAnnouncement.link, mainCalloutTitle: receivedData.mainCallOut.title,
+            mainCalloutBody: receivedData.mainCallOut.body, mainCalloutLink: receivedData.mainCallOut.link, announcements: receivedData.announcements, callOuts: receivedData.callsToAction, notice: receivedData.notice
         });
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
-    }
+
+
+
+
+
+    })
+    .catch(error => this.setState({error})
+      )
+  }
 
     componentDidMount() {
         this.componentRerender();
@@ -95,16 +126,8 @@ class AdminEditHome extends Component {
 
 
     componentRerender() {
-        this.getResponse()
-            .then(res => {
-                const receivedData = res;
-                this.setState({
-                    data: receivedData, pageHeader: receivedData.header, mainAnnouncementTitle: receivedData.mainAnnouncement.title,
-                    welcome: receivedData.welcome, mainAnnouncementBody: receivedData.mainAnnouncement.body,
-                    mainAnnouncementLink: receivedData.mainAnnouncement.link, mainCalloutTitle: receivedData.mainCallOut.title,
-                    mainCalloutBody: receivedData.mainCallOut.body, mainCalloutLink: receivedData.mainCallOut.link, announcements: receivedData.announcements, callOuts: receivedData.callsToAction, notice: receivedData.notice
-                });
-            });
+        this.getResponse();
+   
     }
 
 
@@ -453,7 +476,8 @@ class AdminEditHome extends Component {
         const homePageData = this.state.data;
 
         return (
-
+            <div>
+            {this.state.access === 'denied'? <h5>Requires Admin</h5> : 
             <div id="adminEditHomeContainer">
                 <div id="adminEditHomeHeader">
                     <h2>Home Page Edit</h2>
@@ -867,7 +891,8 @@ class AdminEditHome extends Component {
 
 
             </div>
-
+            }
+</div>
         );
 
     }

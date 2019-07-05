@@ -1,6 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var mid = require('../middleware');
 var HomePage = require('../models/homepageModel').HomePage;
+
+
+
+
+
 /* GET home page. */
 
 router.get('/', function (req, res, next) {
@@ -24,7 +30,25 @@ router.get('/home', function (req, res, next) {
 
 });
 
-router.put('/home/about/edit', function (req, res, next) {
+router.get('/home/admin', mid.requiresAdmin, function (req, res, next) {
+  HomePage.find({})
+    .sort({ datePosted: -1 })
+    .exec(function (err, pages) {
+      if (err) return next(err);
+      var page = pages[0];
+
+      res.status(200);
+
+
+      return res.json(page);
+    });
+
+});
+
+
+
+
+router.put('/home/about/edit', mid.requiresAdmin,  function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
@@ -49,7 +73,7 @@ router.get('/contact', function (req, res, next) {
 });
 
 
-router.post('/home', function (req, res, next) {
+router.post('/home',mid.requiresAdmin, function (req, res, next) {
   let pageData = {
     header: req.body.header,
     welcome: req.body.welcome,
@@ -67,7 +91,7 @@ router.post('/home', function (req, res, next) {
 
 });
 
-router.put('/home/header/edit', function (req, res, next) {
+router.put('/home/header/edit',mid.requiresAdmin, function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
@@ -83,7 +107,7 @@ router.put('/home/header/edit', function (req, res, next) {
 
 
 
-router.put('/home/welcome/edit', function (req, res, next) {
+router.put('/home/welcome/edit',mid.requiresAdmin, function (req, res, next) {
 
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
@@ -100,7 +124,7 @@ router.put('/home/welcome/edit', function (req, res, next) {
     });
 });
 
-router.put('/home/main-announcement/edit', function (req, res, next) {
+router.put('/home/main-announcement/edit',mid.requiresAdmin,function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
@@ -114,7 +138,7 @@ router.put('/home/main-announcement/edit', function (req, res, next) {
     });
 });
 
-router.put('/home/main-callout/edit', function (req, res, next) {
+router.put('/home/main-callout/edit',mid.requiresAdmin, function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
@@ -128,7 +152,7 @@ router.put('/home/main-callout/edit', function (req, res, next) {
     });
 });
 
-router.put('/home/notice/edit', function (req, res, next) {
+router.put('/home/notice/edit',mid.requiresAdmin, function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
@@ -143,21 +167,21 @@ router.put('/home/notice/edit', function (req, res, next) {
 });
 
 
-router.put('/home/license/edit', function (req, res, next) {
+router.put('/home/license/edit',mid.requiresAdmin,function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
       page.update({ $set: { "license": req.body.license } })
         .exec(function (err, doc) {
           if (err) return next(err);
-          res.status(200);
+          res.status(201);
           res.json(doc);
 
         });
     });
 });
 
-router.put('/home/terms/edit', function (req, res, next) {
+router.put('/home/terms/edit',mid.requiresAdmin, function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
@@ -171,7 +195,7 @@ router.put('/home/terms/edit', function (req, res, next) {
     });
 });
 
-router.put('/home/privacy/edit', function (req, res, next) {
+router.put('/home/privacy/edit',mid.requiresAdmin, function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
@@ -187,7 +211,7 @@ router.put('/home/privacy/edit', function (req, res, next) {
 
 
 
-router.put('/home/contact/edit', function (req, res, next) {
+router.put('/home/contact/edit',mid.requiresAdmin, function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, page) {
       if (err) return next(err);
@@ -205,7 +229,7 @@ router.put('/home/contact/edit', function (req, res, next) {
 
 
 
-router.put('/home/announcements/add', function (req, res, next) {
+router.put('/home/announcements/add',mid.requiresAdmin, function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, doc) {
       if (err) return next(err);
@@ -221,7 +245,7 @@ router.put('/home/announcements/add', function (req, res, next) {
 
 
 
-router.put('/home/calls-to-action/add', function (req, res, next) {
+router.put('/home/calls-to-action/add',mid.requiresAdmin, function (req, res, next) {
   HomePage.findById(req.body.id)
     .exec(function (err, doc) {
       if (err) return next(err);
@@ -242,7 +266,7 @@ router.put('/home/calls-to-action/add', function (req, res, next) {
 
 
 
-router.put('/home/calls-to-action/edit', function (req, res, next) {
+router.put('/home/calls-to-action/edit',mid.requiresAdmin,function (req, res, next) {
   HomePage.updateOne({ _id: req.body.id, "callsToAction._id": req.body.ctaId },
 
     { $set: { "callsToAction.$.title": req.body.callsToAction.title, "callsToAction.$.body": req.body.callsToAction.body, "callsToAction.$.link": req.body.link } }
@@ -256,7 +280,7 @@ router.put('/home/calls-to-action/edit', function (req, res, next) {
 })
 
 
-router.put('/home/announcements/edit', function (req, res, next) {
+router.put('/home/announcements/edit',mid.requiresAdmin, function (req, res, next) {
   HomePage.updateOne({ _id: req.body.id, "announcements._id": req.body.anId },
     { $set: { "announcements.$.title": req.body.announcements.title, "announcements.$.body": req.body.announcements.body, "announcements.$.link": req.body.announcements.link } }
 
@@ -272,7 +296,7 @@ router.put('/home/announcements/edit', function (req, res, next) {
 
 
 
-router.delete('/home/announcements/delete', function (req, res, next) {
+router.delete('/home/announcements/delete',mid.requiresAdmin, function (req, res, next) {
   HomePage.findByIdAndUpdate(req.body.id, { $pull: { announcements: { _id: req.body.anId } } }, { new: true })
     .exec(function (err, doc) {
       if (err) return next(err);
@@ -281,7 +305,7 @@ router.delete('/home/announcements/delete', function (req, res, next) {
     });
 });
 
-router.delete('/home/calls-to-action/delete', function (req, res, next) {
+router.delete('/home/calls-to-action/delete',mid.requiresAdmin, function (req, res, next) {
   HomePage.findByIdAndUpdate(req.body.id, { $pull: { callsToAction: { _id: req.body.ctaId } } }, { new: true })
     .exec(function (err, doc) {
       if (err) return next(err);

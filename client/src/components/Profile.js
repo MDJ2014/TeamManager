@@ -1,9 +1,7 @@
 
 import React, { Component } from 'react';
-
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom';
 import Players from '../components/Players';
-import { Link } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader';
 import PlayerForm from '../components/PlayerForm';
 import Address from '../components/Address';
@@ -16,8 +14,9 @@ class Profile extends Component {
       pageLoading: true,
       profileData: "",
       playerSet: "",
-      playerToEdit: ""
-
+      playerToEdit: "",
+      redirect: false,
+      error: null
 
     }
 
@@ -27,6 +26,7 @@ class Profile extends Component {
     this.handleSavedUpdate = this.handleSavedUpdate.bind(this);
     this.getLogos = this.getLogos.bind(this);
     this.componentRerender = this.componentRerender.bind(this);
+  
   }
 
 
@@ -36,34 +36,46 @@ class Profile extends Component {
     };
   }
 
-  getResponse = async () => {
-    const response = await fetch('/users/profile', {
+ 
+  getResponse =async()=>{
+    const response = await fetch('/users/profile',{
       method: 'GET', headers: { 'Content-Type': 'application/json' }
-
     });
     const body = await response;
-    if (response.status !== 200)
-    //throw Error(body.message);
-    {
-
-
-
-    } else {
-      return body;
+    if(response.status !== 200){
+      throw Error(body.message)
     }
+    return body;
   }
+ 
+
+
 
 
   componentDidMount() {
 
-    // fetch('/users/profile')
-    this.getResponse()
-      .then(data => data.json())
-      .then((data) => {
-        this.setState({ profileData: data })
-      });
+  
+fetch('/users/profile', {
+  method: 'GET', headers: { 'Content-Type': 'application/json' }
 
+})
+.then(response =>{
+  if(response.ok){
+    return response.json();
+  }else{
+
+   throw new Error('You must be logged in to view this page');
   }
+})
+.then(data => this.setState({profileData: data}))
+.catch(error => this.setState({error, redirect: true})
+  )
+  }
+
+
+
+
+
 
   componentRerender() {
     this.getResponse()
@@ -159,12 +171,15 @@ class Profile extends Component {
 
 
   render() {
+ 
 
+   {if(this.state.redirect){return <Redirect to='/'/>}}
     let pageData = this.state.profileData.userData;
     let playerData = this.state.profileData.playerData;
     let teamLogos = this.getLogos();
 
     return (<div>
+   
       {pageData ?
 
 
@@ -249,20 +264,23 @@ class Profile extends Component {
 
             :
 
-            null
+          null
           }
           <section id="myPlayers">
             <div id="playersContainer">
-              {pageData ?
+              {pageData?
                 playerData.map((item) => {
                   return this.renderItemOrEditItem(item);
                 }, this)
-                : <h6>Loading....</h6>}
+                :null
+                }
             </div>
           </section>
 
         </div>
-        : null}
+        : 
+        <h5>You must be logged in to view this page</h5>
+        }
     </div>
     );
   }

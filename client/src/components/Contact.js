@@ -15,6 +15,7 @@ class Contact extends Component {
       zip: "",
       phone: "",
       email: "",
+      access:""
     }
 
 
@@ -22,7 +23,7 @@ class Contact extends Component {
   }
 
   getResponse = async () => {
-    const response = await fetch('/home', {
+    const response = await fetch('/home/admin', {
       method: 'GET', headers: { 'Content-Type': 'application/json' }
 
     });
@@ -30,6 +31,14 @@ class Contact extends Component {
     if (response.status !== 200) throw Error(body.message);
     return body;
   }
+
+
+
+
+ 
+
+
+
 
   componentDidMount() {
     this.getResponse()
@@ -53,6 +62,7 @@ class Contact extends Component {
 
     return (
 
+      
       <div id="contactContainer">
 
 
@@ -70,7 +80,6 @@ class Contact extends Component {
         </div>
 
       </div>
-
 
 
     );

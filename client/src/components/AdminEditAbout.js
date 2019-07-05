@@ -11,28 +11,69 @@ class AdminEditTerms extends Component {
       page: "",
       about: "",
       saveSuccess: "",
-      errorMessage: ""
+      errorMessage: "",
+      access: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  getResponse = async () => {
-    const response = await fetch('/home', {
-      method: 'GET', headers: { 'Content-Type': 'application/json' }
 
-    });
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
+  // getResponse = async () => {
+  //   const response = await fetch('/home/admin', {
+  //     method: 'GET', headers: { 'Content-Type': 'application/json' }
+
+  //   });
+  //   const body = await response.json();
+  //   if (response.status !== 200) throw Error(body.message);
+  //   return body;
+  // }
+
+
+  getResponse = async() =>{
+    fetch('/home/admin', {
+      method: 'GET', headers: { 'Content-Type': 'application/json' }
+    
+    })
+
+
+
+    .then(res =>{
+      if(res.status !== 200){
+       this.setState({access: 'denied'})
+      }else{
+        return res.json();
+    
+      }
+    })
+
+
+
+
+    .then(data => {
+
+      const receivedData = data;
+      this.setState({ page: receivedData._id, about: receivedData.about });
+    })
+    .catch(error => this.setState({error})
+      )
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
   componentDidMount() {
-    this.getResponse()
-      .then(res => {
-        const receivedData = res;
-        this.setState({ page: receivedData._id, about: receivedData.about });
-      });
+    this.getResponse();
+  
   }
 
 
@@ -79,8 +120,8 @@ class AdminEditTerms extends Component {
   render() {
     return (<div>
 
-
-
+{this.state.access === "denied"?<h5>Requires Admin</h5>: 
+<div>
       <h2>Edit About</h2>
       <form onSubmit={this.handleSubmit}>
         <textarea id="privacyInput" type="textarea" name="about" value={this.state.about} onChange={this.handleChange} placeholder="Enter About message" rows="15" cols="150">
@@ -98,11 +139,13 @@ class AdminEditTerms extends Component {
 
       </form>
 
+</div>
+}
 
 
-
-
-    </div>);
+    </div>
+    
+    );
   }
 
 

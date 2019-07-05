@@ -28,7 +28,8 @@ class Register extends Component {
       emailValid: false,
       userNameValid: false,
       passwordValid: false,
-      confirmPasswordValid: false
+      confirmPasswordValid: false,
+      redirect: false
 
     };
 
@@ -39,6 +40,7 @@ class Register extends Component {
     this.validatePassword = this.validatePassword.bind(this);
   }
 
+  /*
   getResponse = async () => {
     const response = await fetch('/users/register');
     const body = await response.json();
@@ -53,6 +55,31 @@ class Register extends Component {
         this.setState({ renderedResponse: data.title });
       })
   }
+*/
+
+componentDidMount() {
+
+  
+  fetch('/users/register', {
+    method: 'GET', headers: { 'Content-Type': 'application/json' }
+  
+  })
+  .then(response =>{
+    if(response.ok){
+      return response.json();
+    }else{
+  
+     throw new Error('You must be logged in to view this page');
+    }
+  })
+  .then(data => this.setState({renderedResponse: data.loggedIn, redirect: false}))
+  .catch(error => this.setState({error, redirect: true})
+    )
+    }
+
+
+
+
 
 
   handleChange(event) {
@@ -148,11 +175,8 @@ class Register extends Component {
 
 
   render() {
-    const { redirect } = this.state;
-
-    if (redirect) {
-      return <Redirect to='/profile' />;
-    }
+    {if(this.state.redirect){return <Redirect to='/profile'/>}}
+ 
 
     return (
 

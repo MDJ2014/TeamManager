@@ -17,10 +17,13 @@ class AdminEditLicense extends Component {
       saveSuccess: "",
       errorMessage: "",
       typographer: true,
-      linkify: true
+      linkify: true,
+      access: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.setSuccessMessage = this.setSuccessMessage.bind(this);
+
   }
 
   getResponse = async () => {
@@ -54,33 +57,49 @@ class AdminEditLicense extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-
-    //  var markedLicense =md.render(this.state.license);
-
+ 
     const body = JSON.stringify({
       id: this.state.page,
-      // license: markedLicense
-      license: this.state.license
+     license: this.state.license
     });
 
     const headers = { 'content-type': 'application/json', accept: 'application/json' };
 
+   
     await fetch('/home/license/edit', { method: 'PUT', headers, body })
-      .then((res) => this.setState({ saveSuccess: res }))
-      .then(this.setSuccessMessage('saveSuccess'))
-      .catch(function (response) {
-        this.setState({ errorMessage: response.message })
-      })
+    .then((res) =>{
+     
+      if(res.status !== 201){
  
+        this.setState({access: res})
+       
+      }else{
+   
+        this.setState({ saveSuccess: res })
+      }
+
+    })
+    .then(this.setSuccessMessage())
+    .catch(function (response) {
+      this.setState({ errorMessage: response.message })
+    })
   }
 
 
-  setSuccessMessage(item) {
+  setSuccessMessage() {
+   
+    var msg ="";
+    if(!this.state.saveSuccess){
+      msg = "access";
+    }else if(!this.state.access){
+      msg = "saveSuccess";
+    }
+  
     setTimeout(() => {
       this.setState({
-        [item]: ''
+        [msg]: ''
       });
-    }, 3000)
+    }, 2000)
   }
 
 
@@ -103,6 +122,7 @@ class AdminEditLicense extends Component {
             <h6>License Agreement Saved</h6>
             :
             null}
+            {this.state.access? <h6>Access Denied</h6>:null}
         </div>
 
       </form>

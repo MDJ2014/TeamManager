@@ -11,6 +11,7 @@ class AdminEditTerms extends Component {
       page: "",
       terms: "",
       saveSuccess: "",
+      access:"",
       errorMessage: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,8 +58,18 @@ class AdminEditTerms extends Component {
     const headers = { 'content-type': 'application/json', accept: 'application/json' };
 
     await fetch('/home/terms/edit', { method: 'PUT', headers, body })
-      .then((res) => this.setState({ saveSuccess: res }))
-      .then(this.setSuccessMessage('saveSuccess'))
+      .then((res) => {
+        
+      if(res.status !== 200){
+ 
+        this.setState({access: res})
+       
+      }else{
+   
+        this.setState({ saveSuccess: res })
+      }
+      })
+      .then(this.setSuccessMessage())
       .catch(function (response) {
         this.setState({ errorMessage: response.message })
       })
@@ -66,12 +77,18 @@ class AdminEditTerms extends Component {
   }
 
 
-  setSuccessMessage(item) {
+  setSuccessMessage() {
+    var msg ="";
+    if(!this.state.saveSuccess){
+      msg = "access";
+    }else if(!this.state.access){
+      msg = "saveSuccess";
+    }
     setTimeout(() => {
       this.setState({
-        [item]: ''
+        [msg]: ''
       });
-    }, 3000)
+    }, 2000)
   }
 
 
@@ -90,10 +107,11 @@ class AdminEditTerms extends Component {
             Save
          </button>
 
-          {this.state.saveSuccess ?
-            <h6>Terms of use saved</h6>
+         {this.state.saveSuccess ?
+            <h6>Terms Agreement Saved</h6>
             :
             null}
+            {this.state.access? <h6>Access Denied</h6>:null}
         </div>
 
       </form>

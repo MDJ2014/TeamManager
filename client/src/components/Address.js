@@ -57,7 +57,14 @@ class Address extends Component {
     const headers = { 'content-type': 'application/json', accept: 'application/json' };
 
     await fetch('/users/address', { method: 'PUT', headers, body })
-      .then((res) => this.props.reRender())
+    .then((res)=>this.setState({
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      phone: ""
+    }))
+      .then(this.props.reRender())
       .catch(function (response) {
         //this.setState({error:true, errmsg: error});
         //console.log(response.data)

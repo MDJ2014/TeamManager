@@ -16,34 +16,84 @@ class AdminEditContact extends Component {
       phone: "",
       email: "",
       saveSuccess: "",
-      errorMessage: ""
+      errorMessage: "",
+      access:""
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setSuccessMessage = this.setSuccessMessage.bind(this);
   }
 
-  getResponse = async () => {
-    const response = await fetch('/home', {
+  // getResponse = async () => {
+  //   const response = await fetch('/home', {
+  //     method: 'GET', headers: { 'Content-Type': 'application/json' }
+
+  //   });
+  //   const body = await response.json();
+  //   if (response.status !== 200) throw Error(body.message);
+  //   return body;
+  // }
+
+  getResponse = async() =>{
+    fetch('/home/admin', {
       method: 'GET', headers: { 'Content-Type': 'application/json' }
+    
+    })
 
-    });
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  }
 
-  componentDidMount() {
-    this.getResponse()
-      .then(res => {
-        const receivedData = res;
+
+    .then(res =>{
+      if(res.status !== 200){
+       this.setState({access: 'denied'})
+      }else{
+        return res.json();
+    
+      }
+    })
+
+
+
+
+    .then(data => {
+
+      const receivedData = data;
         if (receivedData.contact) {
           this.setState({ page: receivedData._id, street: receivedData.contact.street, city: receivedData.contact.city, state: receivedData.contact.state, zip: receivedData.contact.zip, phone: receivedData.contact.phone, email: receivedData.contact.email });
         } else {
           this.setState({ page: receivedData._id });
         }
 
-      });
+
+    })
+    .catch(error => this.setState({error})
+      )
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  componentDidMount() {
+    this.getResponse();
+      // .then(res => {
+      //   const receivedData = res;
+      //   if (receivedData.contact) {
+      //     this.setState({ page: receivedData._id, street: receivedData.contact.street, city: receivedData.contact.city, state: receivedData.contact.state, zip: receivedData.contact.zip, phone: receivedData.contact.phone, email: receivedData.contact.email });
+      //   } else {
+      //     this.setState({ page: receivedData._id });
+      //   }
+
+      // });
   }
 
 
@@ -95,7 +145,11 @@ class AdminEditContact extends Component {
 
 
   render() {
-    return (<div>
+    return (
+    
+      <div>
+      {this.state.access === "denied"? <h5>Requires Admin</h5>:
+    <div>
 
 
 
@@ -137,7 +191,11 @@ class AdminEditContact extends Component {
 
 
 
-    </div>);
+    </div>
+      }
+    </div>
+    
+    );
   }
 
 

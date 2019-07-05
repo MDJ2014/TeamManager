@@ -21,7 +21,8 @@ class LogIn extends Component {
       errmsg: "",
       emailValid: false,
       passwordValid: false,
-      formValid: false
+      formValid: false,
+      redirect: false
 
 
     };
@@ -31,20 +32,50 @@ class LogIn extends Component {
     this.validate = this.validate.bind(this);
   }
 
-  getResponse = async () => {
-    const response = await fetch('/users/login');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  }
-
-
 
   componentDidMount() {
 
-    this.setState({ renderedResponse: this.props.type });
+   
+  
+    fetch('/users/login', {
+      method: 'GET', headers: { 'Content-Type': 'application/json' }
+    
+    })
+    .then(response =>{
+      if(response.ok){
+        return response.json();
+      }else{
+    
+       throw new Error('You must be logged in to view this page');
+      }
+    })
+    .then(data => this.setState({renderedResponse: this.props.type, redirect: false}))
+    .catch(error => this.setState({error, redirect: true})
+      )
+      }
+    
+    
+    
+    
+    
+    
+      componentRerender() {
+        this.getResponse()
+          .then(data => data.json())
+          .then((data) => {
+            this.setState({ profileData: data, playerSet: "" })
+          });
+      }
+    
 
-  }
+
+
+
+
+
+
+
+
 
 
   handleChange(event) {
@@ -57,20 +88,6 @@ class LogIn extends Component {
     this.setState({ [name]: value }, this.validate(name, value));
   }
 
-  handleSbmit(event) {
-    event.preventDefault();
-    fetch("/users/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: { "email": this.state.email, "password": this.state.password }
-    })
-      .then(() => this.setState({ redirect: true }))
-      .catch(function (error) {
-
-      })
-
-
-  }
 
 
   validate(name, value) {
@@ -125,11 +142,8 @@ class LogIn extends Component {
 
 
   render() {
-    const { redirect } = this.state;
-
-    if (redirect) {
-      return <Redirect to='/profile' />;
-    }
+    {if(this.state.redirect){return <Redirect to='/profile'/>}}
+ 
 
     return (
 

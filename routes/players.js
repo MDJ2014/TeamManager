@@ -105,7 +105,7 @@ router.get('/parent', mid.requiresLogin, function (req, res, next) {
 
 
 /**UPDATE PLayer mid.requiresLogin,*/
-router.put('/player', function (req, res, next) {
+router.put('/player',mid.requiresLogin, function (req, res, next) {
   Player.findByIdAndUpdate({ _id: req.body.playerId }, req.body.newPlayerData, { new: true })
     .exec(function (err, doc) {
       if (err) return next(err);
@@ -114,7 +114,7 @@ router.put('/player', function (req, res, next) {
 });
 
 
-router.delete('/player', function (req, res, next) {
+router.delete('/player', mid.requiresAdmin, function (req, res, next) {
   Player.findByIdAndDelete({ _id: req.body.playerId })
     .exec(function (err, doc) {
       if (err) return next(err);

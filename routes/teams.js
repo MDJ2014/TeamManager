@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
-var fs = require('fs');
 var User = require('../models/userModel').User;
 var Team = require('../models/teamModel').Team;
 var Message = require('../models/messgeModel').Message;
@@ -10,25 +8,9 @@ var Game = require('../models/gameModel').Game;
 var mid = require('../middleware');
 
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '../public/uploads/')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname + '-' + Date.now() + ".png")
-    }
-})
 
-
-
-var upload = multer({ dest: '../public/uploads/' });
-
-
-
-
-
-/* GET all teams. , mid.requiresLogin*/
-router.get('/', function (req, res, next) {
+/* GET all teams.*/
+router.get('/' , mid.requiresLogin, function (req, res, next) {
     Team.find({})
         .exec(
             function (err, teams) {
@@ -43,7 +25,7 @@ router.get('/', function (req, res, next) {
 
 
 /** GET Teams by Age group*/
-router.get('/ageGroup/:age', function (req, res, next) {
+router.get('/ageGroup/:age', mid.requiresLogin, function (req, res, next) {
     Team.find({ ageGroup: req.params.age })
         .exec(
             function (err, teams) {
@@ -61,7 +43,7 @@ router.get('/ageGroup/:age', function (req, res, next) {
 
 
 /*Post a new team  mid.requiresMod*/
-router.post('/', function (req, res, next) {
+router.post('/', mid.requiresMod, function (req, res, next) {
     var completeTeamName = req.body.teamName + "-" + req.body.ageGroup;
     var newTeam = {
         teamName: completeTeamName,
@@ -98,7 +80,7 @@ router.get('/rankings', mid.requiresLogin, function (req, res, next) {
 
 
 /**GET specific team */
-router.get('/team/:id', function (req, res, next) {
+router.get('/team/:id', mid.requiresLogin, function (req, res, next) {
     let teamData = {
         teamId: req.params.id,
         teamInfo: "",
@@ -160,7 +142,7 @@ router.get('/team/:id', function (req, res, next) {
 
 
 /*Get players*/
-router.get('/roster/:teamId', function (req, res, next) {
+router.get('/roster/:teamId', mid.requiresLogin, function (req, res, next) {
     Team.find({ _id: req.params.teamId }, { roster: 1 })
         .populate("roster")
         .exec(
@@ -178,7 +160,7 @@ router.get('/roster/:teamId', function (req, res, next) {
 
 
 /*update team , mid.requiresMod*/
-router.put('/team/update', function (req, res, next) {
+router.put('/team/update',mid.requiresMod, function (req, res, next) {
 
     var newData = req.body;
 
@@ -209,7 +191,7 @@ router.put('/team/update', function (req, res, next) {
 
 
 
-router.delete('/team/delete', function (req, res, next) {
+router.delete('/team/delete',mid.requiresMod, function (req, res, next) {
     Team.findByIdAndDelete(req.body.teamId, function (err, doc) {
         if (err) return next(err);
 
@@ -223,7 +205,7 @@ router.delete('/team/delete', function (req, res, next) {
 
 
 /*Assign Player to team */
-router.put('/assign-players', function (req, res, next) {
+router.put('/assign-players',mid.requiresMod, function (req, res, next) {
 
     var players = req.body.players;
 
@@ -258,7 +240,7 @@ router.put('/assign-players', function (req, res, next) {
 
 
 
-router.put('/delete-player', function (req, res, next) {
+router.put('/delete-player',mid.requiresAdmin, function (req, res, next) {
 
     var players = req.body.players;
 
@@ -301,7 +283,7 @@ router.put('/delete-player', function (req, res, next) {
 
 
 
-router.put('/coaches', function (req, res, next) {
+router.put('/coaches',mid.requiresAdmin, function (req, res, next) {
     var coaches = req.body.coaches;
 
     User.updateMany({
@@ -336,7 +318,7 @@ router.put('/coaches', function (req, res, next) {
 
 
 
-router.put('/delete-coach', function (req, res, next) {
+router.put('/delete-coach',mid.requiresAdmin, function (req, res, next) {
 
 
 

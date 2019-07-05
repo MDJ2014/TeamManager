@@ -250,7 +250,7 @@ class EditGame extends Component {
             Save
          </button>
           <button id="saveTeamButton" className="sectionButton" type="button" onClick={this.props.close}>
-            Cancel
+            Close
          </button>
         </form>
         {this.state.saveSuccess ? <h6>Game saved</h6> : null}

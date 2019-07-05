@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../assets/citySeal.png';
 
@@ -13,47 +13,39 @@ class AllTeams extends Component {
 
     this.state = {
       allTeams: '',
+      redirect: false
 
     };
 
   }
 
 
-  getResponse = async () => {
-    const response = await fetch('/teams', {
-      method: 'GET', headers: { 'Content-Type': 'application/json' }
-
-    });
-    const body = await response;
-    if (response.status !== 200)
-    //throw Error(body.message);
-    {
-
-    } else {
-      return body;
-    }
-
-
-
-  }
-
-
-
+  
   componentDidMount() {
 
-    this.getResponse()
-      .then(data => data.json())
-      .then((data) => {
-        this.setState({ allTeams: data }, () => console.log("data fetched...", data))
-      });
-
-  }
-
+  
+    fetch('/teams', {
+      method: 'GET', headers: { 'Content-Type': 'application/json' }
+    
+    })
+    .then(response =>{
+      if(response.ok){
+        return response.json();
+      }else{
+    
+       throw new Error('You must be logged in to view this page');
+      }
+    })
+    .then(data => this.setState({allTeams: data}))
+    .catch(error => this.setState({error, redirect: true})
+      )
+      }
+    
 
 
   render() {
 
-
+    {if(this.state.redirect){return <Redirect to='/'/>}}
 
     return (
       <div id="allTeamsContainer">

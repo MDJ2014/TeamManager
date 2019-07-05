@@ -25,7 +25,8 @@ class EditUser extends Component {
     deleteMember: false,
     saveSuccess:false,
     showPopup:false,
-     errorMessage:""
+     errorMessage:"",
+     access:false
     };
 
 
@@ -38,20 +39,50 @@ class EditUser extends Component {
   this.setSuccessMessage=this.setSuccessMessage.bind(this);
   this.setDeleteSuccess=this.setDeleteSuccess.bind(this);
   }
-
+/*
   getResponse = async() =>{
     const response = await fetch('/users');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body; 
+
+  }
+*/
+  getResponse = async() =>{
+    fetch('/users', {
+      method: 'GET', headers: { 'Content-Type': 'application/json' }
+    
+    })
+
+
+
+    .then(res =>{
+      if(res.ok){
+        return res.json();
+      }else{
+        this.setState({access: 'denied'})
+       //throw new Error('You must be logged in to view this page');
+      }
+    })
+
+
+
+
+    .then(data => this.setState({data: data}))
+    .catch(error => this.setState({error})
+      )
   }
   
+
+
+
+
   componentDidMount(){
     this.getResponse()
-    .then(res => {
-      const renderedResponse = res;
-      this.setState({data: renderedResponse},()=>console.log(this.state.data));
-    })
+    // .then(res => {
+    //   const renderedResponse = res;
+    //   this.setState({data: renderedResponse});
+    // })
   }
 
   componentRerender(){
@@ -207,9 +238,12 @@ handleMemberDelete= async(item)=>{
 }
 
   render(){
-  
+ 
       return(
+        <div>
+        {this.state.access === 'denied'? <h5>Requires Admin</h5> : 
       <div id="adminEditUserContainer">
+
       <h4>Members</h4>
       <div id="userList">
       <table id="userTable" className="systemTable">
@@ -432,10 +466,11 @@ null
 null
 }
 
+ 
 
-      
       </div>
-
+      }
+      </div>
       );
   }
 

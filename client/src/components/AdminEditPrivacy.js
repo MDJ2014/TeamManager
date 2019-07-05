@@ -11,6 +11,7 @@ class AdminEditPrivacy extends Component {
       page: "",
       privacy: "",
       saveSuccess: "",
+      access:"",
       errorMessage: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,21 +58,39 @@ class AdminEditPrivacy extends Component {
     const headers = { 'content-type': 'application/json', accept: 'application/json' };
 
     await fetch('/home/privacy/edit', { method: 'PUT', headers, body })
-      .then((res) => this.setState({ saveSuccess: res }))
-      .then(this.setSuccessMessage('saveSuccess'))
+           .then((res) =>{
+     
+        if(res.status !== 200){
+   
+          this.setState({access: res})
+         
+        }else{
+     
+          this.setState({ saveSuccess: res })
+        }
+  
+      })
+      .then(this.setSuccessMessage())
       .catch(function (response) {
         this.setState({ errorMessage: response.message })
       })
-    //.then(this.setErrorMessage())
+    
   }
 
 
-  setSuccessMessage(item) {
+  setSuccessMessage() {
+    var msg ="";
+    if(!this.state.saveSuccess){
+      msg = "access";
+    }else if(!this.state.access){
+      msg = "saveSuccess";
+    }
+
     setTimeout(() => {
       this.setState({
-        [item]: ''
+        [msg]: ''
       });
-    }, 3000)
+    }, 2000)
   }
 
 
@@ -90,10 +109,11 @@ class AdminEditPrivacy extends Component {
             Save
          </button>
 
-          {this.state.saveSuccess ?
-            <h6>Privacy statement saved</h6>
+         {this.state.saveSuccess ?
+            <h6>Privacy Statement Saved</h6>
             :
             null}
+            {this.state.access? <h6>Access Denied</h6>:null}
         </div>
 
       </form>

@@ -37,7 +37,7 @@ this.handleLogout = this.handleLogout.bind(this);
 
   componentDidMount(){
     this.getResponse()
-    //.then(res=>res.json())
+   
     .then((response) => {
       if(response === undefined || response === null){
         return {empty: true}
@@ -54,17 +54,12 @@ this.handleLogout = this.handleLogout.bind(this);
      }
 
    })
-    //.then(data=>  this.setState({authenticated: data, usertype: data.userType}))
-   
+  
 
 
   }
 
-  
-  // .then((res)=>alert(res)
  
-
-
 
 
 
@@ -102,7 +97,7 @@ handleLogout= async(event)=>{
  
    <ul>
 
-{this.state.usertype === "Admin" ? 
+{this.state.usertype === "Admin" || this.state.usertype==="Coach" ? 
 <li><Link to="/admin"><div id="gear"></div></Link></li>
 : null}
 
