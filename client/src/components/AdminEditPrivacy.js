@@ -11,13 +11,15 @@ class AdminEditPrivacy extends Component {
       page: "",
       privacy: "",
       saveSuccess: "",
-      access:"",
+      access: "",
       errorMessage: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
+
+  /*
   getResponse = async () => {
     const response = await fetch('/home', {
       method: 'GET', headers: { 'Content-Type': 'application/json' }
@@ -27,13 +29,40 @@ class AdminEditPrivacy extends Component {
     if (response.status !== 200) throw Error(body.message);
     return body;
   }
+*/
+
+
+  getResponse = async () => {
+    fetch('/home/admin', {
+      method: 'GET', headers: { 'Content-Type': 'application/json' }
+
+    })
+      .then(res => {
+        if (res.status !== 200) {
+          this.setState({ access: 'denied' })
+        } else {
+          return res.json();
+
+        }
+      })
+      .then(data => {
+        const receivedData = data;
+        this.setState({ page: receivedData._id, privacy: receivedData.privacy });
+      })
+      .catch(error => this.setState({ error })
+      )
+
+
+  }
+
+
+
+
+
 
   componentDidMount() {
-    this.getResponse()
-      .then(res => {
-        const receivedData = res;
-        this.setState({ page: receivedData._id, privacy: receivedData.privacy });
-      });
+    this.getResponse();
+
   }
 
 
@@ -58,31 +87,31 @@ class AdminEditPrivacy extends Component {
     const headers = { 'content-type': 'application/json', accept: 'application/json' };
 
     await fetch('/home/privacy/edit', { method: 'PUT', headers, body })
-           .then((res) =>{
-     
-        if(res.status !== 200){
-   
-          this.setState({access: res})
-         
-        }else{
-     
-          this.setState({ saveSuccess: res })
+      .then((res) => {
+
+        if (res.status !== 200) {
+
+          throw new Error("Problem saving.");
+
+        } else {
+
+          this.setState({ saveSuccess: true })
         }
-  
+
       })
       .then(this.setSuccessMessage())
       .catch(function (response) {
         this.setState({ errorMessage: response.message })
       })
-    
+
   }
 
 
   setSuccessMessage() {
-    var msg ="";
-    if(!this.state.saveSuccess){
+    var msg = "";
+    if (!this.state.saveSuccess) {
       msg = "access";
-    }else if(!this.state.access){
+    } else if (!this.state.access) {
       msg = "saveSuccess";
     }
 
@@ -96,29 +125,36 @@ class AdminEditPrivacy extends Component {
 
 
   render() {
-    return (<div>
+    return (
+
+
+      <div>{this.state.access === "denied" ? <h5>Requires Admin</h5> :
+        <div>
 
 
 
-      <h2>Edit Privacy Statement</h2>
-      <form onSubmit={this.handleSubmit}>
-        <textarea id="privacyInput" type="textarea" name="privacy" value={this.state.privacy} onChange={this.handleChange} placeholder="Enter terms of use" rows="15" cols="150">
-        </textarea>
-        <div className="adminHomeBtnContainer">
-          <button className="sectionButton" type="submit">
-            Save
+          <h2>Edit Privacy Statement</h2>
+          <form onSubmit={this.handleSubmit}>
+            <textarea id="privacyInput" type="textarea" name="privacy" value={this.state.privacy} onChange={this.handleChange} placeholder="Enter terms of use" rows="15" cols="150">
+            </textarea>
+            <div className="adminHomeBtnContainer">
+              <button className="sectionButton" type="submit">
+                Save
          </button>
 
-         {this.state.saveSuccess ?
-            <h6>Privacy Statement Saved</h6>
-            :
-            null}
-            {this.state.access? <h6>Access Denied</h6>:null}
+              {this.state.saveSuccess ?
+                <h6>Privacy Statement Saved</h6>
+                :
+                null}
+              {this.state.access ? <h6>Access Denied</h6> : null}
+            </div>
+
+          </form>
+
         </div>
+      }</div>
 
-      </form>
-
-    </div>);
+    );
   }
 
 

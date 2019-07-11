@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -195,5 +195,13 @@ class EditPlayer extends Component {
 
 
 }
+EditPlayer.propTypes = {
 
+  playerToEdit: PropTypes.object,
+  setPlayerEditSuccess:PropTypes.func,
+  setPlayerSaveSuccess:PropTypes.func,
+  reRender:PropTypes.func,
+  cancelEditPlayer:PropTypes.func,
+ 
+ };
 export default EditPlayer;

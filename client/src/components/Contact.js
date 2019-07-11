@@ -23,7 +23,7 @@ class Contact extends Component {
   }
 
   getResponse = async () => {
-    const response = await fetch('/home/admin', {
+    const response = await fetch('/home', {
       method: 'GET', headers: { 'Content-Type': 'application/json' }
 
     });
@@ -71,7 +71,7 @@ class Contact extends Component {
           <div id="contactViewBody">
 
             <div>{this.state.street}</div>
-            <div><span>{this.state.city}</span><span>{this.state.state}</span><span>{this.state.zip}</span></div>
+            <div><span>{this.state.city},</span><span>{this.state.state}</span><span id="contactzip">{this.state.zip}</span></div>
             <div><span>{this.state.phone}</span></div>
             <div>{this.state.email}</div>
 

@@ -102,7 +102,7 @@ html {
   font-size: 1em;
   color: burlywood;
   float: right;
-  margin-top: .5%; }
+  margin-top: 0.5%; }
 
 header {
   background-image: url("../../assets/team4.png");
@@ -327,6 +327,9 @@ header {
 
 #contactViewBody {
   grid-area: "foot"; }
+
+#contactzip {
+  padding-left: 10px; }
 
 #aboutContainer {
   background-color: white;
@@ -816,7 +819,7 @@ input:valid {
 #playerContainer {
   height: auto;
   width: 20%;
-  margin-left: .8em;
+  margin-left: 0.8em;
   margin-top: 3%;
   font-weight: bold;
   padding-top: 1%;
@@ -834,7 +837,7 @@ input:valid {
   width: 6em; }
 
 .playerFormResult {
-  margin-left: .5em; }
+  margin-left: 0.5em; }
 
 .myTeamLogo {
   width: 100%;
@@ -1034,8 +1037,9 @@ input:valid {
   display: flex; }
 
 .coachContainer {
-  width: 7em;
-  text-align: left; }
+  width: 8em;
+  text-align: left;
+  background-color: whitesmoke; }
 
 .coachName {
   margin-left: 10%; }
@@ -1238,7 +1242,7 @@ input:valid {
 .skewed2 {
   background-color: white;
   height: 30px;
-  width: .5em;
+  width: 0.5em;
   transform: skewX(-26deg); }
 
 .radial2 {
@@ -1778,7 +1782,7 @@ textarea {
 
 #game {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr .5fr .5fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
   grid-template-rows: 1fr; }
 
 #editGameDate {
@@ -1826,7 +1830,7 @@ textarea {
 .adminEditGameButton {
   width: 2.5em;
   height: 1.5em;
-  font-size: .7em;
+  font-size: 0.7em;
   font-weight: normal;
   padding: 0%; }
 
@@ -2113,7 +2117,7 @@ a:hover {
 .adminTeamEditButton {
   width: 4em;
   height: 2em;
-  font-size: .7em;
+  font-size: 0.7em;
   margin-left: auto;
   margin-right: auto;
   margin-top: 4%; }

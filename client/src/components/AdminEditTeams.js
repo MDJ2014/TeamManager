@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import AddTeam from '../components/AddTeam';
 import EditTeam from '../components/EditTeam';
 import Popup from 'reactjs-popup';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -52,6 +52,7 @@ class AdminEditTeams extends Component{
       }
 
      componentReRender(){
+  
         this.getResponse()
         .then(res => {
           const receivedData = res;
@@ -181,7 +182,7 @@ return(
     {this.state.teamsData.map(function(team){
     return <div className="adminTeamContainer" key={team._id}>
     <div className="adminTeamLogo">
-    <img className="center" src={`/images/${team.logo}.png`}></img>
+    <img className="center" alt="logo"  src={`/images/${team.logo}.png`}></img>
     </div>
     <div className="adminTeamName"><h6>{team.teamName}</h6></div>
     <div className="adminTeamEditBtnContainer">
@@ -263,7 +264,7 @@ modal id="tmModal" item={team._id}>
 
 {this.state.editTeam?
 <div id="editTeamContainer" ref={(el)=>{this.editStart = el }}>
-<EditTeam teamToEdit={this.state.editTeam} reRender={this.componentReRender} cancelEdit={this.cancelEditTeam}/>
+<EditTeam teamToEdit={this.state.editTeam} reRender={this.componentReRender} cancelEdit={this.cancelEditTeam} modType={this.props.modType}/>
 </div>
 :null
 }
@@ -287,7 +288,12 @@ modal id="tmModal" item={team._id}>
 
 }
 
+AdminEditTeams.propTypes = {
 
+  modType: PropTypes.string,
+
+ 
+ };
 
 
 export default AdminEditTeams;

@@ -24,15 +24,7 @@ class AdminEditContact extends Component {
     this.setSuccessMessage = this.setSuccessMessage.bind(this);
   }
 
-  // getResponse = async () => {
-  //   const response = await fetch('/home', {
-  //     method: 'GET', headers: { 'Content-Type': 'application/json' }
 
-  //   });
-  //   const body = await response.json();
-  //   if (response.status !== 200) throw Error(body.message);
-  //   return body;
-  // }
 
   getResponse = async() =>{
     fetch('/home/admin', {
@@ -74,26 +66,9 @@ class AdminEditContact extends Component {
 
 
 
-
-
-
-
-
-
-
-
-
   componentDidMount() {
     this.getResponse();
-      // .then(res => {
-      //   const receivedData = res;
-      //   if (receivedData.contact) {
-      //     this.setState({ page: receivedData._id, street: receivedData.contact.street, city: receivedData.contact.city, state: receivedData.contact.state, zip: receivedData.contact.zip, phone: receivedData.contact.phone, email: receivedData.contact.email });
-      //   } else {
-      //     this.setState({ page: receivedData._id });
-      //   }
-
-      // });
+  
   }
 
 

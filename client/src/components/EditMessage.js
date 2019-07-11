@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import PropTypes from 'prop-types';
 
 class EditMessage extends Component{
     constructor(props){
@@ -145,6 +145,14 @@ return(
 }
 
 
+EditMessage.propTypes = {
+
+  msgToEdit: PropTypes.object,
+  reSet:PropTypes.func,
+  reRender:PropTypes.func,
+
+ 
+ };
 
 
 export default EditMessage;

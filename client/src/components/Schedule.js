@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Popup from 'reactjs-popup';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -10,6 +10,7 @@ class Schedule extends Component {
     
       this.state = {
             gameData:"",
+            gameDelete:""
         
 
       
@@ -17,7 +18,7 @@ class Schedule extends Component {
       };
 
 this.componentReRender = this.componentReRender.bind(this);
-
+this.handleGameDelete = this.handleGameDelete.bind(this);
     }
 
     componentDidMount(){
@@ -50,13 +51,41 @@ this.componentReRender = this.componentReRender.bind(this);
   
      }
 
+     handleGameDelete= async(item)=>{
 
+
+      const body = JSON.stringify({
+        gameId: item,
+            
+       });
+    
+       const headers = {'content-type': 'application/json', accept: 'application/json'};
+    
+       await fetch('/games/game',{method: 'DELETE', headers, body})
+     
+       .then((res)=>this.setState({gameDelete:"success"}))
+       .then(this.setDeleteSuccess('gameDelete'))  
+       .then(this.componentReRender())
+        .catch(function(res){
+          //
+       })
+    
+    }
+
+    setDeleteSuccess(item){
+      setTimeout(() => {
+          this.setState({
+              [item]: ''
+          });
+      }, 2000)
+    }
 
 
 
 render(){
 
 return(
+  <div>
     <table id="gameTable" className="systemTable">
 <thead>
 <tr>
@@ -96,16 +125,16 @@ return <tr key={game._id}>
 {this.props.edit===true? 
  <td>
  <Popup trigger={<button  className="adminEditButton deleteBtn">Del</button>} 
-modal id="delGameModal" item={null}>
+modal id="delGameModal" item={game._id}>
     {close => (
       <div className="modal">
         <a className="close" onClick={close}>
         &times;
         </a>
-        <div className="header">Delete Member</div>
+        <div className="header">Delete Game</div>
         <div className="content">
           {' '}
-          Are you sure you want to delete {null}?
+          Are you sure you want to delete this game?
     
         </div>
         <div className="actions">
@@ -126,7 +155,7 @@ modal id="delGameModal" item={null}>
             className="sectionButton popupDelBtn"
             
             onClick={() => {
-             this.handleDeleteTeam(null);
+             this.handleGameDelete(game._id);
               close();
             }}
           >
@@ -147,7 +176,10 @@ modal id="delGameModal" item={null}>
 
 </tbody>
 :null}
+
 </table>
+{this.state.gameDelete === 'success'? <h6>Game deleted</h6>:null}
+</div>
 )
 
 
@@ -158,4 +190,9 @@ modal id="delGameModal" item={null}>
 
 
 }
+Schedule.propTypes = {
+
+  teamId: PropTypes.string,
+ 
+ };
 export default Schedule;

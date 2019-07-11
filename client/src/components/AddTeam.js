@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 class AddTeam extends Component {
   constructor(props) {
@@ -143,7 +143,11 @@ class AddTeam extends Component {
 
 }
 
+AddTeam.propTypes = {
 
+ reRender: PropTypes.func,
+
+};
 
 
 export default AddTeam;

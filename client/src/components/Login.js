@@ -13,7 +13,7 @@ class LogIn extends Component {
     super(props);
 
     this.state = {
-      renderedResponse: '',
+      loggedIn: '',
       email: '',
       password: '',
       redirect: false,
@@ -22,7 +22,8 @@ class LogIn extends Component {
       emailValid: false,
       passwordValid: false,
       formValid: false,
-      redirect: false
+      redirect: false,
+      success: true
 
 
     };
@@ -30,51 +31,42 @@ class LogIn extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validate = this.validate.bind(this);
+    this.processError = this.processError.bind(this);
+    this.componentLoad = this.componentLoad.bind(this);
   }
 
 
-  componentDidMount() {
 
-   
+   componentDidMount() {
+
+   this.componentLoad();
   
-    fetch('/users/login', {
-      method: 'GET', headers: { 'Content-Type': 'application/json' }
-    
-    })
-    .then(response =>{
-      if(response.ok){
-        return response.json();
-      }else{
-    
-       throw new Error('You must be logged in to view this page');
-      }
-    })
-    .then(data => this.setState({renderedResponse: this.props.type, redirect: false}))
-    .catch(error => this.setState({error, redirect: true})
-      )
+ 
       }
     
-    
-    
-    
-    
-    
-      componentRerender() {
-        this.getResponse()
-          .then(data => data.json())
-          .then((data) => {
-            this.setState({ profileData: data, playerSet: "" })
-          });
+      componentLoad() {
+        fetch('/users/login', {
+          method: 'GET', headers: { 'Content-Type': 'application/json' }
+        
+        })
+        .then(response =>{
+          if(response.ok){
+            return response.json();
+          }else{
+        
+           throw new Error('You must be logged in to view this page');
+          }
+        })
+        .then(data => this.setState({loggedIn: data.loggedIn, redirect: false}))
+        .catch(error => this.setState({error, redirect: true})
+          )
+
       }
     
-
-
-
-
-
-
-
-
+    
+    
+      
+    
 
 
 
@@ -82,8 +74,6 @@ class LogIn extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
-
 
     this.setState({ [name]: value }, this.validate(name, value));
   }
@@ -116,25 +106,33 @@ class LogIn extends Component {
   }
 
 
+processError(){
+  this.setState({ success: false, email: "", password:""})
+
+}
 
 
-
-  handleSubmit = async (event) => {
-    event.preventDefault();
+handleSubmit = async (event) => {
+  event.preventDefault();
 
     const body = JSON.stringify({ email: this.state.email, password: this.state.password });
     const headers = { 'content-type': 'application/json', accept: 'application/json' };
 
     await fetch('/users/login', { method: 'POST', headers, body })
-      .then(() => this.setState({ redirect: true }))
+    
+    .then((res)=>{
+      if(res.status===401){
+          this.processError();
+      }else{
+        this.setState({ redirect: true })
+      }
+    })
       .catch(function (error) {
         this.setState({ error: true, errmsg: error });
       })
 
 
-
-  }
-
+}
 
 
 
@@ -188,7 +186,7 @@ New users: Create an account with your email.</h6></p>
 
               </form>
 
-
+{this.state.success? null: <h6>User not found</h6>}
 
 
             </div>

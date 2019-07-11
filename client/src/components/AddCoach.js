@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -13,13 +13,15 @@ class AddCoach extends Component {
       allCoaches: "",
       removeCoach: false,
       selectedCoaches: [],
-      saveSuccess: false
+      saveSuccess: false,
+      access: true
 
     };
-    //   this.handelMenu = this.handelMenu.bind(this);
+  
     this.removeCoach = this.removeCoach.bind(this);
     this.handleSelectCoach = this.handleSelectCoach.bind(this);
     this.handleRemoveSelectedCoach = this.handleRemoveSelectedCoach.bind(this);
+    this.setSuccessMessage = this.setSuccessMessage.bind(this);
   }
 
 
@@ -54,13 +56,7 @@ class AddCoach extends Component {
 
   }
 
-  setSuccessMessage(item) {
-    setTimeout(() => {
-      this.setState({
-        [item]: ''
-      });
-    }, 1400)
-  }
+  
 
   handleSelectCoach(coach) {
     var coachList = this.state.selectedCoaches;
@@ -95,13 +91,7 @@ class AddCoach extends Component {
   }
 
 
-  setSuccessMessage(item) {
-    setTimeout(() => {
-      this.setState({
-        [item]: ''
-      });
-    }, 1400)
-  }
+
 
   handleSubmit = async (event) => {
 
@@ -120,19 +110,34 @@ class AddCoach extends Component {
     const headers = { 'content-type': 'application/json', accept: 'application/json' };
 
     await fetch('/teams/coaches', { method: 'PUT', headers, body })
-      .then((res) => this.setState({ saveSuccess: true, selectedCoaches: [] }))
-      .then(this.setSuccessMessage("saveSuccess"))
+
+    .then(res =>{
+      if(res.status !== 201){
+        this.setState({access: 'denied'})
+      }else{
+        this.setState({ saveSuccess: true, selectedCoaches: [] })
+    // return res.json();
+      }
+    })
+     // .then((res) => this.setState({ saveSuccess: true, selectedCoaches: [] }))
+      .then(this.setSuccessMessage())
       .then(this.props.reRender())
-      .catch(function (response) {
-        //this.setState({error:true, errmsg: error});
-        //console.log(response.data)
-      })
+      .catch((error) => { 
+        this.setState({err: true})
+        error.then((e) => {
+          this.setSuccessMessage("error");
+        });
+    })
+
+
+
+
 
 
 
   }
 
-
+  
 
   removeCoach() {
     this.state.removeCoach ? this.setState({ removeCoach: false }) : this.setState({ removeCoach: true });
@@ -140,6 +145,21 @@ class AddCoach extends Component {
 
 
 
+  setSuccessMessage(item) {
+    var msg = "";
+    if(this.state.saveSuccess){
+      msg = "saveSuccess";
+    }else{
+      msg = "access";
+    }
+    setTimeout(() => {
+      this.setState({
+        [msg]: ''
+      });
+    }, 2000)
+  }
+
+ 
 
   render() {
 
@@ -242,8 +262,8 @@ class AddCoach extends Component {
         </div>
 
 
-
-
+{this.state.saveSuccess? <h6>Saved</h6>:null}
+{this.state.access === "denied"? <h6>Requires Admin</h6>:null}
       </div>
     )
 
@@ -255,4 +275,5 @@ class AddCoach extends Component {
 
 
 }
+
 export default AddCoach;

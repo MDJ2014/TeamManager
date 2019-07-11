@@ -36,6 +36,7 @@ router.get('/register', mid.loggedOut, function (req, res, next) {
 /*User Login */
 
 router.get('/login',mid.loggedOut, function (req, res, next) {
+  res.status(200);
   res.json({ loggedIn: false });
 
 });
@@ -91,17 +92,34 @@ router.get('/user', mid.requiresLogin, function (req, res, next) {
 });
 
 
-router.get('/user/admin',mid.requiresMod, function(req,res,next){
+// router.get('/user/admin',mid.requiresMod, function(req,res,next){
 
-  res.status(200);
-  res.json({admin: true});
+//   res.status(200);
+//   res.json({admin: true});
 
-})
-
-
+// })
 
 
-/** , mid.requiresLogin*/
+router.get('/user/admin', function(req,res,next){
+  User.findById(req.session.userId)
+  .exec(function (err, user) {
+    if(user.userType === "Admin"){
+      res.json({type: "Admin"})
+    }else{
+      res.json({type: "Coach"})
+    }
+
+
+
+
+  });
+
+});
+
+
+
+
+
 router.get('/coaches', mid.requiresLogin, function (req, res, next) {
   User.find({ "userType": "Coach" })
     .populate("position.team")
@@ -109,9 +127,16 @@ router.get('/coaches', mid.requiresLogin, function (req, res, next) {
       if (err) return next(err);
       res.status(200);
       res.json(user);
-      //render update form and delete
+    
     });
 });
+
+
+
+  
+
+
+
 
 
 
@@ -122,8 +147,8 @@ router.post('/login', function (req, res, next) {
       if (err || !user) {
         var err = new Error("Wrong email or password");
         res.status(401);
-
-        return next(err);
+        res.json({"error": "Wrong email or password"})
+      
       } else {
         req.session.userId = user._id;
         req.session.userName = user.userName;
@@ -134,8 +159,8 @@ router.post('/login', function (req, res, next) {
   } else {
     var err = new Error("Email and Password are required.");
     res.status(401);
-
-    return next(err);
+    res.json({"error": "error"})
+ 
   }
 
 

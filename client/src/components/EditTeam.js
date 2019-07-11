@@ -10,7 +10,7 @@ import Schedule from '../components/Schedule';
 import EditPlayer from '../components/EditPlayer';
 import EditCoaches from '../components/EditCoaches';
 import TeamMessages from './TeamMessages';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -44,7 +44,8 @@ class EditTeam extends Component {
       playerToEdit: false,
       playerEditSuccess: false,
       showCoaches: true,
-      showTeamMessages: true
+      showTeamMessages: true,
+
     }
     this.clickDelete = this.clickDelete.bind(this);
     this.handleEditGame = this.handleEditGame.bind(this);
@@ -68,6 +69,7 @@ class EditTeam extends Component {
     this.setMessageEdit = this.setMessageEdit.bind(this);
     this.teamMessagesRerender = this.teamMessagesRerender.bind(this);
     this.reSetPane = this.reSetPane.bind(this);
+
   }
 
 
@@ -82,16 +84,24 @@ class EditTeam extends Component {
   }
 
   componentReRender() {
-    this.setState({
-      teamToEdit: this.props.teamToEdit._id,
-      teamName: this.props.teamToEdit.teamName,
-      ageGroup: this.props.teamToEdit.ageGroup,
-      teamLogo: this.props.teamToEdit.logo,
+   
 
 
-    });
-
+           this.setState({
+          
+            teamToEdit: this.props.teamToEdit._id,
+            teamName: this.props.teamToEdit.teamName,
+            ageGroup: this.props.teamToEdit.ageGroup,
+            teamLogo: this.props.teamToEdit.logo,
+          
+          
+          });
+          
+      
+ 
   }
+
+ 
 
   setSuccessMessage(item) {
     setTimeout(() => {
@@ -122,7 +132,7 @@ class EditTeam extends Component {
   }
 
   reSetPane(item) {
-    if (item = "add") {
+    if (item === "add") {
       this.setState({ addMessage: false })
     } else {
       this.setState({ editMessage: false })
@@ -187,7 +197,7 @@ class EditTeam extends Component {
   }
 
   clickAddMessage() {
-    // this.setState({addMessage:true, editMessage:false});
+  
     this.state.addMessage ? this.setState({ addMessage: false }) : this.setState({ addMessage: true, editMessage: false });
   }
 
@@ -311,7 +321,7 @@ class EditTeam extends Component {
 
               </div>
               <div id="adminTeamEditSectionLogoContainer" className="adminTeamLogo">
-                <img className="center" src={`/images/${this.state.teamLogo}.png`}></img>
+                <img className="center" alt="logo" src={`/images/${this.state.teamLogo}.png`}></img>
               </div>
 
             </div>
@@ -429,7 +439,7 @@ class EditTeam extends Component {
           <div className="adminEditTeamBody">
 
             {this.state.showCoaches ?
-              <EditCoaches teamId={this.state.teamToEdit} />
+              <EditCoaches teamId={this.state.teamToEdit} modType={this.props.modType}/>
               : null}
 
 
@@ -458,21 +468,23 @@ class EditTeam extends Component {
 
             }
 
-
+  {this.props.modType === "Admin"? 
             <button type="button" id="addCoachBtn" className="sectionButton" onClick={this.clickAddCoach}>
               {this.state.addCoach ? "Close" : "Add Coach"}
             </button>
+      :null}
           </div>
         </div>
-
+{this.state.isAdmin?   null  :null}
         <div id="coachesEdit">
           <h5>Available Coaches</h5>
           {this.state.addCoach ?
 
-            <AddCoach teamId={this.state.teamToEdit} reRender={this.coachesRerender} />
+            <AddCoach teamId={this.state.teamToEdit} reRender={this.coachesRerender} modType={this.props.modType}/>
             :
             null
           }
+        
         </div>
 
 
@@ -553,6 +565,12 @@ class EditTeam extends Component {
 
 }
 
+EditTeam.propTypes = {
+  teamToEdit: PropTypes.object,
+ reRender: PropTypes.func,
+ cancelEdit: PropTypes.func,
+ modType: PropTypes.string
+};
 
 
 export default EditTeam;

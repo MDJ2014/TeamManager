@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 class AddGame extends Component {
   constructor(props) {
@@ -219,7 +220,11 @@ class AddGame extends Component {
 
 }
 
-
+AddGame.propTypes = {
+  teamId: PropTypes.string,
+  ageGroup: PropTypes.number,
+  reRender: PropTypes.func
+};
 
 
 export default AddGame;

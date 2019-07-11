@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Popup from 'reactjs-popup';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -167,7 +167,7 @@ modal id="tmModal" item={player._id}>
           <button
             className="sectionButton"
             onClick={() => {
-              console.log('modal closed ')
+       
               close()
             }}
           >
@@ -230,4 +230,9 @@ null
 
 
 }
+Roster.propTypes = {
+
+  teamToAssign: PropTypes.string,
+ 
+ };
 export default Roster;

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Popup from 'reactjs-popup';
 
 
-
 class EditCoaches extends Component {
     constructor(props){
       super(props);
@@ -18,6 +17,7 @@ class EditCoaches extends Component {
   coachToEdit:false,
   editCoachTitle:false,
   coachTitle:""
+
                
       };
   
@@ -40,8 +40,8 @@ this.componentReRender();
 
   
     getResponse = async()=>{
-      const response = await fetch(`/users/coaches`,{method:'GET', headers:{'Content-Type': 'application/json'}
     
+     const response = await fetch(`/users/coaches`,{method:'GET', headers:{'Content-Type': 'application/json'}
     
     });
       const body = await response.json();
@@ -191,9 +191,11 @@ return (<tr key={coach._id}>
 
         :
        <td> 
+     {this.props.modType === "Admin"? 
         <button className="adminEditButton" id="playerEditButton"type="button" onClick={()=>this.setState({editCoachTitle:true, coachToEdit:coach._id})} >
            Edit
          </button>
+   :null}
        </td> 
         }
   
@@ -201,7 +203,7 @@ return (<tr key={coach._id}>
   
    <td>
 
- 
+   {this.props.modType === "Admin"? 
          <Popup trigger={<button  className="adminEditButton deleteBtn">Del</button>} 
 modal id="tmModal" item={coach._id}>
     {close => (
@@ -246,7 +248,7 @@ modal id="tmModal" item={coach._id}>
       </div>
     )}
   </Popup>
-
+:null}
 
    </td>        
 </tr>
@@ -285,4 +287,10 @@ null
 
 
 }
+
+
+
+
+
+
 export default EditCoaches;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -237,6 +237,10 @@ class PlayerForm extends Component {
   }
 
 }
+PlayerForm.propTypes = {
 
+  playerToEdit: PropTypes.string,
+ 
+ };
 
 export default PlayerForm;

@@ -32,7 +32,6 @@ class Admin extends Component {
       editMember: false,
       editTeam: false,
       editPlayer: false
-
     };
     this.handleMenu = this.handleMenu.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -56,7 +55,7 @@ class Admin extends Component {
           throw new Error('You must be logged in to view this page');
         }
       })
-      .then(this.setState({ redirect: false }))
+      .then((res)=> this.setState({ redirect: false, userType: res.type}))
 
 
       .catch(error => this.setState({ error, redirect: true })
@@ -69,7 +68,7 @@ class Admin extends Component {
 
   handleMenu(event) {
     const target = event.target;
-    const value = target.value;
+    //const value = target.value;
     const name = target.name;
 
     this.setState({ editView: name });
@@ -83,11 +82,11 @@ class Admin extends Component {
 
   render() {
 
-    {
+    
 
       if (this.state.redirect) { return <Redirect to='/' /> }
 
-    }
+    
 
     return (
 
@@ -149,7 +148,7 @@ class Admin extends Component {
             <div id="adminBody">
 
               {this.state.editView === 'home' ?
-                <AdminEditHome />
+                <AdminEditHome modType={this.state.userType}/>
                 :
                 this.state.editView === 'about' ?
                   <AdminEditAbout />
@@ -159,7 +158,7 @@ class Admin extends Component {
                     :
 
                     this.state.editView === 'teams' ?
-                      <AdminEditTeams />
+                      <AdminEditTeams modType={this.state.userType}/>
                       :
 
                       this.state.editView === 'messages' ?

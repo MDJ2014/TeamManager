@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
+
+
 
 class EditGame extends Component {
   constructor(props) {
@@ -260,6 +263,10 @@ class EditGame extends Component {
   }
 
 }
+EditGame.propTypes = {
+  game: PropTypes.object,
+  reRender:PropTypes.func,
+ };
 
 
 

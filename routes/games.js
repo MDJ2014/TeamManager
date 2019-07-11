@@ -72,6 +72,19 @@ router.put('/game/:id', mid.requiresMod, function (req, res, next) {
 });
 
 
+router.delete('/game', mid.requiresMod, function (req, res, next) {
+
+ 
+
+    Game.findByIdAndDelete(req.body.gameId)
+        .exec(function (err, doc) {
+            if (err) return next(err);
+
+        
+                    res.status(200);
+                    res.json(doc);
+                });
+        });
 
 
 

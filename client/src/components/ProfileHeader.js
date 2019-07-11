@@ -2,6 +2,13 @@ import React from 'react';
 
 import cup from '../assets/winnercup.png';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+
+
+
+
+
 
 const ProfileHeader = (props) => {
 
@@ -44,6 +51,11 @@ const ProfileHeader = (props) => {
 
 }
 
+ProfileHeader.propTypes = {
 
+  name: PropTypes.string,
+  team: PropTypes.array
+ 
+ };
 
 export default ProfileHeader;

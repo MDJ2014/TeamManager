@@ -26,22 +26,33 @@ class AdminEditLicense extends Component {
 
   }
 
-  getResponse = async () => {
-    const response = await fetch('/home', {
-      method: 'GET', headers: { 'Content-Type': 'application/json' }
 
-    });
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
+  getResponse = async () => {
+    fetch('/home/admin', {
+      method: 'GET', headers: { 'Content-Type': 'application/json' }
+    
+    })
+    .then(res =>{
+      if(res.status !== 200){
+       this.setState({access: 'denied'})
+      }else{
+        return res.json();
+    
+      }
+    })
+    .then(data => {
+      const receivedData = data;
+      this.setState({ page: receivedData._id, license: receivedData.license });
+    })  
+    .catch(error => this.setState({error})
+    )
+
+
   }
 
   componentDidMount() {
-    this.getResponse()
-      .then(res => {
-        const receivedData = res;
-        this.setState({ page: receivedData._id, license: receivedData.license });
-      });
+    this.getResponse();
+
   }
 
 
@@ -53,6 +64,10 @@ class AdminEditLicense extends Component {
 
     this.setState({ [name]: value });
   }
+
+
+
+
 
 
   handleSubmit = async (event) => {
@@ -67,19 +82,10 @@ class AdminEditLicense extends Component {
 
    
     await fetch('/home/license/edit', { method: 'PUT', headers, body })
-    .then((res) =>{
-     
-      if(res.status !== 201){
- 
-        this.setState({access: res})
-       
-      }else{
-   
-        this.setState({ saveSuccess: res })
-      }
-
+    .then((res)=>{
+      this.setState({saveSuccess: true})
     })
-    .then(this.setSuccessMessage())
+     .then(this.setSuccessMessage())
     .catch(function (response) {
       this.setState({ errorMessage: response.message })
     })
@@ -105,7 +111,11 @@ class AdminEditLicense extends Component {
 
 
   render() {
-    return (<div>
+    return (
+    
+    <div>{this.state.access === "denied"? <h5>Requires Admin</h5> :
+    
+    <div>
 
 
 
@@ -122,12 +132,15 @@ class AdminEditLicense extends Component {
             <h6>License Agreement Saved</h6>
             :
             null}
-            {this.state.access? <h6>Access Denied</h6>:null}
+          
         </div>
 
       </form>
 
-    </div>);
+    </div>
+     } </div>
+    
+    );
   }
 
 

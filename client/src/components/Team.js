@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Schedule from './Schedule';
 import Roster from './Roster';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 
@@ -25,7 +26,7 @@ class Team extends Component {
     });
     const body = await response;
     if (response.status !== 200)
-    //throw Error(body.message);
+  
     {
 
     } else {
@@ -143,5 +144,9 @@ class Team extends Component {
   }
 
 }
+Team.propTypes = {
 
+teamid: PropTypes.any,
+ 
+ };
 export default Team;

@@ -40,22 +40,7 @@ class Register extends Component {
     this.validatePassword = this.validatePassword.bind(this);
   }
 
-  /*
-  getResponse = async () => {
-    const response = await fetch('/users/register');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  }
-
-  componentDidMount() {
-    this.getResponse()
-      .then(res => {
-        const data = res;
-        this.setState({ renderedResponse: data.title });
-      })
-  }
-*/
+ 
 
 componentDidMount() {
 

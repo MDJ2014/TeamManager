@@ -15,10 +15,18 @@ router.get('/' , mid.requiresLogin, function (req, res, next) {
         .exec(
             function (err, teams) {
                 if (err) return next(err);
+                res.status(200);
                 res.json(teams);
 
             });
 });
+
+
+
+        
+          
+    
+      
 
 
 
@@ -240,7 +248,7 @@ router.put('/assign-players',mid.requiresMod, function (req, res, next) {
 
 
 
-router.put('/delete-player',mid.requiresAdmin, function (req, res, next) {
+router.put('/delete-player',mid.requiresMod, function (req, res, next) {
 
     var players = req.body.players;
 

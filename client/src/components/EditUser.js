@@ -39,35 +39,19 @@ class EditUser extends Component {
   this.setSuccessMessage=this.setSuccessMessage.bind(this);
   this.setDeleteSuccess=this.setDeleteSuccess.bind(this);
   }
-/*
-  getResponse = async() =>{
-    const response = await fetch('/users');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body; 
 
-  }
-*/
   getResponse = async() =>{
     fetch('/users', {
       method: 'GET', headers: { 'Content-Type': 'application/json' }
     
     })
-
-
-
-    .then(res =>{
+   .then(res =>{
       if(res.ok){
         return res.json();
       }else{
         this.setState({access: 'denied'})
-       //throw new Error('You must be logged in to view this page');
-      }
+        }
     })
-
-
-
-
     .then(data => this.setState({data: data}))
     .catch(error => this.setState({error})
       )
@@ -78,18 +62,16 @@ class EditUser extends Component {
 
 
   componentDidMount(){
-    this.getResponse()
-    // .then(res => {
-    //   const renderedResponse = res;
-    //   this.setState({data: renderedResponse});
-    // })
+    this.getResponse();
+
   }
+
 
   componentRerender(){
     this.getResponse()
     .then(res => {
       const renderedResponse = res;
-      this.setState({data: renderedResponse},()=>console.log(this.state.data));
+      this.setState({data: renderedResponse});
    
     });
 }
@@ -102,6 +84,7 @@ class EditUser extends Component {
      });
  }, 3000)
 }
+
 
 setDeleteSuccess(item){
   setTimeout(() => {
@@ -215,6 +198,9 @@ clickDeleteMember(){
   this.state.deleteMember? this.setState({deleteMember: false}) : this.setState({deleteMember: true});
  
 }
+
+
+
 
 handleMemberDelete= async(item)=>{
 

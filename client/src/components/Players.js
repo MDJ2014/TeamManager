@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 
 class Players extends Component {
@@ -107,6 +107,10 @@ class Players extends Component {
 
 }
 
+Players.propTypes = {
 
+    playerToShow: PropTypes.object,
+   
+   };
 
 export default Players;
