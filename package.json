@@ -11,7 +11,7 @@
     "connect-mongo": "^2.0.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "~4.17.3",
     "express-session": "^1.16.1",
     "helmet": "^3.18.0",
     "mongoose": "^5.5.5",
